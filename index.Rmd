@@ -48,14 +48,64 @@ UMG
 ::::::
 
 
-## Links
+##  Useful links
+How to install R: [https://rstudio-education.github.io/hopr/starting.html](https://rstudio-education.github.io/hopr/starting.html)
+
+The basics of R: [https://rstudio.cloud/learn/primers/1.2](https://rstudio.cloud/learn/primers/1.2)
+
 Slides:
 
-Exercises:
+Short Test:
 
 
 
-## References
+## Reading Recommendations
+
+:::::: {.columns}
+::: {.column width="24%" data-latex="{0.24\textwidth}"}
+
+Introductory Statistics for the Life and Biomedical Sciences, 1st Edition
+
+Julie Vu and Dave Harrington
+
+freely available at: [https://leanpub.com/biostat](https://leanpub.com/biostat)
+
+:::
+::: {.column width="2%" data-latex="{0.02\textwidth}"}
+\ 
+<!-- an empty Div (with a white space), serving as
+a column separator -->
+:::
+
+::: {.column width="22%" data-latex="{0.22\textwidth}"}
+
+![](./figure/intro_statistics_book.png){width=100%}
+:::
+::: {.column width="4%" data-latex="{0.04\textwidth}"}
+\ 
+<!-- an empty Div (with a white space), serving as
+a column separator -->
+:::
+::: {.column width="24%" data-latex="{0.24\textwidth}"}
+
+OpenIntro Statistics, 4th Edition
+
+David Diez, Mine Cetinkaya-Rundel and Christopher Barr
+
+freely available at: [https://leanpub.com/os](https://leanpub.com/os)
+
+:::
+::: {.column width="2%" data-latex="{0.02\textwidth}"}
+\ 
+<!-- an empty Div (with a white space), serving as
+a column separator -->
+:::
+::: {.column width="22%" data-latex="{0.22\textwidth}"}
+
+![](./figure/openintro_book.jpg){width=100%}
+:::
+::::::
+
 
 
 ## Acknowledgments

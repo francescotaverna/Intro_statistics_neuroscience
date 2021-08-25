@@ -476,9 +476,9 @@ for(j in 1:10){
 M_mean&lt;-mean(M_col_mean)
 M_col_mean
 M_mean</code></pre>
-<pre><code>##  [1] -0.40613828  0.10311176  0.86393209  0.17101159  0.13032896  0.10438452
-##  [7]  0.07516472 -0.18113559  0.32502907 -0.37123855
-## [1] 0.08144503</code></pre>
+<pre><code>##  [1]  0.12599723  0.02188408 -0.12489168  0.46702371 -0.10541764 -0.76175302
+##  [7] -0.26357906 -0.32909437 -0.31604460  0.06492381
+## [1] -0.1220952</code></pre>
 </div>
 <p>Plot the density function of the standard normal distribution. Using the function <strong><tt>points()</tt></strong> draw the sample means and the mean of means into the plot.</p>
 <div class="fold s o">
@@ -557,7 +557,7 @@ for(j in 1:100){
 
 # percentage of interval that contains the true value for the mean
 sum((M_conf[1,]&lt;=500 &amp; 500&lt;=M_conf[2,]))/100</code></pre>
-<pre><code>## [1] 0.91</code></pre>
+<pre><code>## [1] 0.93</code></pre>
 <pre class="r"><code>#EXTRA
 # usage of if else statement to give the color to the segments
 plot.new()
