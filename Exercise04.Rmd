@@ -1,0 +1,27 @@
+---
+title: "Hypothesis Tests"
+---
+# Exercise 4.1
+Consider CBF-levels were measured in 100 subjects with low-grade tumors
+and 100 subjects with high-grade tumors. Here we simulate the measurements from
+the normal distribution.
+
+```{r ex3.1, echo=TRUE, eval=FALSE}
+n = 100 
+low = rnorm(n = n, mean = 50, sd = 10)
+high = rnorm(n = n, mean = 60, sd = 10)
+```
+
+In a real-world experiment you would first check whether your data is
+normally distributed (necessary for t-test). Draw quantile-quantile plots 
+(QQ-plots) to check the normality-assumption. (Hint: $\texttt{qqnorrm}$
+and $\texttt{qqline}$)
+
+Illustrate the sample values by boxplots and histograms to check whether the assumption of equal variances seems reasonable.
+
+Perform the t-test. (Hint: $\texttt{t.test}$)
+
+Interpret the results.
+
+# Exercise 4.2
+Repeat the above computer simulation with sample sizes $n=5$ per group. Discuss with your neighbor whether the test results lead to a false positive or false negative decision.

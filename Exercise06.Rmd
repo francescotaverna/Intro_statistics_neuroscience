@@ -1,0 +1,27 @@
+---
+title: "Correlation and Regression"
+---
+# Exercise 6.1 (Correlation)
+Assume Proteins A, B and C are members of a cellular pathway that is related to a certain disease. The concentration of these protein was measured in $n=5000$ patients.
+
+Read the corresponding data (\texttt{study2.csv}) into the R-environment.
+
+Make scatterplots of each pair of proteins (\texttt{plot}).
+
+Determine Pearson's correlation between each pair of proteins (\texttt{cor.test}).
+
+# Exercise 6.2 (Linear Regression)
+From the correlation analysis, protein A appears to be related to protein B. From earlier research, it is known that protein B depends on protein A. 
+
+Model the relation between the two proteins using a \textbf{simple linear regression} (R function: \texttt{lm}).
+
+Test whether the regression coefficient is significantly different from zero.
+
+Draw the regression line into the scatterplot.
+
+
+
+
+
+
+

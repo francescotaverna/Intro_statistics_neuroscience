@@ -1,0 +1,53 @@
+name: "R-for-the-neuroscience-class"
+
+navbar:
+    
+  #title: "<img id=\"logo\" style=\"width: 400px;\" src=\"umg_logo.png\" />"
+  
+  title: "<div class=\"image-txt-container\"><img id=\"logo\" style=\"width: 400px;\" src=\"./figure/umg_logo.png\" /></div>"
+  
+  
+  right:
+    - text: "About"
+      href: index.html
+    - text: "R intro"
+      href: Exercise00.html
+    - text: "Exercises"
+      menu:
+        - text: "Exe. 1"
+          href: Exercise01.html
+        - text: "Exe. 2"
+          href: Exercise02.html
+        - text: "Exe. 3"
+          href: Exercise03.html
+        - text: "Exe. 4"
+          href: Exercise04.html
+        - text: "Exe. 5"
+          href: Exercise05.html
+        - text: "Exe. 6"
+          href: Exercise06.html
+        - text: "Exe. 7"
+          href: Exercise07.html
+        - text: "Exe. 8"
+          href: Exercise08.html
+        - text: "Exe. 9"
+          href: Exercise09.html
+        - text: "Exe. 10"
+          href: Exercise10.html
+
+     
+      
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    css: w3.css
+    mathjax: local
+    self_contained: false
+    include:
+      before_body: custom_js.html
+    # include:
+    #   after_body: footer.html
+    
+  # pdf_document:
+  #   toc: true

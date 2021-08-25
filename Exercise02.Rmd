@@ -1,0 +1,117 @@
+---
+title: "Probability Distributions"
+---
+
+# Functions for basic satisical models.
+
+As an example, let $X$ be a normally distributed  random variable, $X \sim N(\mu,\sigma^2)$.
+The following functions are included in R order to work with the normal distribution:
+
+* **<tt>dnorm(x,mean=$\mu$,sd=$\sigma$)</tt>**, which returns the value of the probability density function in  **<tt>x</tt>** for the normal distribution;
+* **<tt>pnorm(q,mean=$\mu$,sd=$\sigma$,lower.tail=TRUE)</tt>**, which returns $P(X\leq q)$ when lower.tail is set to TRUE, otherwise $P(X\geq q)$;
+* **<tt>qnorm(p,mean=$\mu$,sd=$\sigma$)</tt>**, which calculates the theatrical quantile for a given probability level  **<tt>p</tt>**;
+* **<tt>rnorm(n,mean=$\mu$,sd=$\sigma$)</tt>**, which generates n observation from a normal distribution.  
+
+These concepts generally hold true for all the distribution functions built into R. Indeed, we will use **<tt>rbinom()</tt>** to generate observation from a binomial distribution. Use `help(distributions)` to discover all the other functions the others distributions.
+
+# Exercises
+
+## Exercise 1
+Look at the three histograms.
+```{r ex1,fig.align='center',out.width = '80%'}
+par(mfrow=c(2,2))
+## Random sample of size n=10 of N(0,1)-Distribution
+x1 = rnorm(n = 10, mean = 0, sd = 1)	
+hist(x1, breaks=3)
+## Random sample of size n=100 of N(0,1)-Distribution
+x2 = rnorm(n = 100, mean = 0, sd = 1)	
+hist(x2, breaks=3)
+## Random sample of size n=1000 of N(0,1)-Distribution
+x3 = rnorm(n = 1000, mean = 0, sd = 1)	
+hist(x3, breaks = 3)
+```
+
+What is a reasonable choice of the parameter **<tt>breaks</tt>**? Obtain the following graph for the random sample **<tt>x3</tt>**.
+<div class='fold s'>
+```{r fig.align='center',out.width = '80%'}
+x3 = rnorm(n = 1000, mean = 0, sd = 1)
+hist(x3, breaks = 50,probability=TRUE,xlab =NA, main='Standard normal distribution')
+lines(sort(x3),dnorm(sort(x3)),col='red')
+```
+</div>
+
+## Exercise 2
+Assume, the survival probability of patients after brain surgery is exponentially distributed. Assume further that the average survival time of a patient is 36 months, $\lambda = 1/36$.
+
+Plot the density function of the exponential distribution over the interval  **<tt>[0,200]</tt>**. Plot the function over a sequence obtained using the **<tt>seq()</tt>** function.
+
+<div class='fold s o'>
+```{r fig.align='center',out.width = '80%'}
+x = seq(0, 200, length.out = 100)
+y = dexp(x, rate = 1/36)
+plot(x, y, type = "l", xlab = "months")
+```
+</div>
+
+Plot the cumulative distribution function of the exponential distribution.
+<div class='fold s o'>
+```{r fig.align='center',out.width = '80%'}
+x = seq(0, 200, length.out = 100)
+y = pexp(x, rate = 1/36)
+plot(x, y, type = "l", xlab = "months")
+```
+</div>
+
+Determine the probability of a particular patient of surviving equal or shorter than 12 month, namely $P(X\leq 12)$.
+
+<div class='fold s o'>
+```{r}
+pexp(q=12, rate=1/36)
+```
+</div>
+
+What is the probability of a particular patient of surviving longer than 5 years (i.e. 60 month)?
+
+<div class='fold s o'>
+```{r}
+1 - pexp(q=60, rate=1/36) # equal to pexp(q=60, rate=1/36, lower.tail = FALSE) 
+```
+</div>
+
+The previous questions are equivalent to calculate the red and blue area in following plot.
+
+```{r echo=FALSE,fig.align='center',out.width = '80%'}
+curve(dexp(x,rate=1/36),from=0,to=200,xlab="months",ylab='Density')
+cord.x<-c(60,seq(60,200,0.1),200)
+cord.y<-c(0,dexp(seq(60,200,0.1),rate=1/36),0)
+polygon(cord.x,cord.y,col='skyblue')
+
+cord.x<-c(0,seq(0,12,0.1),12)
+cord.y<-c(0,dexp(seq(0,12,0.1),rate=1/36),0)
+polygon(cord.x,cord.y,col='coral1')
+```
+
+
+
+## Exercise 3
+Let's assume that the outcome of a therapy can be modeled as a binomial distribution , $B(n,p)$. If $n=10$ and $p=0.7$, determine the probability that $k = \{1, 4, 8\}$ OR LESS patients out of $n = 10$ will have a successful therapy.
+
+<div class='fold s o'>
+```{r results='hold'}
+pbinom(1, 10, prob=0.7)
+pbinom(q=4, size=10, prob=0.7)
+pbinom(q=8, size=10, prob=0.7)
+pbinom(q=c(1, 4, 8), size=10, prob=0.7)
+```
+</div>
+
+Determine the probability that EXACTLY $k = \{1, 4, 8\}$ patients out of $n = 10$ will have a successful therapy.
+
+<div class='fold s o'>
+```{r results='hold'}
+dbinom(x=1, size=10, prob=0.7)
+dbinom(x=4, size=10, prob=0.7)
+dbinom(x=8, size=10, prob=0.7)
+dbinom(x=c(1, 4, 8), size=10, prob=0.7)
+```
+</div>

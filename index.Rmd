@@ -1,0 +1,67 @@
+---
+title: "R for the neuroscience class"
+---
+
+These are the exercises for the courses of Introduction to Statistics for Neuroscience class held  by:
+
+:::::: {.columns}
+::: {.column width="24%" data-latex="{0.24\textwidth}"}
+
+Prof. Dr. Tim Friede
+
+Department of 
+
+Medical Statistics
+
+UMG
+
+[tim.friede@med.uni-goettingen.de](mailto:tim.friede@med.uni-goettingen.de?subject=Introduction%20to%20Statistics%20for%20Neuroscience class)
+
+:::
+::: {.column width="24%" data-latex="{0.24\textwidth}"}
+
+![](./figure/Friede.jpg){width=90%}
+:::
+::: {.column width="4%" data-latex="{0.04\textwidth}"}
+\ 
+<!-- an empty Div (with a white space), serving as
+a column separator -->
+:::
+:::::: {.column width="24%" data-latex="{0.24\textwidth}"}
+
+Dr. Andreas Leha
+
+Core Facility 'Medical Biometry
+
+and Statistical Bioinformatics
+
+UMG
+
+[Andreas.Leha@med.uni-goettingen.de](mailto:Andreas.Leha@med.uni-goettingen.de?subject=Introduction%20to%20Statistics%20for%20Neuroscience class)
+
+:::
+
+::: {.column width="24%" data-latex="{0.24\textwidth}"}
+
+![](./figure/Leha.jpg){width=90%}
+:::
+::::::
+
+
+## Links
+Slides:
+
+Exercises:
+
+
+
+## References
+
+
+## Acknowledgments
+
+The course is based on lectures notes by Prof. Dr. Klaus Jung, TiHo Hannover.
+
+The R introduction and some exercise take inspiration from the 
+lectures notes of Prof. Dr. Paolo Vidoni, Università di Udine.
+

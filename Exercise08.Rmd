@@ -1,0 +1,46 @@
+---
+title: "Analysis of variance"
+---
+
+# Exercise 8.1 (One-way analysis of variance)
+Assume the concentration of a certain metabolite was measured in three experimental groups.
+
+Sample sizes:
+```{r ex1.1, echo=TRUE, eval=FALSE}
+n1 = 12
+n2 = 18
+n3 = 8
+```
+
+Mean concentration in the population from which samples were drawn:
+```{r ex1.2, echo=TRUE, eval=FALSE}
+mu1 = 4
+mu2 = 4.5
+mu3 = 6
+```
+
+Measurement values can be generated using normal distribution:
+```{r ex1.3, echo=TRUE, eval=FALSE}
+x1 = rnorm(n=n1, mean=mu1, sd=3)
+x2 = rnorm(n=n2, mean=mu2, sd=3)
+x3 = rnorm(n=n3, mean=mu3, sd=3)
+```
+
+a) Plot the concentration versus the group levels and perform one-way analysis of variance (\texttt{boxplot}, \texttt{aov}).
+
+b) Perform subsequent pairwise group comparisons by t-tests to see which groups are different.
+
+c) Repeat the exercise with increased variances in the measurement values (e.g. sd = 5).
+
+
+# Exercise 8.2 (Repeated measurements analysis of variance)
+Some concentration was measured in $n = 10$ patients repeatedly at $T = 4$ time points. Load the dataset \texttt{Exercise\_8\_2\_Repeated\_OneWay.csv}.
+
+a) Plot the concentration across different time-points. Use one-way repeated measures ANOVA to detect whether there is a time effect without the information of repeated measures (\texttt{aov}).
+
+b) Perform one-way repeated measures ANOVA with information of repeated measures.
+
+c) A second group was studied in the above study. Plot the concentration versus the group levels across different time-points. Analyse whether there is an effect by time, group or an interaction between time and group. Data is given in the folder \texttt{Exercise\_8\_3\_Repeated\_TwoWay.csv}.
+
+d) Conduct Anova without information of repeated measures. Also, conduct Anova with information of repeated measures.
+

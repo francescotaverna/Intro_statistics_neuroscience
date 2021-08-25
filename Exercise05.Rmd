@@ -1,0 +1,66 @@
+---
+title: "Hypothesis Tests: Non-normal"
+---
+# Exercise 5.1 
+Assume the expression of a particular gene is measures in blood samples of $n=10$
+patients with Parkinson's disease and in $n=10$ healthy controls.
+
+Example data is drawn from exponential distributions as follows:
+
+```{r ex5.1, echo=TRUE, eval=FALSE}
+n = 10
+patients = rexp(n = n, rate = 1/2)
+controls = rexp(n = n, rate = 1/1)
+```
+
+Plot of sample values:
+
+```{r ex5.2, echo=TRUE, eval=FALSE}
+complete = c(patients, controls)
+group = c(rep(1, n), rep(2, n))
+plot(group, complete, cex=1.5, xlim=c(0.5, 2.5), axes=FALSE, ylab="gene expression")
+axis(1, c(1, 2), c("patients", "control"))
+axis(2)
+box()
+```
+
+Calculate the ranks of sample values. Like above, plot the ranks of sample values.
+
+Use quantile-quantile plots to check for the assumption of normal distribution.
+
+Perform Mann-Whitney U test (Wilcoxon Rank Sum test, R function \texttt{wilcox.test}). Conduct a t-test. Compare results from these two tests.
+
+# Exercise 5.2
+Assume there are two different types of disease (type A and B). The mutation rate of a particular gene is \texttt{p1} under type A and \texttt{p2} under type B. To compare the mutation rates, tissue samples of \texttt{n1}=50 patients of disease type A and \texttt{n2}=100 patients of disease type B are studied.
+
+Example data is drawn from binomial distributions. Look at the sample values
+of both patient groups - a value of "0" means no mutation, a value of "1" means there is a mutation.
+
+```{r ex5.4, echo=TRUE, eval=FALSE}
+n1 = 50
+n2 = 100
+p1 = 0.1
+p2 = 0.15
+typeA = rbinom(n = n1, prob = p1, size = 1)
+typeB = rbinom(n = n2, prob = p2, size = 1)
+```
+
+Mutation levels are summarized in a 2x2 cross tabulation:
+
+```{r ex5.5, echo=TRUE, eval=FALSE}
+mutation = c(typeA, typeB)
+group = c(rep("type A", n1), rep("type B", n2))
+X = table(mutation, group)
+X
+prop.table(X, 2)
+```
+
+Perform Fisher's exact test to see whether mutation rates are significantly
+different between the two groups (R function: \texttt{fisher.test}).
+
+Change samples sizes \texttt{n1}, \texttt{n2} and mutations rates \texttt{p1}, \texttt{p2}. Discuss how results change.
+
+
+
+
+

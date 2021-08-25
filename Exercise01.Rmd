@@ -1,0 +1,97 @@
+---
+title: "Data management and descriptive methods"
+---
+
+CASE STUDY: In a clinical trial 12 patients are randomly assigned to two different treatments. Blood measurements are taken before and after the treatment.
+Load the **<tt>study1.csv</tt>** data frame into the R workspace.
+
+```{r}
+study1<-read.table("./data/study1.csv",sep=";",header = TRUE) # the values are separated by ; in the csv file
+```
+
+# Exercises
+
+## Execrise 1
+Calculate mean, median, variance, standard deviation, quartiles and the sum of the measurements before treatment (**<tt>mean()</tt>**).
+
+<div class='fold s o'>
+```{r collapse=TRUE}
+X<-study1$before
+# we will show the direct function and the calculation behind it
+# sum of the elements of the vector
+sum(X)
+# the sample mean
+sum(X)/length(X)
+mean(X)
+# the sample variance
+sum((X-mean(X))^2)/(length(X)-1)
+var(X)
+
+# the sample standard deviation
+sqrt(var(X))
+sd(X)
+
+#the median
+mean(sort(X)[c(length(X)/2,length(X)/2+1)])
+median(X)
+
+# quantile
+quantile(X, probs=c(0.25, 0.50, 0.75))
+# A quartile is the value of the quantile at the probabilities 0.25, 0.5 and 0.75.
+
+# all of this can be achieved easily using the summary function
+summary(X)
+```
+</div>
+
+## Exercise 2
+
+Plot a boxplot and a histogram of the measurements obtained before the treatment. 
+Correct the title of the axes. Choose appropriate range of axes (**<tt>boxplot()</tt>**).
+
+<div class='fold s o'>
+```{r, fig.align='center'}
+par(mfrow=c(1,2))# define the plot area one row, two columns
+X<-study1$before
+boxplot(X, 
+        xlab = "Before treatment", 
+        ylab = "Blood measurements", 
+        ylim = c(0.2, 0.7), 
+        main = "Box plot", 
+        horizontal = TRUE)
+points(X, y = rep(0.6, 12), pch=1,
+       col="orange", cex=0.75)
+# Histogram
+hist(X, 
+     xlim = c(0.2, 0.7), 
+     xlab = "Before treatment", 
+     main = "Histogram", 
+     breaks = 12)
+points(X, rep(0, 12), pch=15, col="orange", cex=0.75)
+```
+</div>
+
+
+## Exercise 3
+
+Determine the absolute and relative frequencies of patients in the study groups(**<tt>table()</tt>**). Plot  a bar chart and a pie chart of the parameter "group" (**<tt>pie()</tt>** and **<tt>barplot()</tt>**).
+
+<div class='fold s o'>
+```{r, fig.align='center',results='hold'}
+X<-study1$group
+## absolute and relative 
+table(X); table(X) / length(X)
+```
+</div>
+<div class='fold s o'>
+```{r, fig.align='center',results='hold'}
+par(mfrow=c(1,2))# define the plot area one row, two columns
+pie(table(X),
+    main = "Pie chart"
+    )
+barplot(table(X),
+        main = "Bar chart"
+        )
+```
+</div>
+
