@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>R intro</title>
+
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="w3.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><div class="image-txt-container"><img id="logo" style="width: 400px;" src="figure/umg_logo.png" /></div></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">About</a>
+</li>
+<li>
+  <a href="Exercise00.html">R intro</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Exercises
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Exercise01.html">Exe. 1</a>
+    </li>
+    <li>
+      <a href="Exercise02.html">Exe. 2</a>
+    </li>
+    <li>
+      <a href="Exercise03.html">Exe. 3</a>
+    </li>
+    <li>
+      <a href="Exercise04.html">Exe. 4</a>
+    </li>
+    <li>
+      <a href="Exercise05.html">Exe. 5</a>
+    </li>
+    <li>
+      <a href="Exercise06.html">Exe. 6</a>
+    </li>
+    <li>
+      <a href="Exercise07.html">Exe. 7</a>
+    </li>
+    <li>
+      <a href="Exercise08.html">Exe. 8</a>
+    </li>
+    <li>
+      <a href="Exercise09.html">Exe. 9</a>
+    </li>
+    <li>
+      <a href="Exercise10.html">Exe. 10</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+<script>
+$(document).ready(function() {
+
+  $chunks = $('.fold');
+
+  $chunks.each(function () {
+
+    // add button to source code chunks
+    if ( $(this).hasClass('s') ) {
+      $('pre.r', this).prepend("<div class=\"showopt\">Show Source</div><br style=\"line-height:22px;\"/>");
+      $('pre.r', this).children('code').attr('class', 'folded');
+    }
+
+    // add button to output chunks
+    if ( $(this).hasClass('o') ) {
+      $('pre:not(.r)', this).has('code').prepend("<div class=\"showopt\">Show Output</div><br style=\"line-height:22px;\"/>");
+      $('pre:not(.r)', this).children('code:not(r)').addClass('folded');
+
+      // add button to plots
+      $(this).find('img').wrap('<pre class=\"plot\"></pre>');
+      $('pre.plot', this).prepend("<div class=\"showopt\">Show Plot</div><br style=\"line-height:22px;\"/>");
+      $('pre.plot', this).children('img').addClass('folded');
+
+    }
+  });
+
+  // hide all chunks when document is loaded
+  $('.folded').css('display', 'none')
+
+  // function to toggle the visibility
+  $('.showopt').click(function() {
+    var label = $(this).html();
+    if (label.indexOf("Show") >= 0) {
+      $(this).html(label.replace("Show", "Hide"));
+    } else {
+      $(this).html(label.replace("Hide", "Show"));
+    }
+    $(this).siblings('code, img').slideToggle('fast', 'swing');
+  });
+});
+
+</script>
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">R intro</h1>
+
+</div>
+
+
+<hr />
+<div id="dowload-r-and-rstudio" class="section level1">
+<h1>Dowload R and RStudio</h1>
+<p>We will describe the main step to install R and RStudio on your local machine.</p>
+<div id="r-installation" class="section level2">
+<h2>R installation</h2>
+<ul>
+<li><p>Windows: go to <a href="https://cran.r-project.org/bin/windows/base/">https://cran.r-project.org/bin/windows/base/</a> and download the .exe file and install it on your machine.</p></li>
+<li><p>Macosx: go to <a href="https://cran.r-project.org/bin/macosx/">https://cran.r-project.org/bin/macosx/</a> and download the file according to the spec. of your machine.</p></li>
+<li><p>Linux: go to <a href="https://cran.r-project.org/bin/linux/">https://cran.r-project.org/bin/linux/</a> select your distribution and follow the instructions to install R and its dependencies.</p></li>
+</ul>
+</div>
+<div id="rstudio-installation" class="section level2">
+<h2>RStudio installation</h2>
+Go to <a href="https://www.rstudio.com/products/rstudio/download/#download">https://www.rstudio.com/products/rstudio/download/#download</a> and download the installation file according to your operative system.<br />
+
+<center>
+<img src="figure/rstudioIDE.png" title="fig:" style="width:80.0%" alt="Example of RStudio IDE" />
+</center>
+<hr />
+</div>
+</div>
+<div id="r-as-a-calculator" class="section level1">
+<h1>R as a calculator</h1>
+<div id="numeric-operators" class="section level2">
+<h2>Numeric operators</h2>
+<p>Now let’s get in touch with the basic R operators, we want to calculate the following expressions. <span class="math display">\[\left[\frac{1}{2}\cdot\left(e^{5}-\frac{2}{3^{5}}\right)\right]-\sqrt{2\cos\left(\frac{\pi}{3}\right)\sin\left(\frac{2\cdot\pi}{3}\right)}\,,\\
+{10\choose 4}\ln(2)\,.\]</span></p>
+<pre class="r"><code>((1/2)*(exp(5)-2/(3^5)))-sqrt(2*cos(pi/3)*sin(2*pi/3))
+## [1] 73.27186
+factorial(10)/(factorial(4)*factorial(6))*log(2)
+## [1] 145.5609</code></pre>
+<p>Instead of line brakers to separate different statement you can use the semicolon operator <strong><tt>;</tt></strong>.</p>
+<div class="fold o">
+<pre class="r"><code>2/0;0/0;sin(pi) #why is not zero?</code></pre>
+<pre><code>## [1] Inf</code></pre>
+<pre><code>## [1] NaN</code></pre>
+<pre><code>## [1] 1.224606e-16</code></pre>
+</div>
+<p>An important operator is the comment operator <strong><tt>#</tt></strong>. Whenever R encounters this operator, it will ignore everything printed after it (in the current line).</p>
+</div>
+<div id="logical-operators" class="section level2">
+<h2>Logical operators</h2>
+<p>The logical operators are very important for data manipulation. When R evaluates statements containing logical operators it will return either TRUE or FALSE.</p>
+<pre class="r"><code>1&lt; 2 #less than
+## [1] TRUE
+1&lt;=2 #less than or equal
+## [1] TRUE
+1&gt; 2 #greater than
+## [1] FALSE
+1&gt;=2 #greater than or equal
+## [1] FALSE
+1==2 #equal than
+## [1] FALSE
+1!=2 #not equal
+## [1] TRUE
+TRUE &amp; FALSE # and
+## [1] FALSE
+TRUE &amp; FALSE # or
+## [1] FALSE</code></pre>
+Can you guess the result of the following script?
+<div class="fold o">
+<pre class="r"><code>23 &amp; 45; 0 | 1</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<hr />
+</div>
+</div>
+<div id="need-an-help-ask-r" class="section level1">
+<h1>Need an help, ask R</h1>
+<p>While reading an R script, you can bump into an unknown R’function, the first thing to do is to ask directly R. To do this you can use the function <strong><tt>help()</tt></strong>, remember put the name of the function inside the brackets.</p>
+<p>Who knows what does the <strong><tt>lm()</tt></strong> function do?</p>
+<div class="fold s">
+<pre class="r"><code>help(lm)</code></pre>
+</div>
+<hr />
+</div>
+<div id="objects" class="section level1">
+<h1>Objects</h1>
+<p>R is an object oriented language. This mean that everything in R is an object. When we run the script we create and manipulate object. To master R, it is important to understand the basic data types and data structures and how to operate on them.</p>
+<div id="types" class="section level2">
+<h2>Types</h2>
+<p>The type of an object is a property assigned to an object that determines how generic functions operate with it. The <strong><tt>typeof()</tt></strong> function return the type of an object. R distinguishes the following main types of object:</p>
+<ul>
+<li>integer: integer numbers ;</li>
+<li>real (double): real numbers;</li>
+<li>character: elements made up of text-strings; for example, “Germany”;</li>
+<li>logical: data containing logical constants, namely, TRUE and FALSE.</li>
+</ul>
+<p>Try to guess which is the outcome of this sum:</p>
+<div class="fold o">
+<pre class="r"><code>1+1.3+&#39;a&#39;+TRUE</code></pre>
+<pre><code>## Error in 1 + 1.3 + &quot;a&quot;: non-numeric argument to binary operator</code></pre>
+</div>
+</div>
+<div id="assignements" class="section level2">
+<h2>Assignements</h2>
+<p>For sure we do not want to compute an object every time we need it, especially if comes from a time-consuming calculation. To store an object and to easily recall it, we assign it to a variable name through the assignment operator <strong><tt>&lt;-</tt></strong> or <strong><tt>=</tt></strong>.</p>
+<pre class="r"><code>x&lt;-2+5</code></pre>
+<p>On the environment tab, up-right corner of RStudio, you will find a list of the object stored in the current working directory, alternatively you can use the <strong><tt>ls()</tt></strong> command. To remove the object, you can use the <strong><tt>rm()</tt></strong> function, where in the brackets put the name of the variable.</p>
+<div class="fold o">
+<pre class="r"><code>rm(x)</code></pre>
+</div>
+</div>
+<div id="structures" class="section level2">
+<h2>Structures</h2>
+<p>We will just introduce the need data structures for this course we will leave out others structures, such as factor and functions.</p>
+<div id="vectors" class="section level3">
+<h3>Vectors</h3>
+<p>Vectors are one-dimensional sequences of elements of the same type. To crate a vector, you need to use the <strong><tt>c()</tt></strong> function, where <strong><tt>c</tt></strong>stands for concatenate.</p>
+<pre class="r"><code>a&lt;-c(6,9,12,15)
+a&lt;-c(a,c(0,3))# concatenate the vector with another vector and store it with the same name
+#  equivalently a&lt;-c(a,0,3)</code></pre>
+<p>Let’s sort the created vector in ascending or descending order using the <strong><tt>sort()</tt></strong> function. Check its help pages to see what additional options you can specify, look at the <strong><tt>decreasing</tt></strong> argument.</p>
+<div class="fold s">
+<pre class="r"><code>sort(a); sort(a, decreasing=TRUE) #why I don&#39;t need to specify decreasing=FALE in the first one</code></pre>
+<pre><code>## [1]  0  3  6  9 12 15</code></pre>
+<pre><code>## [1] 15 12  9  6  3  0</code></pre>
+</div>
+What type of object is the following one, try to answer and then use the <strong><tt>class()</tt></strong> function to check
+<div class="fold o">
+<pre class="r"><code>class(c(a,&#39;b&#39;))</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+</div>
+Indeed.
+<div class="fold s o">
+<pre class="r"><code>c(a,&#39;b&#39;)</code></pre>
+<pre><code>## [1] &quot;6&quot;  &quot;9&quot;  &quot;12&quot; &quot;15&quot; &quot;0&quot;  &quot;3&quot;  &quot;b&quot;</code></pre>
+</div>
+<p>For sure manually typing all the elements of the vector <strong><tt>class()</tt></strong> isn’t the only option we can use the function <strong><tt>seq()</tt></strong>:</p>
+<pre class="r"><code>seq(from=0,to=15,by=3) #setting the increments with the argument by</code></pre>
+<pre><code>## [1]  0  3  6  9 12 15</code></pre>
+<pre class="r"><code>seq(from=0,to=16, length.out=6) #setting the length of the the vector </code></pre>
+<pre><code>## [1]  0.0  3.2  6.4  9.6 12.8 16.0</code></pre>
+Which is the output of the following line of code ? Hint: ask R. <!-- example to understandthe order of the argument of a function -->
+<div class="fold o">
+<pre class="r"><code>seq(0, 15, 2)</code></pre>
+<pre><code>## [1]  0  2  4  6  8 10 12 14</code></pre>
+</div>
+<p>Furthermore, you can use the colon operatoe, namely <strong><tt>:</tt></strong>, to tell R to create an integer vector with a regular numbers sequence.</p>
+<pre class="r"><code>pi:6;8:-8</code></pre>
+<pre><code>## [1] 3.141593 4.141593 5.141593</code></pre>
+<pre><code>##  [1]  8  7  6  5  4  3  2  1  0 -1 -2 -3 -4 -5 -6 -7 -8</code></pre>
+<div id="basic-vector-operators" class="section level4">
+<h4>Basic Vector operators</h4>
+<p>Here we show some useful mathematical functions that works with real vectors.</p>
+<pre class="r"><code>x&lt;-seq(0.4,100,3) #  define a vector x
+sum(x)
+## [1] 1696.6
+prod(x)
+## [1] 3.285916e+52
+min(x)
+## [1] 0.4
+max(x)
+## [1] 99.4
+length(x)
+## [1] 34
+y&lt;-seq(pi,56.8,length.out=length(x)) #create a vector with equal length of y
+
+head(x+y);head(x*y) #head function just give the first six elements
+## [1]  3.541593  8.167605 12.793617 17.419630 22.045642 26.671654
+## [1]   1.256637  16.209857  40.919151  75.384519 119.605961 173.583477</code></pre>
+</div>
+<div id="vector-slicing" class="section level4">
+<h4>Vector slicing</h4>
+<p>Slicing a vector is done through the square bracklets <strong><tt>[]</tt></strong> operator.</p>
+<pre class="r"><code>x&lt;-c(&#39;These&#39;,&#39;are&#39;,&#39;not&#39;,&#39;the&#39;,&#39;exercise&#39;,&#39;of&#39;,&#39;neuroscience&#39;,&#39;class&#39;)
+x[c(3,4)] #select the 3rd and the 4th element
+## [1] &quot;not&quot; &quot;the&quot;
+x[-3] #all except the 3rd element
+## [1] &quot;These&quot;        &quot;are&quot;          &quot;the&quot;          &quot;exercise&quot;     &quot;of&quot;          
+## [6] &quot;neuroscience&quot; &quot;class&quot;
+x[2:4]
+## [1] &quot;are&quot; &quot;not&quot; &quot;the&quot;</code></pre>
+<p>Logical operators can be very useful in slicing a vector.</p>
+<pre class="r"><code>y&lt;- -10:20
+y&lt;=0 #the logical operator is applied element-wise</code></pre>
+<pre><code>##  [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE
+## [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code>y[y&lt;=0&amp;y!=-5]</code></pre>
+<pre><code>##  [1] -10  -9  -8  -7  -6  -4  -3  -2  -1   0</code></pre>
+<pre class="r"><code>y[y&lt;0|y&gt;5]</code></pre>
+<pre><code>##  [1] -10  -9  -8  -7  -6  -5  -4  -3  -2  -1   6   7   8   9  10  11  12  13  14
+## [20]  15  16  17  18  19  20</code></pre>
+What is the output of the expression:
+<div class="fold o">
+<pre class="r"><code>c(FALSE, TRUE) | c(TRUE, TRUE)</code></pre>
+<pre><code>## [1] TRUE TRUE</code></pre>
+</div>
+<p>Write an R expression that will return the sum of the vector (2, 1, 4, 2, 1, NA), use the slicing techniques to remove the NA.</p>
+<div class="fold s o">
+<pre class="r"><code>x &lt;- c(2, 1, 4, 2, 1, NA)
+sum(x[-length(x)]);sum(x,na.rm =TRUE )</code></pre>
+<pre><code>## [1] 10
+## [1] 10</code></pre>
+</div>
+</div>
+</div>
+<div id="matrices" class="section level3">
+<h3>Matrices</h3>
+<p>A matrix is a collection of the same data type arranged into a two dimensional data structure, namely rows and columns. To create matrix, we use the <strong><tt>matrix()</tt></strong> function which takes the following arguments:</p>
+<ul>
+<li><strong><tt>data</tt></strong>: a data vector;</li>
+<li><strong><tt>nrow</tt></strong>: the desired number of columns;</li>
+<li><strong><tt>ncol</tt></strong>: the desired number of rows;</li>
+<li><strong><tt>byrow</tt></strong>: a logical statment to populate the matrix either by row or column, the default is FALSE.</li>
+</ul>
+Create a <span class="math inline">\(2\times 3\)</span> matrix of ones.
+<div class="fold s o">
+<pre class="r"><code>M1&lt;-matrix(data=1,nrow = 2, ncol = 3)
+M1 # we use the dim() function to check the dimension of the created matrix
+##      [,1] [,2] [,3]
+## [1,]    1    1    1
+## [2,]    1    1    1
+dim(M1)
+## [1] 2 3</code></pre>
+</div>
+What is the result of the following scripts:
+<div class="fold o">
+<pre class="r"><code>matrix(1:11,nrow=4)</code></pre>
+<pre><code>## Warning in matrix(1:11, nrow = 4): data length [11] is not a sub-multiple or
+## multiple of the number of rows [4]</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    2    6   10
+## [3,]    3    7   11
+## [4,]    4    8    1</code></pre>
+</div>
+<div class="fold o">
+<pre class="r"><code>matrix(1:12,nrow=4,byrow=TRUE)</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+## [3,]    7    8    9
+## [4,]   10   11   12</code></pre>
+</div>
+<p>We cran create matrix also binding together vectors by row <strong><tt>rbind()</tt></strong> using and by columns <strong><tt>cbind()</tt></strong>. The former function automatically label row of columns name, but you can use <strong><tt>rownames()</tt></strong> and <strong><tt>colnames()</tt></strong> to label rows and columns respectively.</p>
+<pre class="r"><code>x&lt;-c(1001:1010)
+y&lt;-c(1,0,0,1,0,0,1,1,0,1)
+z&lt;-cbind(x,y)
+colnames(z)&lt;-c(&#39;patient_id&#39;,&#39;treatment&#39;)
+z</code></pre>
+<pre><code>##       patient_id treatment
+##  [1,]       1001         1
+##  [2,]       1002         0
+##  [3,]       1003         0
+##  [4,]       1004         1
+##  [5,]       1005         0
+##  [6,]       1006         0
+##  [7,]       1007         1
+##  [8,]       1008         1
+##  [9,]       1009         0
+## [10,]       1010         1</code></pre>
+<div id="basic-matrix-operators" class="section level4">
+<h4>Basic Matrix operators</h4>
+<p>R can do matrix arithmeti. Here you can find a list of some basic operation:</p>
+<ul>
+<li><strong><tt>+ - * / </tt></strong> standard scalar or by element operations;</li>
+<li><strong><tt><span class="math inline">\(\%*\%\)</span></tt></strong> matix multiplication;</li>
+<li><strong><tt>t()</tt></strong> transpose;</li>
+<li><strong><tt>det()</tt></strong> determinant;</li>
+<li><strong><tt>solve()</tt></strong> inverse.</li>
+</ul>
+</div>
+<div id="matrix-slicing" class="section level4">
+<h4>Matrix slicing</h4>
+<p>As done for the vector we use the squared bracket <strong><tt>[]</tt></strong> to slice a matrix. Let <span class="math inline">\(M\)</span> be a matrix the <span class="math inline">\(m_{i,j}\)</span> element is retrieved in R by <strong><tt>[i,j]</tt></strong>.</p>
+<pre class="r"><code>M&lt;-matrix(1:9,3,byrow=TRUE)
+M
+##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+## [3,]    7    8    9
+M[2,3] #extract the 3rd element of the 2nd row
+## [1] 6
+M[2:3,] #extract the 2nd and 3rd row
+##      [,1] [,2] [,3]
+## [1,]    4    5    6
+## [2,]    7    8    9
+M[,3] #extract the 3rd column
+## [1] 3 6 9</code></pre>
+Write a script that extract from the matrix M all the columns that in their third raw contains contains a value higher than 7.
+<div class="fold s o">
+<pre class="r"><code>M[,M[3,]&gt;7]</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    2    3
+## [2,]    5    6
+## [3,]    8    9</code></pre>
+</div>
+<p>Given the vectors x&lt;-c(1:10) and y&lt;-c(1:3), create a matrix <span class="math inline">\(M\)</span> , such that <span class="math inline">\(m_{(i,j)}=x_i+y_j\)</span>. Use the <strong><tt>outer()</tt></strong> function.</p>
+<div class="fold s o">
+<pre class="r"><code>x&lt;-c(1:7)
+y&lt;-c(1:3)
+outer(x,y,&quot;+&quot;)
+##      [,1] [,2] [,3]
+## [1,]    2    3    4
+## [2,]    3    4    5
+## [3,]    4    5    6
+## [4,]    5    6    7
+## [5,]    6    7    8
+## [6,]    7    8    9
+## [7,]    8    9   10</code></pre>
+</div>
+</div>
+</div>
+<div id="lists" class="section level3">
+<h3>Lists</h3>
+<p>An R list is an object, which contains elements of different types like, such as numbers, strings, vectors and lists. A list is created using <strong><tt>list()</tt></strong> function, to access the element of the list we can use the squared brackets <strong><tt>[]</tt></strong> or <strong><tt>$key_name</tt></strong> if a key, character, is assigned to the element.</p>
+<pre class="r"><code>#create a list
+x&lt;-list(patient_name=&#39;Rob&#39;,tratment=c(3,2),&#39;112&#39;=&#39;Jo&#39;,5)
+x[1] # show the key name, if present, and the value in the first entry of the list
+## $patient_name
+## [1] &quot;Rob&quot;
+x[[1]] #  reference the first  element of the list directly
+## [1] &quot;Rob&quot;
+x$hospital # there is no such a key
+## NULL
+x$tratment[2]
+## [1] 2
+x$&#39;112&#39;
+## [1] &quot;Jo&quot;</code></pre>
+</div>
+<div id="data-frames" class="section level3">
+<h3>Data frames</h3>
+<p>A dataframe is a list of named vectors (called columns) of the same length. Therefore each column contains elements of the same type. You can slice a dataframe in the same way that you can slice a matrix, furthermore you can also use the <strong><tt>$</tt></strong>, as done for the lists, to select columns. We use the <strong><tt>data.frame()</tt></strong> function to create a data frame</p>
+<pre class="r"><code>x&lt;-seq(1,10)
+y&lt;-letters[1:5] # extract the first five letters of the alphabet
+z&lt;-matrix(x,nrow=5,byrow=5)
+df&lt;-data.frame(z,treatment=y)
+class(df)
+## [1] &quot;data.frame&quot;
+df
+##   X1 X2 treatment
+## 1  1  2         a
+## 2  3  4         b
+## 3  5  6         c
+## 4  7  8         d
+## 5  9 10         e
+names(df) #names of the coluns
+## [1] &quot;X1&quot;        &quot;X2&quot;        &quot;treatment&quot;
+str(df) #summarize the structure of the data frame
+## &#39;data.frame&#39;:    5 obs. of  3 variables:
+##  $ X1       : int  1 3 5 7 9
+##  $ X2       : int  2 4 6 8 10
+##  $ treatment: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
+
+
+with(df,X1+X2) # that is equal to df$X1+df$X2
+## [1]  3  7 11 15 19
+subset(df,df$X1&gt;5) # that is equal to df[df$X1&gt;5,]
+##   X1 X2 treatment
+## 4  7  8         d
+## 5  9 10         e</code></pre>
+<div id="load-and-save-data-frames" class="section level4">
+<h4>Load and save data frames</h4>
+<p>Creating and editing a data frames in R can be cumbersome, indeed R isn’t a spreadsheet. For this reason the data are created using different programming languages and then loaded into R. We will show how to load <strong><tt>.csv</tt></strong>, file, but keep in mind that R can load a huge variety of file formats.</p>
+<p>We use the commands <strong><tt>getwd()</tt></strong>, <strong><tt>setwd()</tt></strong> and <strong><tt>list.files()</tt></strong> to manage our working directory. R uses <strong><tt>/</tt></strong> as path separator even on Windows. <!-- /* never a good choice to move to the data directory*/ --></p>
+<pre class="r"><code>getwd() # print the name of the current working directory</code></pre>
+<pre><code>## [1] &quot;C:/Users/frenc/Documents/GitHub/Intro_statistics_neuroscience&quot;</code></pre>
+<pre class="r"><code>#setwd(&quot;./data&quot;) change the working directory  to the data, ./ is very useful to create relative path
+list.files(&quot;./data&quot;) # list the files in the current directory</code></pre>
+<pre><code>## [1] &quot;Exercise_10_1.csv&quot;                &quot;Exercise_8_2_TwoWay.csv&quot;         
+## [3] &quot;Exercise_8_3_Repeated_OneWay.csv&quot; &quot;Exercise_8_3_Repeated_TwoWay.csv&quot;
+## [5] &quot;study1.csv&quot;                       &quot;study2.csv&quot;                      
+## [7] &quot;study3.csv&quot;</code></pre>
+<p>Always try to keep separate the data from the analysis, working inside the data directory could lead to data loss or corruption. Let’s say we want to read the <strong><tt>study1.csv()</tt></strong> file. We use the general function <strong><tt>read.table()</tt></strong>, that allows to set the delimiter , to include or not the headers, and more.</p>
+<pre class="r"><code>study1&lt;-read.table(&quot;./data/study1.csv&quot;,sep=&quot;;&quot;,header = TRUE) # the values are separated by ; in the csv file
+head(study1)
+##   patient group    before     after
+## 1       1     a 0.3722790 0.2210778
+## 2       2     a 0.4421391 0.4396936
+## 3       3     a 0.3816662 0.3312596
+## 4       4     a 0.5689327 0.5908162
+## 5       5     a 0.5711550 0.6679012
+## 6       6     a 0.5373978 0.3811533
+str(study1)
+## &#39;data.frame&#39;:    12 obs. of  4 variables:
+##  $ patient: int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ group  : chr  &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; ...
+##  $ before : num  0.372 0.442 0.382 0.569 0.571 ...
+##  $ after  : num  0.221 0.44 0.331 0.591 0.668 ...
+stud1_new&lt;-subset(study1,study1$group==&#39;a&#39;) # keep only the data from group a</code></pre>
+<p>In order to save the new data frame <strong><tt>stud1_new()</tt></strong> we use the general function <strong><tt>write.table()</tt></strong>.</p>
+<pre class="r"><code>write.table(stud1_new,file=&quot;./data/study1_new.csv&quot;,col.names=TRUE,sep=&quot;;&quot;)</code></pre>
+</div>
+</div>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<div id="exercise-1" class="section level3">
+<h3>Exercise 1</h3>
+<p>Generate a vector of length 20 containing some numbers and sort it in descending order. What do the related <strong><tt>rank()</tt></strong> and <strong><tt>order()</tt></strong> functions do? Create a matrix (vector,vector of ranks). Use <strong><tt>order()</tt></strong> function to sort the vector in ascending order.</p>
+<div class="fold s o">
+<pre class="r"><code>x &lt;- c(seq(1,15,by=2),-4:4,pi,11,13)
+print(x) # print the vector
+##  [1]  1.000000  3.000000  5.000000  7.000000  9.000000 11.000000 13.000000
+##  [8] 15.000000 -4.000000 -3.000000 -2.000000 -1.000000  0.000000  1.000000
+## [15]  2.000000  3.000000  4.000000  3.141593 11.000000 13.000000
+length(x) # return the length of the variable
+## [1] 20
+
+# decreasing oder:
+sort(x, decreasing=TRUE)
+##  [1] 15.000000 13.000000 13.000000 11.000000 11.000000  9.000000  7.000000
+##  [8]  5.000000  4.000000  3.141593  3.000000  3.000000  2.000000  1.000000
+## [15]  1.000000  0.000000 -1.000000 -2.000000 -3.000000 -4.000000
+
+#na.last argument controlling the treatment of NA
+sort(c(5,7,1,NA,3))
+## [1] 1 3 5 7
+sort(c(5,7,1,NA,3), na.last=TRUE) #put last
+## [1]  1  3  5  7 NA
+sort(c(5,7,1,NA,3), na.last=FALSE) # put first
+## [1] NA  1  3  5  7
+sort(c(5,7,1,NA,3), na.last=NA) #removed
+## [1] 1 3 5 7
+
+# return the vector of ranks
+rank(x)
+##  [1]  6.5  9.5 13.0 14.0 15.0 16.5 18.5 20.0  1.0  2.0  3.0  4.0  5.0  6.5  8.0
+## [16]  9.5 12.0 11.0 16.5 18.5
+sum(rank(x))
+## [1] 210
+cbind(x, &quot;rank()&quot;=rank(x))
+##               x rank()
+##  [1,]  1.000000    6.5
+##  [2,]  3.000000    9.5
+##  [3,]  5.000000   13.0
+##  [4,]  7.000000   14.0
+##  [5,]  9.000000   15.0
+##  [6,] 11.000000   16.5
+##  [7,] 13.000000   18.5
+##  [8,] 15.000000   20.0
+##  [9,] -4.000000    1.0
+## [10,] -3.000000    2.0
+## [11,] -2.000000    3.0
+## [12,] -1.000000    4.0
+## [13,]  0.000000    5.0
+## [14,]  1.000000    6.5
+## [15,]  2.000000    8.0
+## [16,]  3.000000    9.5
+## [17,]  4.000000   12.0
+## [18,]  3.141593   11.0
+## [19,] 11.000000   16.5
+## [20,] 13.000000   18.5
+
+# order return the index order corresponding to the ascending order of the elements of the vector
+x[order(x,decreasing = FALSE)]
+##  [1] -4.000000 -3.000000 -2.000000 -1.000000  0.000000  1.000000  1.000000
+##  [8]  2.000000  3.000000  3.000000  3.141593  4.000000  5.000000  7.000000
+## [15]  9.000000 11.000000 11.000000 13.000000 13.000000 15.000000</code></pre>
+</div>
+</div>
+<div id="exercise-2" class="section level3">
+<h3>Exercise 2</h3>
+<p>Add two columns to the <strong><tt>study1</tt></strong> data frame:</p>
+<ol style="list-style-type: decimal">
+<li><p>A column with logical object, that says for every entry of the <strong><tt>before</tt></strong> column if is lower or not than 0.3.</p></li>
+<li><p>A column with logical object, that says for every entry of the <strong><tt>after</tt></strong> column if is grater or not than 0.4.</p></li>
+</ol>
+<p>Return the rows that fulfill both the conditions of the former columns, namely rows with value true in both columns. How many patients belonging to group <strong><tt>a</tt></strong> fulfill this condition?</p>
+<div class="fold s o">
+<pre class="r"><code>temp&lt;-study1$after&lt;0.3 #create an extra vector
+study1&lt;-cbind(study1,temp) # bind together the data frame and the vector
+names(study1)[length(study1)]&lt;-&#39;after_l_0.3&#39; # similarly tail(study1)&lt;-&#39;after_l_0.3&#39;
+
+#in a more compact way 
+study1&lt;-data.frame(study1, &#39;before_gr_0.4&#39;=with(study1,before&gt;0.4))
+head(study1)</code></pre>
+<pre><code>##   patient group    before     after after_l_0.3 before_gr_0.4
+## 1       1     a 0.3722790 0.2210778        TRUE         FALSE
+## 2       2     a 0.4421391 0.4396936       FALSE          TRUE
+## 3       3     a 0.3816662 0.3312596       FALSE         FALSE
+## 4       4     a 0.5689327 0.5908162       FALSE          TRUE
+## 5       5     a 0.5711550 0.6679012       FALSE          TRUE
+## 6       6     a 0.5373978 0.3811533       FALSE          TRUE</code></pre>
+<pre class="r"><code>subset(study1,study1$before_gr_0.4 &amp; study1$after_l_0.3)</code></pre>
+<pre><code>##    patient group    before      after after_l_0.3 before_gr_0.4
+## 8        8     b 0.5827886 -0.0446239        TRUE          TRUE
+## 12      12     b 0.4743519  0.2184937        TRUE          TRUE</code></pre>
+</div>
+<hr />
+</div>
+</div>
+</div>
+<div id="basic-plotting" class="section level1">
+<h1>Basic plotting</h1>
+<p>One of the basic plotting functions is the <strong><tt>plot()</tt></strong> function. This is a generic function, namely the type of plot produced is dependent on the type or class of the first argument. For example:</p>
+<ul>
+<li><strong><tt>plot(x_vector, y_vector)</tt></strong> produces a scatterplot of y against x</li>
+<li><strong><tt>plot(x_vector)</tt></strong> a scatterplot of x against index of x</li>
+<li><strong><tt>plot(dataframe)</tt></strong> each variable against the others</li>
+</ul>
+<pre class="r"><code>str(study1)
+## &#39;data.frame&#39;:    12 obs. of  6 variables:
+##  $ patient      : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ group        : chr  &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; ...
+##  $ before       : num  0.372 0.442 0.382 0.569 0.571 ...
+##  $ after        : num  0.221 0.44 0.331 0.591 0.668 ...
+##  $ after_l_0.3  : logi  TRUE FALSE FALSE FALSE FALSE FALSE ...
+##  $ before_gr_0.4: logi  FALSE TRUE FALSE TRUE TRUE TRUE ...
+plot(subset(study1,select=-c(group)),
+     main= &#39;Study 1 results&#39;, # title of the plot
+     col = factor(study1$group) # color for the points accoding to the group
+     )</code></pre>
+<p><img src="Exercise00_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The <strong><tt>curve()</tt></strong> function draws the given expression over the given interval <strong><tt>[from,to]</tt></strong>.</p>
+<pre class="r"><code>curve(exp(-0.5*(x^2))/sqrt(2*pi),from=-5,to=5,
+      xlab=&quot;x&quot;, #label of the x axis
+      main= &quot;Standardt normal distribution&quot;,
+      ylab=bquote(phi[mu==0~&#39;,&#39;~sigma^{2}==1](x)) #label of y axis
+)</code></pre>
+<p><img src="Exercise00_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="exercises-1" class="section level2">
+<h2>Exercises</h2>
+<div id="exercise-1-1" class="section level3">
+<h3>Exercise 1</h3>
+<p>Plot the points (<code>study1$before</code>,<code>study1$after</code>) and use the function <strong><tt>abline()</tt></strong> to add a straight line with intercept 1 and slope 0. Use the example in <code>?abline</code> to understand how to use the latter function.</p>
+<div class="fold s o">
+<pre class="r"><code>plot(study1$before,study1$after,col=factor(study1$group),
+     xlim=c(-0.1,1),
+     ylim=c(-0.1,1),
+     xlab=&quot;before&quot;,ylab=&quot;after&quot;)
+abline(0,1)
+# extra how to add the legend
+legend(&quot;topleft&quot;,
+       legend=c(&quot;a&quot;,&quot;b&quot;),
+       col=c(&#39;red&#39;,&quot;black&quot;),
+       pch = 1)</code></pre>
+<p><img src="Exercise00_files/figure-html/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="exercise-2-1" class="section level3">
+<h3>Exercise 2</h3>
+<p>Use the <strong><tt>seq()</tt></strong> function to generate a vector <strong><tt>x</tt></strong> of length 100 of evenly spaced numbers between 0 and <span class="math inline">\(2\pi\)</span>. Draw a plot of <strong><tt>x</tt></strong> agianst <strong><tt>sin(x)</tt></strong>. Look at the <strong><tt>type</tt></strong> argument of function <strong><tt>plot()</tt></strong> to draw a connecting line. Use the <strong><tt>lines()</tt></strong> function to add the cosine to the plot.</p>
+<div class="fold s o">
+<pre class="r"><code>x&lt;-seq(from=0, to=2*pi,length.out=100)
+plot(x,sin(x),
+     ylab=&#39;&#39;, # no y axis label
+     type=&#39;l&#39;# we want to plot a lines that connects the points
+     ) # same curve(sin(x),from=0,to=2*pi)
+lines(x,cos(x),col=&#39;red&#39;) # add the cos
+abline(0,0) # add the x axis</code></pre>
+<p><img src="Exercise00_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "site_libs/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+/* W3.CSS 4.15 December 2020 by Jan Egil and Borge Refsnes */
+html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
+
+
+
+h1 {
+  font-weight: bold;
+  color: #4AA4DE;
+  font-size: 30px;
+  background-clip: content-box;
+  background-color: #f5f5f5;
+}
+
+
+h2 {
+  font-weight: bold;
+  color:  #3686D3;
+  font-size: 26px;
+  border-bottom: 2px solid #3686D3;
+}
+
+h3 {
+  font-weight: bold;
+  color: #1F65CC;
+  font-size: 20px;
+}
+
+body{
+  font-size:14px;
+}
+tt{
+  font-size:16px;
+}
+
+.showopt {
+  background-color: #28B62C;
+  color: #FFFFFF; 
+  width: 100px;
+  height: 20px;
+  text-align: center;
+  vertical-align: middle !important;
+  float: right;
+  font-family: sans-serif;
+  border-radius: 8px;
+}
+
+
+.fold:focus{
+    background-color: #FF4136;
+    color: #FFFFFF;
+}
+
+
+pre.plot {
+  background-color: white !important;
+}
+
+.navbar-brand {
+  height: 56px !important;
+  padding: 5px 5px !important;
+}
+
+.cols {display: flex; }
