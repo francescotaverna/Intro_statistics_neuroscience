@@ -786,10 +786,10 @@ subset(df,df$X1&gt;5) # that is equal to df[df$X1&gt;5,]
 <pre><code>## [1] &quot;C:/Users/frenc/Documents/GitHub/Intro_statistics_neuroscience&quot;</code></pre>
 <pre class="r"><code>#setwd(&quot;./data&quot;) change the working directory  to the data, ./ is very useful to create relative path
 list.files(&quot;./data&quot;) # list the files in the current directory</code></pre>
-<pre><code>## [1] &quot;Exercise_10_1.csv&quot;                &quot;Exercise_8_2_TwoWay.csv&quot;         
-## [3] &quot;Exercise_8_3_Repeated_OneWay.csv&quot; &quot;Exercise_8_3_Repeated_TwoWay.csv&quot;
-## [5] &quot;study1.csv&quot;                       &quot;study2.csv&quot;                      
-## [7] &quot;study3.csv&quot;</code></pre>
+<pre><code>## [1] &quot;dimarta_trial.csv&quot;                &quot;Exercise_10_1.csv&quot;               
+## [3] &quot;Exercise_8_2_TwoWay.csv&quot;          &quot;Exercise_8_3_Repeated_OneWay.csv&quot;
+## [5] &quot;Exercise_8_3_Repeated_TwoWay.csv&quot; &quot;study1.csv&quot;                      
+## [7] &quot;study2.csv&quot;                       &quot;study3.csv&quot;</code></pre>
 <p>Always try to keep separate the data from the analysis, working inside the data directory could lead to data loss or corruption. Let’s say we want to read the <strong><tt>study1.csv()</tt></strong> file. We use the general function <strong><tt>read.table()</tt></strong>, that allows to set the delimiter , to include or not the headers, and more.</p>
 <pre class="r"><code>study1&lt;-read.table(&quot;./data/study1.csv&quot;,sep=&quot;;&quot;,header = TRUE) # the values are separated by ; in the csv file
 head(study1)

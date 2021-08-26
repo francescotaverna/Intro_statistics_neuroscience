@@ -1,27 +1,170 @@
 ---
 title: "Hypothesis Tests"
 ---
-# Exercise 4.1
-Consider CBF-levels were measured in 100 subjects with low-grade tumors
-and 100 subjects with high-grade tumors. Here we simulate the measurements from
-the normal distribution.
 
-```{r ex3.1, echo=TRUE, eval=FALSE}
+
+# Exercises
+
+## Exercise 1
+Consider CBF-levels were measured in 100 subjects with low-grade tumors and 100 subjects with high-grade tumors. Here we simulate the measurements from the normal distribution.
+
+```{r ex3.1, echo=TRUE}
+set.seed(12) # we set the seed to get a reproducible random result.
 n = 100 
 low = rnorm(n = n, mean = 50, sd = 10)
 high = rnorm(n = n, mean = 60, sd = 10)
 ```
 
-In a real-world experiment you would first check whether your data is
-normally distributed (necessary for t-test). Draw quantile-quantile plots 
-(QQ-plots) to check the normality-assumption. (Hint: $\texttt{qqnorrm}$
-and $\texttt{qqline}$)
+In a real-world experiment you would first check whether your data is normally distributed (necessary for t-test). Draw quantile-quantile plots  (QQ-plots) to check the normality-assumption (**<tt>qqnorrm</tt>**,**<tt>qqline</tt>**).
 
-Illustrate the sample values by boxplots and histograms to check whether the assumption of equal variances seems reasonable.
+<div class='fold s o'>
+```{r}
+par(mfrow=c(1,2))
+qqnorm(low,main='low')
+qqline(low)
+qqnorm(high,main='high')
+qqline(high)
+```
+</div>
 
-Perform the t-test. (Hint: $\texttt{t.test}$)
+Illustrate the sample values by box-plots and histograms to check whether the assumption of equal variances seems reasonable.
+
+<div class='fold s o'>
+```{r}
+boxplot(low, high, names=c("low", "high"),cex.lab=1.5, cex.axis=1.5,col=c(2,3))
+grid()
+hist(low, border=2, xlim=c(0, 100), ylim=c(0, 0.5*n), density=5, col=2)
+hist(high, border=3, add=TRUE, density=2.5, col=3)
+```
+</div>
+
+Perform the t-test (**<tt>t.test</tt>**).
+
+<div class='fold s o'>
+```{r}
+a = t.test(low, high)
+a = t.test(low, high, var.equal = TRUE)
+#a = t.test(low, high, paired = FALSE,
+#                      alternative = "two-sided",
+#                      conf.level = 0.95)
+a
+# mean difference
+a$estimate[1] - a$estimate[2]
+```
+</div>
 
 Interpret the results.
 
-# Exercise 4.2
-Repeat the above computer simulation with sample sizes $n=5$ per group. Discuss with your neighbor whether the test results lead to a false positive or false negative decision.
+## Exercise 2
+
+Repeat the above computer simulation with sample sizes $n=5$ per group. Analyze whether  the test results lead to a false positive or false negative decision.
+
+<div class='fold s o'>
+```{r}
+set.seed(1)
+n = 5 ### Sample Size
+low = rnorm(n=n, mean=50, sd=10)
+high = rnorm(n=n, mean=60, sd=10)
+t.test(low, high, var.equal = TRUE)
+```
+</div>
+
+
+## Exercise 3
+Load the data frame in the **<tt>dimarta_trial.csv</tt>** file.
+```{r}
+dimarta_df<-read.csv('./data/dimarta_trial.csv',sep=',')
+str(dimarta_df)
+```
+
+Compute the difference between **<tt>histamine_end</tt>** level and **<tt>histamine_start</tt>** level and add the data to the data frame.
+
+<div class='fold s'>
+```{r}
+dimarta_df$histamine_change<-with(dimarta_df,histamine_end - histamine_start)
+```
+</div>
+
+Use boxplots to check whether the assumption of equal variances of histamine changes between arms seems reasonable .
+
+<div class='fold s o'>
+```{r}
+armI<-subset(dimarta_df,arm=='I')$histamine_change
+armII<-subset(dimarta_df,arm=='II')$histamine_change
+armIII<-subset(dimarta_df,arm=='III')$histamine_change
+boxplot(armI,armII,armIII,names=c('arm I','arm II','arm III'),
+        col=c('coral1','lightskyblue','mediumspringgreen'))
+grid()
+```
+</div>
+
+Check whether your data is normally distributed (necessary for t-test). Draw quantile-quantile plots (QQ-plots) to check the normality-assumption,(**<tt>qqnorrm</tt>**,**<tt>qqline</tt>**).
+
+<div class='fold s o'>
+```{r}
+par(mfrow=c(1,3))
+qqnorm(armI,main='arm I',col='coral1')
+qqline(armI)
+qqnorm(armII,main='arm II',col='lightskyblue',ylab=NA)
+qqline(armII)
+qqnorm(armIII,main='arm III',col='mediumspringgreen',ylab=NA)
+qqline(armIII)
+```
+</div>
+
+To check this you can also use the Shapiro-Wilk’s test, where The null hypothesis is that the data are normally distributed (**<tt>shapiro.test</tt>**).
+
+<div class='fold s o'>
+```{r collapse=TRUE}
+shapiro.test(armI)
+shapiro.test(armII)
+shapiro.test(armIII)
+```
+</div>
+
+Let treatment arm I be the control arm and II and III two new types of drugs. Check if the population means of arm I and II are equal, then  do the same for arm I and III (**<tt>t.test</tt>**).
+
+<div class='fold s o'>
+```{r,collapse=TRUE}
+#when the variance are not equal we the Welch t-test
+t.test(armI,armII)
+t.test(armI,armII,var.equal = TRUE)
+t.test(armI,armIII)
+t.test(armI,armIII,var.equal = TRUE)
+```
+</div>
+
+Interpret the results of the test. 
+
+<!-- 
+## Install an R package
+R packages are a collection of R functions, complied code and sample data. We install an R package through 
+the function **<tt>install.package(package_name)</tt>**. Let's install the package **<tt>Stat2Data</tt>**:
+
+
+```{r ,eval=FALSE}
+install.packages("Stat2Data")
+```
+
+To use this package in our session we need to load it. To accomplish this, we use the **<tt>library()</tt>** function:
+
+```{r}
+library(Stat2Data)
+```
+
+from this package we want to retrieve the **<tt>Blood1</tt>** data frame, which contains the systolic blood pressure, the weight and the smoking status for a sample of 500 adults. We use the **<tt>library()</tt>** to add this data frame to variable in our current environment:
+
+```{r}
+data(Blood1)
+str(Blood1)
+```
+
+-->
+
+
+
+
+
+
+
+
