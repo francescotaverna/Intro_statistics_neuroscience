@@ -628,10 +628,10 @@ OR=odds_B / odds_A
 </div>
 <p>Change samples sizes <span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_2\)</span> and mutations rates <span class="math inline">\(p_1\)</span>, <span class="math inline">\(p_2\)</span>. Discuss how results change.</p>
 <div class="fold s o">
-<pre class="r"><code>n1 = 500
-n2 = 1000
+<pre class="r"><code>n1 = 50
+n2 = 100
 p1 = 0.1
-p2 = 0.15
+p2 = 0.5
 typeA = rbinom(n = n1, prob = p1, size = 1)
 typeB = rbinom(n = n2, prob = p2, size = 1)
 
@@ -639,18 +639,23 @@ mutation = c(typeA, typeB)
 group = c(rep(&quot;type A&quot;, n1), rep(&quot;type B&quot;, n2))
 X = table(mutation, group)
 
-fisher.test(X)</code></pre>
-<pre><code>## 
+fisher.test(X)
+## 
 ##  Fisher&#39;s Exact Test for Count Data
 ## 
 ## data:  X
-## p-value = 0.04262
+## p-value = 8.101e-10
 ## alternative hypothesis: true odds ratio is not equal to 1
 ## 95 percent confidence interval:
-##  1.005806 2.023885
+##   5.125226 64.273949
 ## sample estimates:
 ## odds ratio 
-##    1.41848</code></pre>
+##   15.59446
+
+odds_A=p1/(1-p1)
+odds_B=p2/(1-p2)
+odds_B / odds_A
+## [1] 9</code></pre>
 </div>
 </div>
 </div>

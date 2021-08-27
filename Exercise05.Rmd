@@ -201,11 +201,11 @@ OR=odds_B / odds_A
 Change samples sizes $n_1$, $n_2$ and mutations rates $p_1$, $p_2$. Discuss how results change.
 
 <div class='fold s o'>
-```{r}
-n1 = 500
-n2 = 1000
+```{r collapse=TRUE}
+n1 = 50
+n2 = 100
 p1 = 0.1
-p2 = 0.15
+p2 = 0.5
 typeA = rbinom(n = n1, prob = p1, size = 1)
 typeB = rbinom(n = n2, prob = p2, size = 1)
 
@@ -214,6 +214,10 @@ group = c(rep("type A", n1), rep("type B", n2))
 X = table(mutation, group)
 
 fisher.test(X)
+
+odds_A=p1/(1-p1)
+odds_B=p2/(1-p2)
+odds_B / odds_A
 
 ```
 </div>
