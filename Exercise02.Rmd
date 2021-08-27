@@ -16,7 +16,7 @@ These concepts generally hold true for all the distribution functions built into
 
 # Exercises
 
-## Exercise 1
+## Exercise 2.1
 Look at the three histograms.
 ```{r ex1,fig.align='center',out.width = '80%'}
 par(mfrow=c(2,2))
@@ -40,7 +40,8 @@ lines(sort(x3),dnorm(sort(x3)),col='red')
 ```
 </div>
 
-## Exercise 2
+
+## Exercise 2.2
 Assume, the survival probability of patients after brain surgery is exponentially distributed. Assume further that the average survival time of a patient is 36 months, $\lambda = 1/36$.
 
 Plot the density function of the exponential distribution over the interval  **<tt>[0,200]</tt>**. Plot the function over a sequence obtained using the **<tt>seq()</tt>** function.
@@ -93,7 +94,8 @@ polygon(cord.x,cord.y,col='coral1')
 
 
 
-## Exercise 3
+
+## Exercise 2.3
 Let's assume that the outcome of a therapy can be modeled as a binomial distribution , $B(n,p)$. If $n=10$ and $p=0.7$, determine the probability that $k = \{1, 4, 8\}$ OR LESS patients out of $n = 10$ will have a successful therapy.
 
 <div class='fold s o'>

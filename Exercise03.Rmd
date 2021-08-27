@@ -32,7 +32,7 @@ print(fib)
 
 # Exercises
 
-## Exercise 1
+## Exercise 3.1
 
 Draw 10 random samples of size $N = 5$ from the standard normal distribution ($\mu$ = 0, $\sigma$ = 1). Calculate the mean of each sample. Calculate the mean of all 10 means.
 
@@ -106,7 +106,8 @@ points(M_mean, y = 0, pch=4, col=2, lwd=3)
 ```
 </div>
 
-## Exercise 2
+
+## Exercise 3.2
 A producer gives the information that the content of a pharmaceutical substance in the tablets of some preparation A is normally distributed with an expectation of 500 mg and with a variance  of 10mg. To check this claim, the contents of 25 randomly chosen tablets are determined.
 
 Load the **<tt>study3.csv</tt>** data frame and plot the histogram of the data, remember to select a reasonable choice of the parameter **<tt>breaks</tt>**.

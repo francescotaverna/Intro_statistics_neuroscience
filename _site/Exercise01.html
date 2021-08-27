@@ -427,8 +427,8 @@ $(document).ready(function() {
 <pre class="r"><code>study1&lt;-read.table(&quot;./data/study1.csv&quot;,sep=&quot;;&quot;,header = TRUE) # the values are separated by ; in the csv file</code></pre>
 <div id="exercises" class="section level1">
 <h1>Exercises</h1>
-<div id="execrise-1" class="section level2">
-<h2>Execrise 1</h2>
+<div id="execrise-1.1" class="section level2">
+<h2>Execrise 1.1</h2>
 <p>Calculate mean, median, variance, standard deviation, quartiles and the sum of the measurements before treatment (<strong><tt>mean()</tt></strong>).</p>
 <div class="fold s o">
 <pre class="r"><code>X&lt;-study1$before
@@ -471,8 +471,8 @@ summary(X)
 ##  0.2715  0.3639  0.4119  0.4344  0.5453  0.5828</code></pre>
 </div>
 </div>
-<div id="exercise-2" class="section level2">
-<h2>Exercise 2</h2>
+<div id="exercise-1.2" class="section level2">
+<h2>Exercise 1.2</h2>
 <p>Plot a boxplot and a histogram of the measurements obtained before the treatment. Correct the title of the axes. Choose appropriate range of axes (<strong><tt>boxplot()</tt></strong>).</p>
 <div class="fold s o">
 <pre class="r"><code>par(mfrow=c(1,2))# define the plot area one row, two columns
@@ -495,8 +495,8 @@ points(X, rep(0, 12), pch=15, col=&quot;orange&quot;, cex=0.75)</code></pre>
 <p><img src="Exercise01_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
-<div id="exercise-3" class="section level2">
-<h2>Exercise 3</h2>
+<div id="exercise-1.3" class="section level2">
+<h2>Exercise 1.3</h2>
 <p>Determine the absolute and relative frequencies of patients in the study groups(<strong><tt>table()</tt></strong>). Plot a bar chart and a pie chart of the parameter “group” (<strong><tt>pie()</tt></strong> and <strong><tt>barplot()</tt></strong>).</p>
 <div class="fold s o">
 <pre class="r"><code>X&lt;-study1$group

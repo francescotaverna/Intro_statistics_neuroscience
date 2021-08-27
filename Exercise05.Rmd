@@ -30,7 +30,7 @@ The database **<tt>polyps</tt>** contains the results of the randomized controll
 
 # Exercises
 
-## Exercise 1 
+## Exercise 5.1 
 Assume the expression of a particular gene is measures in blood samples of $n=10$ patients with Parkinson's disease and in $n=10$ healthy controls.
 
 Example data is drawn from exponential distributions as follows:
@@ -98,7 +98,7 @@ t.test(patients, controls)
 
 
 
-## Exercise 2
+## Exercise 5.2
 
 Compute the difference between **<tt>number12m</tt>** level and **<tt>baseline</tt>** level and add the data to the data frame.
 
@@ -159,7 +159,7 @@ Interpret the results of the test, keeping in mid the analysis made before.
 
 
 
-## Exercise 3
+## Exercise 5.3
 Assume there are two different types of disease (type A and B). The mutation rate of a particular gene is $p_1$ under type A and $p_2$ under type B. To compare the mutation rates, tissue samples of $n_A=50$ patients of disease type A and $n_B=100$ patients of disease type B are studied.
 
 Example data is drawn from binomial distributions. Look at the sample values of both patient groups (a value of 0 means no mutation, a value of 1 means there is a mutation).

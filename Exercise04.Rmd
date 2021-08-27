@@ -5,7 +5,7 @@ title: "Hypothesis Tests"
 
 # Exercises
 
-## Exercise 1
+## Exercise 4.1
 Consider CBF-levels were measured in 100 subjects with low-grade tumors and 100 subjects with high-grade tumors. Here we simulate the measurements from the normal distribution.
 
 ```{r ex3.1, echo=TRUE}
@@ -55,7 +55,8 @@ a$estimate[1] - a$estimate[2]
 
 Interpret the results.
 
-## Exercise 2
+
+## Exercise 4.2
 
 Repeat the above computer simulation with sample sizes $n=5$ per group. Analyze whether  the test results lead to a false positive or false negative decision.
 
@@ -70,7 +71,8 @@ t.test(low, high, var.equal = TRUE)
 </div>
 
 
-## Exercise 3
+
+## Exercise 4.3
 Load the data frame in the **<tt>dimarta_trial.csv</tt>** file.
 ```{r}
 dimarta_df<-read.csv('./data/dimarta_trial.csv',sep=',')

@@ -1,0 +1,15 @@
+---
+title: "ROC curves"
+---
+
+# Exercise 9.1
+The concentration of the s100b-protein was measured in $n=113$ patients. Additionally, the clinical
+outcome of patients was classified as either "Good" or "Poor" using a gold standard. Dataset is part of the \texttt{pROC} package.
+
+a) Install the \texttt{pROC} package. Load the dataset \texttt{aSAH} from \texttt{pROC}.
+
+b) Perform an ROC analysis using \texttt{roc} function to determine the sensitivity and specificity for possible cut-off values of s100b. Plot the ROC curve, and interpret the results. Extract the sensitivity and specificity values from the \texttt{roc} object. Calculate the youden index.
+
+c) Besides s100b, the enzyme NDKA was measured. Make again an ROC analysis and draw the ROC curve on top of the existing plot.
+
+d) Perform a statistical test to see whether s100b or ndka is a better predictor for the clinical outcome \texttt{roc.test}.

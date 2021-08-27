@@ -436,8 +436,8 @@ $(document).ready(function() {
 </div>
 <div id="exercises" class="section level1">
 <h1>Exercises</h1>
-<div id="exercise-1" class="section level2">
-<h2>Exercise 1</h2>
+<div id="exercise-2.1" class="section level2">
+<h2>Exercise 2.1</h2>
 <p>Look at the three histograms.</p>
 <pre class="r"><code>par(mfrow=c(2,2))
 ## Random sample of size n=10 of N(0,1)-Distribution
@@ -458,8 +458,8 @@ lines(sort(x3),dnorm(sort(x3)),col=&#39;red&#39;)</code></pre>
 <p><img src="Exercise02_files/figure-html/unnamed-chunk-1-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
-<div id="exercise-2" class="section level2">
-<h2>Exercise 2</h2>
+<div id="exercise-2.2" class="section level2">
+<h2>Exercise 2.2</h2>
 <p>Assume, the survival probability of patients after brain surgery is exponentially distributed. Assume further that the average survival time of a patient is 36 months, <span class="math inline">\(\lambda = 1/36\)</span>.</p>
 <p>Plot the density function of the exponential distribution over the interval <strong><tt>[0,200]</tt></strong>. Plot the function over a sequence obtained using the <strong><tt>seq()</tt></strong> function.</p>
 <div class="fold s o">
@@ -488,8 +488,8 @@ plot(x, y, type = &quot;l&quot;, xlab = &quot;months&quot;)</code></pre>
 <p>The previous questions are equivalent to calculate the red and blue area in following plot.</p>
 <p><img src="Exercise02_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="exercise-3" class="section level2">
-<h2>Exercise 3</h2>
+<div id="exercise-2.3" class="section level2">
+<h2>Exercise 2.3</h2>
 <p>Let’s assume that the outcome of a therapy can be modeled as a binomial distribution , <span class="math inline">\(B(n,p)\)</span>. If <span class="math inline">\(n=10\)</span> and <span class="math inline">\(p=0.7\)</span>, determine the probability that <span class="math inline">\(k = \{1, 4, 8\}\)</span> OR LESS patients out of <span class="math inline">\(n = 10\)</span> will have a successful therapy.</p>
 <div class="fold s o">
 <pre class="r"><code>pbinom(1, 10, prob=0.7)

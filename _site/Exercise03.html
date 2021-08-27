@@ -446,8 +446,8 @@ print(fib)</code></pre>
 </div>
 <div id="exercises" class="section level1">
 <h1>Exercises</h1>
-<div id="exercise-1" class="section level2">
-<h2>Exercise 1</h2>
+<div id="exercise-3.1" class="section level2">
+<h2>Exercise 3.1</h2>
 <p>Draw 10 random samples of size <span class="math inline">\(N = 5\)</span> from the standard normal distribution (<span class="math inline">\(\mu\)</span> = 0, <span class="math inline">\(\sigma\)</span> = 1). Calculate the mean of each sample. Calculate the mean of all 10 means.</p>
 <div class="fold s o">
 <pre class="r"><code># Sample creation
@@ -476,9 +476,9 @@ for(j in 1:10){
 M_mean&lt;-mean(M_col_mean)
 M_col_mean
 M_mean</code></pre>
-<pre><code>##  [1] -0.41274442 -0.28633794  0.19348326 -0.02731490  0.09425692  0.28154201
-##  [7]  0.27839582  0.03145423 -0.23433761 -0.04044311
-## [1] -0.01220457</code></pre>
+<pre><code>##  [1]  0.2785640 -0.6207207 -0.3587130  0.3273617 -0.2784221  0.4955207
+##  [7]  0.5576932 -0.6164465  0.1344372 -0.6490567
+## [1] -0.07297823</code></pre>
 </div>
 <p>Plot the density function of the standard normal distribution. Using the function <strong><tt>points()</tt></strong> draw the sample means and the mean of means into the plot.</p>
 <div class="fold s o">
@@ -496,8 +496,8 @@ Repeat the above computer experiment with <span class="math inline">\(N = 25\)</
 <p><img src="Exercise03_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
-<div id="exercise-2" class="section level2">
-<h2>Exercise 2</h2>
+<div id="exercise-3.2" class="section level2">
+<h2>Exercise 3.2</h2>
 <p>A producer gives the information that the content of a pharmaceutical substance in the tablets of some preparation A is normally distributed with an expectation of 500 mg and with a variance of 10mg. To check this claim, the contents of 25 randomly chosen tablets are determined.</p>
 Load the <strong><tt>study3.csv</tt></strong> data frame and plot the histogram of the data, remember to select a reasonable choice of the parameter <strong><tt>breaks</tt></strong>.
 <div class="fold s o">
@@ -557,7 +557,7 @@ for(j in 1:100){
 
 # percentage of interval that contains the true value for the mean
 sum((M_conf[1,]&lt;=500 &amp; 500&lt;=M_conf[2,]))/100</code></pre>
-<pre><code>## [1] 0.9</code></pre>
+<pre><code>## [1] 0.92</code></pre>
 <pre class="r"><code>#EXTRA
 # usage of if else statement to give the color to the segments
 plot.new()

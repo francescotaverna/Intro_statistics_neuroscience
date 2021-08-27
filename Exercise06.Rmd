@@ -1,27 +1,85 @@
 ---
 title: "Correlation and Regression"
 ---
-# Exercise 6.1 (Correlation)
+
+# Exercise
+
+## Exercise 6.1 (Correlation)
 Assume Proteins A, B and C are members of a cellular pathway that is related to a certain disease. The concentration of these protein was measured in $n=5000$ patients.
 
-Read the corresponding data (\texttt{study2.csv}) into the R-environment.
+Read the corresponding data **<tt>study2.csv</tt>** into the R-environment.
 
-Make scatterplots of each pair of proteins (\texttt{plot}).
+<div class='fold s o'>
+```{r}
+X = read.table("data/study2.csv", sep=";", header=TRUE)
+str(X)
+```
+</div>
 
-Determine Pearson's correlation between each pair of proteins (\texttt{cor.test}).
+Make scatter plots of each pair of proteins (**<tt>plot</tt>**).
 
-# Exercise 6.2 (Linear Regression)
-From the correlation analysis, protein A appears to be related to protein B. From earlier research, it is known that protein B depends on protein A. 
+<div class='fold s o'>
+```{r fig.align='center',out.width = '70%'}
+plot(X)
+```
+</div>
 
-Model the relation between the two proteins using a \textbf{simple linear regression} (R function: \texttt{lm}).
+Determine Pearson's correlation between each pair of proteins (**<tt>cor.test</tt>**).
 
-Test whether the regression coefficient is significantly different from zero.
+<div class='fold s o'>
+```{r,results='hold'}
+cor.test(X$Protein.A, X$Protein.B)
+cor.test(X$Protein.A, X$Protein.C)
+cor.test(X$Protein.B, X$Protein.C)
+```
+</div>
 
-Draw the regression line into the scatterplot.
+## Exercise 6.2 (Linear Regression)
+
+From the correlation analysis, protein A appears to be related to protein B. From earlier research, it is known that protein B depends on protein A. Model the relation between the two proteins using a simple linear regression (**<tt>lm</tt>**).
+<div class='fold s'>
+```{r}
+L1 = lm(X$Protein.B ~ X$Protein.A)
+```
+</div>
+
+Evaluate the  **<tt>summary</tt>** over the linear model to check the goodness of fit. 
+
+<div class='fold o'>
+```{r}
+summary(L1)
+```
+</div>
+
+Do you know the meaning behind each section of summary?
+
+<details><summary>T-statistic</summary>
+<p>The t-Test checks the nullity of the coefficient.
+</p>
+</details>
+<details><summary>Multiple R-squared</summary>
+<p>Percentage of variability explained by the model.</p>
+</details>
+
+<details><summary>F-statistic</summary>
+<p>The F-Statistic  checks if at least one of your coefficients are nonzero.
+</p>
+</details>
 
 
+The output of the **<tt>lm</tt>** is a list which contains the estimates of the linear regression model. Use the latter to draw 
+the regression line into the scatter plot (**<tt>abline</tt>**).
 
+<div class='fold s o'>
+```{r}
 
-
-
-
+par(mfrow=c(1,1))
+plot(X$Protein.A, X$Protein.B, cex.axis=1.5, cex.lab=1.5, 
+     xlab="Concentration of Protein A",
+     ylab="Concentration of Protein B")
+grid()
+#The coefficients of the linear regression model
+#L1$coefficients
+abline(a=L1$coefficients[1], b=L1$coefficients[2], col=2, lwd=3)
+```
+</div>
