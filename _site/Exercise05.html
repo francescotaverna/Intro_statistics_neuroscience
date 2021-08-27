@@ -586,8 +586,8 @@ t.test(ds,dp)</code></pre>
 </div>
 <div id="exercise-3" class="section level2">
 <h2>Exercise 3</h2>
-<p>Assume there are two different types of disease (type A and B). The mutation rate of a particular gene is  under type A and  under type B. To compare the mutation rates, tissue samples of =50 patients of disease type A and =100 patients of disease type B are studied.</p>
-<p>Example data is drawn from binomial distributions. Look at the sample values of both patient groups - a value of “0” means no mutation, a value of “1” means there is a mutation.</p>
+<p>Assume there are two different types of disease (type A and B). The mutation rate of a particular gene is <span class="math inline">\(p_1\)</span> under type A and <span class="math inline">\(p_2\)</span> under type B. To compare the mutation rates, tissue samples of <span class="math inline">\(n_A=50\)</span> patients of disease type A and <span class="math inline">\(n_B=100\)</span> patients of disease type B are studied.</p>
+<p>Example data is drawn from binomial distributions. Look at the sample values of both patient groups (a value of 0 means no mutation, a value of 1 means there is a mutation).</p>
 <pre class="r"><code>n1 = 50
 n2 = 100
 p1 = 0.1
@@ -598,18 +598,60 @@ typeB = rbinom(n = n2, prob = p2, size = 1)</code></pre>
 <pre class="r"><code>mutation = c(typeA, typeB)
 group = c(rep(&quot;type A&quot;, n1), rep(&quot;type B&quot;, n2))
 X = table(mutation, group)
-X</code></pre>
-<pre><code>##         group
-## mutation type A type B
-##        0     45     85
-##        1      5     15</code></pre>
-<pre class="r"><code>prop.table(X, 2)</code></pre>
+prop.table(X, 2)</code></pre>
 <pre><code>##         group
 ## mutation type A type B
 ##        0   0.90   0.85
 ##        1   0.10   0.15</code></pre>
-<p>Perform Fisher’s exact test to see whether mutation rates are significantly different between the two groups (R function: ).</p>
-<p>Change samples sizes ,  and mutations rates , . Discuss how results change.</p>
+<p>Perform Fisher’s exact test to see whether mutation rates are significantly different between the two groups (<strong><tt>fisher.test</tt></strong>).</p>
+<div class="fold s o">
+<pre class="r"><code>fisher.test(X)
+
+## Odds ratio
+odds_A=p1/(1-p1)
+odds_B=p2/(1-p2)
+OR=odds_B / odds_A
+
+# Null hypothesis: OR equals to 1
+# Null hypothesis : Disease type and mutation status are independent</code></pre>
+<pre><code>## 
+##  Fisher&#39;s Exact Test for Count Data
+## 
+## data:  X
+## p-value = 0.4558
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  0.5047588 5.9364737
+## sample estimates:
+## odds ratio 
+##   1.583639</code></pre>
+</div>
+<p>Change samples sizes <span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_2\)</span> and mutations rates <span class="math inline">\(p_1\)</span>, <span class="math inline">\(p_2\)</span>. Discuss how results change.</p>
+<div class="fold s o">
+<pre class="r"><code>n1 = 500
+n2 = 1000
+p1 = 0.1
+p2 = 0.15
+typeA = rbinom(n = n1, prob = p1, size = 1)
+typeB = rbinom(n = n2, prob = p2, size = 1)
+
+mutation = c(typeA, typeB)
+group = c(rep(&quot;type A&quot;, n1), rep(&quot;type B&quot;, n2))
+X = table(mutation, group)
+
+fisher.test(X)</code></pre>
+<pre><code>## 
+##  Fisher&#39;s Exact Test for Count Data
+## 
+## data:  X
+## p-value = 0.04262
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  1.005806 2.023885
+## sample estimates:
+## odds ratio 
+##    1.41848</code></pre>
+</div>
 </div>
 </div>
 
