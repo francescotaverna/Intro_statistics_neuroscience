@@ -423,26 +423,169 @@ $(document).ready(function() {
 </div>
 
 
-<div id="exercise-5.1" class="section level1">
-<h1>Exercise 5.1</h1>
+<div id="install-an-r-package" class="section level1">
+<h1>Install an R package</h1>
+<p>R packages are a collection of R functions, complied code and sample data. We install an R package through the function <strong><tt>install.package(package_name)</tt></strong>. Let’s install the package <strong><tt>medicaldata</tt></strong>:</p>
+<pre class="r"><code>install.packages(&quot;medicaldata&quot;)</code></pre>
+<p>To use this package in our session we need to load it. To accomplish this, we use the <strong><tt>library()</tt></strong> function:</p>
+<pre class="r"><code>library(medicaldata)</code></pre>
+<pre><code>## Warning: package &#39;medicaldata&#39; was built under R version 4.0.5</code></pre>
+<p>from this package we want to retrieve the <strong><tt>polyps</tt></strong> data frame, which contains the systolic blood pressure, the weight and the smoking status for a sample of 500 adults. We use the <strong><tt>library()</tt></strong> to add this data frame to variable in our current environment:</p>
+<pre class="r"><code>data(polyps)
+str(polyps)
+## &#39;data.frame&#39;:    22 obs. of  7 variables:
+##  $ participant_id: chr  &quot;001&quot; &quot;002&quot; &quot;003&quot; &quot;004&quot; ...
+##  $ sex           : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 1 1 2 1 2 1 1 2 2 2 ...
+##  $ age           : num  17 20 16 18 22 13 23 34 50 19 ...
+##  $ baseline      : int  7 77 7 5 23 35 11 12 7 318 ...
+##  $ treatment     : Factor w/ 2 levels &quot;placebo&quot;,&quot;sulindac&quot;: 2 1 2 1 2 1 2 1 1 1 ...
+##  $ number3m      : int  6 67 4 5 16 31 6 20 7 347 ...
+##  $ number12m     : num  NA 63 2 28 17 61 1 7 15 44 ...</code></pre>
+<p>The database <strong><tt>polyps</tt></strong> contains the results of the randomized controlled trial of sulindac vs. placebo in the prevention of colonic polyps in FAP (Familial Adenomatous Polyposis). You can find more information here <a href="https://htmlpreview.github.io/?https://github.com/higgi13425/medicaldata/blob/master/man/description_docs/polyps_desc.html">polyps</a>.</p>
+</div>
+<div id="exercises" class="section level1">
+<h1>Exercises</h1>
+<div id="exercise-1" class="section level2">
+<h2>Exercise 1</h2>
 <p>Assume the expression of a particular gene is measures in blood samples of <span class="math inline">\(n=10\)</span> patients with Parkinson’s disease and in <span class="math inline">\(n=10\)</span> healthy controls.</p>
 <p>Example data is drawn from exponential distributions as follows:</p>
-<pre class="r"><code>n = 10
+<pre class="r"><code>set.seed(1223)
+n = 10
 patients = rexp(n = n, rate = 1/2)
 controls = rexp(n = n, rate = 1/1)</code></pre>
-<p>Plot of sample values:</p>
+Plot the sample values:
+<div class="fold s o">
 <pre class="r"><code>complete = c(patients, controls)
 group = c(rep(1, n), rep(2, n))
 plot(group, complete, cex=1.5, xlim=c(0.5, 2.5), axes=FALSE, ylab=&quot;gene expression&quot;)
 axis(1, c(1, 2), c(&quot;patients&quot;, &quot;control&quot;))
 axis(2)
 box()</code></pre>
-<p>Calculate the ranks of sample values. Like above, plot the ranks of sample values.</p>
-<p>Use quantile-quantile plots to check for the assumption of normal distribution.</p>
-<p>Perform Mann-Whitney U test (Wilcoxon Rank Sum test, R function ). Conduct a t-test. Compare results from these two tests.</p>
+<p><img src="Exercise05_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="exercise-5.2" class="section level1">
-<h1>Exercise 5.2</h1>
+Calculate the ranks of sample values. Like above, plot the ranks of sample values.
+<div class="fold s o">
+<pre class="r"><code>ranked.values = rank(complete)
+group = c(rep(1, n), rep(2, n))
+plot(group, ranked.values, cex=1.5, xlim=c(0.5, 2.5), axes=FALSE, ylab=&quot;gene expression&quot;)
+axis(1, c(1, 2), c(&quot;patients&quot;, &quot;control&quot;))
+axis(2)
+box()</code></pre>
+<p><img src="Exercise05_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<p>Use quantile-quantile plots to check for the assumption of normal distribution.</p>
+<div class="fold s o">
+<pre class="r"><code>par(mfrow=c(1,2))
+qqnorm(patients,main = &#39;patients&#39;)
+qqline(patients)
+qqnorm(controls,main=&#39;control&#39;,ylab=NA)
+qqline(controls)</code></pre>
+<p><img src="Exercise05_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<p>Perform Mann-Whitney U test (Wilcoxon Rank Sum test, R function (<strong><tt>wilcox.test</tt></strong>). Conduct a t-test. Compare results from these two tests.</p>
+<div class="fold s o">
+<pre class="r"><code>
+#Null hypothesis is that the distributions of x and y differ by a
+#location shift of mu
+wilcox.test(patients,controls)
+## 
+##  Wilcoxon rank sum exact test
+## 
+## data:  patients and controls
+## W = 85, p-value = 0.006841
+## alternative hypothesis: true location shift is not equal to 0
+
+#Comparison with t-test result, null hypothesis  equal means
+t.test(patients, controls)
+## 
+##  Welch Two Sample t-test
+## 
+## data:  patients and controls
+## t = 2.9504, df = 13.022, p-value = 0.01125
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  0.4205594 2.7192461
+## sample estimates:
+## mean of x mean of y 
+## 2.3166639 0.7467612</code></pre>
+</div>
+<!-- we can not trust t-test-->
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise 2</h2>
+<p>Compute the difference between <strong><tt>number12m</tt></strong> level and <strong><tt>baseline</tt></strong> level and add the data to the data frame.</p>
+<div class="fold s o">
+<pre class="r"><code>polyps$change12m&lt;-polyps$number12m-polyps$baseline</code></pre>
+</div>
+<p>Check if the differences relative to the <code>treatment=='placebo'</code> are normally distributed and do the same for <code>treatment=='sulindac'</code>.</p>
+<div class="fold s o">
+<pre class="r"><code>dp&lt;-subset(polyps,treatment==&#39;placebo&#39;)$change12m
+ds&lt;-subset(polyps,treatment==&#39;sulindac&#39;)$change12m
+
+#Shapiro-Wilk’s test
+shapiro.test(dp)
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dp
+## W = 0.4912, p-value = 1.188e-06
+shapiro.test(ds)
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  ds
+## W = 0.48965, p-value = 4.83e-06
+
+#QQplot
+par(mfrow=c(1,2))
+qqnorm(dp,main=&#39;placebo&#39;)
+qqline(dp,col=&#39;red&#39;)
+qqnorm(ds,main=&#39;sulindac&#39;,ylab=NA)
+qqline(ds,col=&#39;red&#39;)</code></pre>
+<p><img src="Exercise05_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<p>Calculate the ranks of sample values. Plot the ranks of sample values.</p>
+<div class="fold s o">
+<pre class="r"><code>ranked_values&lt;-cbind(
+  c(rep(1,length(dp)),rep(2,length(ds))),
+  rank(c(dp,ds))
+)
+
+plot(ranked_values,cex=1.5, xlim=c(0.5, 2.5), axes=FALSE,
+     ylab=&quot;number of polyps&quot;,xlab = NA)
+
+axis(1, c(1, 2), c(&quot;patients&quot;, &quot;control&quot;))
+axis(2)
+box()</code></pre>
+<p><img src="Exercise05_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<p>Perform Mann-Whitney U test, in this case you need to set <code>correct=FALSE</code>, because the continuity correction can not be applied as there are ties in our sample. Conduct a t-test. Compare results from these two tests.</p>
+<div class="fold s o">
+<pre class="r"><code>wilcox.test(ds,dp,correct=FALSE)
+t.test(ds,dp)</code></pre>
+<pre><code>## 
+##  Wilcoxon rank sum test
+## 
+## data:  ds and dp
+## W = 24, p-value = 0.05208
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+##  Welch Two Sample t-test
+## 
+## data:  ds and dp
+## t = -0.11864, df = 15.232, p-value = 0.9071
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -66.3924  59.3823
+## sample estimates:
+## mean of x mean of y 
+## -21.77778 -18.27273</code></pre>
+</div>
+<p>Interpret the results of the test, keeping in mid the analysis made before.</p>
+</div>
+<div id="exercise-3" class="section level2">
+<h2>Exercise 3</h2>
 <p>Assume there are two different types of disease (type A and B). The mutation rate of a particular gene is  under type A and  under type B. To compare the mutation rates, tissue samples of =50 patients of disease type A and =100 patients of disease type B are studied.</p>
 <p>Example data is drawn from binomial distributions. Look at the sample values of both patient groups - a value of “0” means no mutation, a value of “1” means there is a mutation.</p>
 <pre class="r"><code>n1 = 50
@@ -455,10 +598,19 @@ typeB = rbinom(n = n2, prob = p2, size = 1)</code></pre>
 <pre class="r"><code>mutation = c(typeA, typeB)
 group = c(rep(&quot;type A&quot;, n1), rep(&quot;type B&quot;, n2))
 X = table(mutation, group)
-X
-prop.table(X, 2)</code></pre>
+X</code></pre>
+<pre><code>##         group
+## mutation type A type B
+##        0     45     85
+##        1      5     15</code></pre>
+<pre class="r"><code>prop.table(X, 2)</code></pre>
+<pre><code>##         group
+## mutation type A type B
+##        0   0.90   0.85
+##        1   0.10   0.15</code></pre>
 <p>Perform Fisher’s exact test to see whether mutation rates are significantly different between the two groups (R function: ).</p>
 <p>Change samples sizes ,  and mutations rates , . Discuss how results change.</p>
+</div>
 </div>
 
 
