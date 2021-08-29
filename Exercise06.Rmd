@@ -62,7 +62,7 @@ Do you know the meaning behind each section of summary?
 </details>
 
 <details><summary>F-statistic</summary>
-<p>The F-Statistic  checks if at least one of your coefficients are nonzero.
+<p>The F-Statistic  checks if at least one of your coefficients is nonzero.
 </p>
 </details>
 

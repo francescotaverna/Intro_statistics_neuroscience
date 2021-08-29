@@ -3,7 +3,7 @@ title: "Sample size calculations"
 ---
 
 # Exercise 7.1
-Assume you want to compare the concentration of a certain metabolite in blood samples of patients with a certain disease with samples from healthy control people. From a pilot sample, it is known that the standard deviation in the complete sample is 2 (SD = 2). A difference of $\delta = 3$ mml/l between the group means is considered as clinical relevant. If there is truly a difference of $\delta = 3$ mml/l between the group means, it is desired to detect this differences with a probability of 80 %. i.e., you allow for a false negative probability of 100% - 80% = 20%.
+Assume you want to compare the concentration of a certain metabolite in blood samples of patients with a certain disease with samples from healthy control people. From a pilot sample, it is known that the standard deviation in the complete sample is 2 (SD = 2). A difference of $\delta = 3$ mml/l between the group means is considered as clinical relevant. If there is truly a difference of $\delta = 3$ mml/l between the group means, it is desired to detect this differences with a probability of 80 \%, i.e. you allow for a false negative probability of 100% - 80% = 20%.
 
 How many samples per group are necessary to fulfill the above demand for the power of 80% ($\texttt{power.t.test}$)?
 
