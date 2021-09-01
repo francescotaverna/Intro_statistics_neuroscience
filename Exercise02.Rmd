@@ -2,6 +2,9 @@
 title: "Probability Distributions"
 ---
 
+```{r, code=readLines('_setup.R')}
+```
+
 # Functions for basic satisical models.
 
 As an example, let $X$ be a normally distributed  random variable, $X \sim N(\mu,\sigma^2)$.

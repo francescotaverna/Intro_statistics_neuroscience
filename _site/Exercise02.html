@@ -423,6 +423,13 @@ $(document).ready(function() {
 </div>
 
 
+<pre class="r"><code># student
+# op_echo=FALSE
+# op_eval=FALSE
+
+# teacher
+op_echo=TRUE
+op_eval=TRUE</code></pre>
 <div id="functions-for-basic-satisical-models." class="section level1">
 <h1>Functions for basic satisical models.</h1>
 <p>As an example, let <span class="math inline">\(X\)</span> be a normally distributed random variable, <span class="math inline">\(X \sim N(\mu,\sigma^2)\)</span>. The following functions are included in R order to work with the normal distribution:</p>
@@ -455,7 +462,7 @@ What is a reasonable choice of the parameter <strong><tt>breaks</tt></strong>? O
 <pre class="r"><code>x3 = rnorm(n = 1000, mean = 0, sd = 1)
 hist(x3, breaks = 50,probability=TRUE,xlab =NA, main=&#39;Standard normal distribution&#39;)
 lines(sort(x3),dnorm(sort(x3)),col=&#39;red&#39;)</code></pre>
-<p><img src="Exercise02_files/figure-html/unnamed-chunk-1-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise02_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="exercise-2.2" class="section level2">
@@ -466,14 +473,14 @@ lines(sort(x3),dnorm(sort(x3)),col=&#39;red&#39;)</code></pre>
 <pre class="r"><code>x = seq(0, 200, length.out = 100)
 y = dexp(x, rate = 1/36)
 plot(x, y, type = &quot;l&quot;, xlab = &quot;months&quot;)</code></pre>
-<p><img src="Exercise02_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise02_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 Plot the cumulative distribution function of the exponential distribution.
 <div class="fold s o">
 <pre class="r"><code>x = seq(0, 200, length.out = 100)
 y = pexp(x, rate = 1/36)
 plot(x, y, type = &quot;l&quot;, xlab = &quot;months&quot;)</code></pre>
-<p><img src="Exercise02_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise02_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <p>Determine the probability of a particular patient of surviving equal or shorter than 12 month, namely <span class="math inline">\(P(X\leq 12)\)</span>.</p>
 <div class="fold s o">
@@ -486,7 +493,7 @@ plot(x, y, type = &quot;l&quot;, xlab = &quot;months&quot;)</code></pre>
 <pre><code>## [1] 0.1888756</code></pre>
 </div>
 <p>The previous questions are equivalent to calculate the red and blue area in following plot.</p>
-<p><img src="Exercise02_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise02_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="exercise-2.3" class="section level2">
 <h2>Exercise 2.3</h2>
