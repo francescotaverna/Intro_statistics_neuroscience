@@ -1,46 +1,180 @@
 ---
 title: "Analysis of variance"
 ---
+# Theory 
 
-# Exercise 8.1 (One-way analysis of variance)
+Let's consider the framework in which there are k levels of a factor of interest, which identify k different groups of observations.
+
+The statistical model for one-way analysis of variance is:
+$$
+y_{ij}=\mu+\tau_{i}+\epsilon_{ij}\quad i=1,\dots,k \text{ and } j=1,\dots,n_{i}
+$$
+where $\mu$ is the general mean, $\tau_{i}$ is the treatment effect for group $i$ and $\epsilon_{ij}\sim N(0,\sigma^2)$. By considering a suitable F-test is possible to test the null hypothesis that all mean are equal ($\tau_i=0\;\forall i$) against  at least one treatment effect not null. To perform this test we use the **<tt>aov</tt>** function.
+
+# Formulas in R
+
+The the formulas in R are used to specify the symbolic model as well as generating the intended design matrix. The formula are characterized by the $\sim$ as you can see in this example `y~x`.
+
+Let y and x1 be two variables, with `y~x1`we mean that y, the dependent variable, depends on x1, the independent variable. When the dependence relation is quadraticwe will write `y~I(x1^2)`, indeed you nedd to use **<tt>I()</tt>**, as-is operator, to apply a function to a variable. Now let x2 be another variable, with`y~x1+x2`we mean that y depends on x1 and x2 but there is no dependence between x1 and x2. We will use the $-$ sign to ignore an object in the analysis `y~x1+x2`.If we want to express the dependence of y on x1, x2 and their interaction we will write `y~x1+x2+x1:x2`, the former is equal to`y~x1*x2`.
+
+# Exercises
+
+## Exercise 8.1 (One-way analysis of variance)
 Assume the concentration of a certain metabolite was measured in three experimental groups.
 
 Sample sizes:
-```{r ex1.1, echo=TRUE, eval=FALSE}
+```{r ex1.1}
 n1 = 12
 n2 = 18
 n3 = 8
 ```
 
 Mean concentration in the population from which samples were drawn:
-```{r ex1.2, echo=TRUE, eval=FALSE}
-mu1 = 4
+```{r ex1.2}
+mu1 = 1
 mu2 = 4.5
 mu3 = 6
 ```
 
 Measurement values can be generated using normal distribution:
-```{r ex1.3, echo=TRUE, eval=FALSE}
+```{r ex1.3}
 x1 = rnorm(n=n1, mean=mu1, sd=3)
 x2 = rnorm(n=n2, mean=mu2, sd=3)
 x3 = rnorm(n=n3, mean=mu3, sd=3)
 ```
 
-a) Plot the concentration versus the group levels and perform one-way analysis of variance (\texttt{boxplot}, \texttt{aov}).
+a) Plot the concentration versus the group levels (**<tt>boxplot</tt>**).
 
-b) Perform subsequent pairwise group comparisons by t-tests to see which groups are different.
+<div class='fold s o'>
+```{r results='hold'}
+boxplot(x1, x2, x3, cex.lab=1.5, cex.axis=1.5, xlab="Group", 
+        ylab="Concentration (mg/ml)", names=c(1, 2, 3), lwd=2)
 
-c) Repeat the exercise with increased variances in the measurement values (e.g. sd = 5).
+x = c(x1, x2, x3)
+group = (c(rep('1', n1), rep('2', n2), rep('3', n3)))
+
+aov.oneway = aov(x ~ group)
+summary(aov.oneway)
+
+```
+</div>
+
+b) Perform one-way analysis of variance (**<tt>aov</tt>**).
+
+What dose the result suggest?
+
+(EXTRA) Plot the stripplot of the the data set to add the mean values of each group and to draw the segments connecting them. To do this, use the **<tt>coefficients</tt>** of the output given by the function **<tt>summary.lm</tt>** applied to the object obtained from **<tt>aov</tt>** .
+
+<div class='fold s o'>
+```{r}
+plot(x ~ group,
+     xlab="Group",
+     ylab="Concentration (mg/ml)",
+     pch=16)
+
+# mean of the first group
+tr1<-summary.lm(aov.oneway)$coefficients[1,1] 
+# mean of the second group
+tr2<-tr1+summary.lm(aov.oneway)$coefficients[2,1] 
+# mean of the second group
+tr3<-tr1+summary.lm(aov.oneway)$coefficients[3,1] 
+
+points(c(1,2,3),c(tr1,tr2,tr3),col='red',lwd=2)
+lines(c(1,2,3),c(tr1,tr2,tr3),col='red',lwd=2)
+
+```
+</div>
+
+c) Perform subsequent pairwise group comparisons by t-tests to see which groups are different. As the chances chances of committing a type I error for a series of comparisons is greater than the error rate for any one comparison alone, use the **<tt>p.adjust</tt>** function  with to **<tt>bonferroni</tt>** method to adjust the p-values.
+
+<div class='fold s o'>
+```{r,results='hold'}
+(t1 = t.test(x1, x2))
+(t2 = t.test(x1, x3))
+(t3 = t.test(x2, x3))
+
+## Using bonferroni correction we can adjust the p-values 
+p.adjust(p = c(t1$p.value, t2$p.value, t3$p.value), method = "bonferroni")
+```
+</div>
 
 
-# Exercise 8.2 (Repeated measurements analysis of variance)
-Some concentration was measured in $n = 10$ patients repeatedly at $T = 4$ time points. Load the dataset \texttt{Exercise\_8\_2\_Repeated\_OneWay.csv}.
+d) Repeat the exercise with increased variances in the measurement values (e.g. sd = 5).
 
-a) Plot the concentration across different time-points. Use one-way repeated measures ANOVA to detect whether there is a time effect without the information of repeated measures (\texttt{aov}).
+<div class='fold s o'>
+```{r results='hold'}
 
-b) Perform one-way repeated measures ANOVA with information of repeated measures.
+x1 = rnorm(n=n1, mean=mu1, sd=5)
+x2 = rnorm(n=n2, mean=mu2, sd=5)
+x3 = rnorm(n=n3, mean=mu3, sd=5)
 
-c) A second group was studied in the above study. Plot the concentration versus the group levels across different time-points. Analyse whether there is an effect by time, group or an interaction between time and group. Data is given in the folder \texttt{Exercise\_8\_3\_Repeated\_TwoWay.csv}.
+x = c(x1, x2, x3)
+group = (c(rep('1', n1), rep('2', n2), rep('3', n3)))
+
+aov.oneway = aov(x ~ group)
+summary(aov.oneway)
+
+```
+</div>
+
+
+## Exercise 8.2 (Repeated measurements analysis of variance)
+Some concentration was measured in $n = 10$ patients repeatedly at $T = 4$ time points. Load the dataset **<tt>Repeated_OneWay.csv</tt>**.
+
+```{r}
+X <- read.csv("./data/Exercise_8_3_Repeated_OneWay.csv", sep=";")
+str(X)
+```
+
+a) Plot the concentration across different time-points. Use one-way repeated measures ANOVA to detect whether there is a time effect without the information of repeated measures.
+
+<div class='fold s o'>
+```{r}
+boxplot(X$Concentration ~ X$Time, 
+        xlab="Time", 
+        ylab="Concentration")
+
+summary(aov(X$Concentration ~ X$Time))
+
+```
+</div>
+
+b) Perform one-way repeated measures ANOVA with information of repeated measures. This is equal to add a random effect to the model that keeps in mind the correlation between observation from the same patient, [random effects model](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html#random-effects-models). To do this, wrap the relevant variable inside **<tt>Error()</tt>** operator and add it to the formula.
+
+<div class='fold s o'>
+```{r}
+summary(aov(X$Concentration ~ X$Time + Error(X$Patient)))
+```
+</div>
+c) A second group was studied in the above study. Plot the concentration versus the group levels across different time-points. Analyse whether there is an effect by time, group or an interaction between time and group (**<tt>boxplot</tt>**). Data is given in the folder
+**<tt>Repeated_TwoWay.csv</tt>**.
+
+<div class='fold s o'>
+```{r results='hold'}
+X = read.csv("./data/Exercise_8_3_Repeated_TwoWay.csv", sep=";")
+str(X)
+
+boxplot(X$Concentration ~ X$Time + X$Group, 
+        xlab="Time", 
+        ylab="Concentration", 
+        col=c(2,2,2,2,3,3,3,3)
+        )
+
+#3.1 means time 3 group 1
+
+legend("topleft", c("Group 1", "Group 2"), col=c(2,3), ncol=2, pch=15)
+
+```
+</div>
 
 d) Conduct Anova without information of repeated measures. Also, conduct Anova with information of repeated measures.
 
+<div class='fold s o'>
+```{r results='hold'}
+#Without information of repeated measures; and with intreacttions
+summary(aov(X$Concentration ~ X$Time + X$Group + X$Time:X$Group))
+
+### With information of repeated measures
+summary(aov(X$Concentration ~ X$Time + X$Group + X$Time:X$Group + Error(X$Patient)))
+```
+</div>

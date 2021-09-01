@@ -1,0 +1,39 @@
+---
+title: "Survival analysis"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+# Exercise 10.1
+The survival of patients was studied after some neurological surgery. $N=50$ patients were operated with scheme A and another group of $N=50$ patients were operated with scheme B. Assume that the mean survival time is three years (i.e. 36 months) under scheme A, and five years (i.e. 60 months) under scheme B, and both survival times are exponentially distributed. At the end of this study, approximately 30% of scheme A and 20% of scheme B patients have died.
+
+Generating fake survival data:
+```{r ex1.1, echo=TRUE, eval=FALSE}
+N = 50
+timesA = rexp(n=N, 1/36)
+timesB = rexp(n=N, 1/60)
+eventsA = rbinom(n=N, prob=0.3, size=1)
+eventsB = rbinom(n=N, prob=0.2, size=1)
+times = c(timesA, timesB)
+events = c(eventsA, eventsB)
+```
+
+
+a) Analyse the data using \texttt{survival} R package. For this purpose, firstly create a so-called survival object using \texttt{Surv} function. Later, use \texttt{survfit} to calculate Kaplan-Meier estimates of the survival function for the whole study collective. Plot the Kaplan-Meier-curve plus confidence band into a graphic. What is the probability of a patient in this study to survive more than 10 years?
+
+b) Analyse the effect of treatment scheme on the patient's survival by Kaplan-Meier curves. What is the median survival time in the two groups?
+
+c) Assume that patients under treatment scheme A were on average a little bit older
+compared to patients under treatment scheme B. 
+
+```{r ex1.2, echo=TRUE, eval=FALSE}
+ageA = rnorm(n = N, mean = 55, sd = 2.5)
+ageB = rnorm(n = N, mean = 50, sd = 2.5)
+age = c(ageA, ageB)
+age = (age>median(age))
+```
+
+Analyse whether age at surgery has an influence on survival using Cox regression (R function \texttt{coxph}). 
+
