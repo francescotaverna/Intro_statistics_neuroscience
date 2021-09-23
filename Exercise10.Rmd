@@ -1,39 +1,182 @@
 ---
 title: "Survival analysis"
 ---
+<!-- For who wants to go deeper into the survival package
+https://www.emilyzabor.com/tutorials/survival_analysis_in_r_tutorial.html -->
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
-```
+# Theory
+For each subject $i\in\{1,...,n\}$ let's define $T_i\geq 0$ the time of the event, $C_i \geq 0$ the censoring time. Let $T\geq0$ be a random variable, that we view as the time until the occurrence of death. 
+The probability that a subject will survive till a time $t$ is
+$$
+S(t)=Pr(T>t)=1-Pr(T\leq t)\;,
+$$
+where $S$ is called survival function. The Kaplan-Meier estimate of survival probability is define as 
 
-# Exercise 10.1
-The survival of patients was studied after some neurological surgery. $N=50$ patients were operated with scheme A and another group of $N=50$ patients were operated with scheme B. Assume that the mean survival time is three years (i.e. 36 months) under scheme A, and five years (i.e. 60 months) under scheme B, and both survival times are exponentially distributed. At the end of this study, approximately 30% of scheme A and 20% of scheme B patients have died.
+$$
+\hat{S}(t)=\prod_{i:\,t_i\leq t}\left(1-\frac{d_i}{n_i}\right)\;,
+$$
+where $d_i$ the number of deaths happened at time $t_i$ and $n_i$ the individuals known to have survived  up to time $t_i$.
+
+# Exercises
+## Exercise 10.1
+The survival of patients was studied after some neurological surgery. $N=50$ patients were operated with scheme A and another group of $N=50$ patients were operated with scheme B. Assume that the mean survival time is three years (i.e. 26 months) under scheme A, and five years (i.e. 60 months) under scheme B, and both survival times are exponentially distributed. At the end of this study, approximately 30% of scheme A and 20% of scheme B patients have died.
+
+
 
 Generating fake survival data:
-```{r ex1.1, echo=TRUE, eval=FALSE}
+```{r}
+set.seed(123)
 N = 50
-timesA = rexp(n=N, 1/36)
+timesA = rexp(n=N, 1/26)
 timesB = rexp(n=N, 1/60)
 eventsA = rbinom(n=N, prob=0.3, size=1)
 eventsB = rbinom(n=N, prob=0.2, size=1)
+
 times = c(timesA, timesB)
 events = c(eventsA, eventsB)
+
+# times=timesA
+# events=eventsA
 ```
 
 
-a) Analyse the data using \texttt{survival} R package. For this purpose, firstly create a so-called survival object using \texttt{Surv} function. Later, use \texttt{survfit} to calculate Kaplan-Meier estimates of the survival function for the whole study collective. Plot the Kaplan-Meier-curve plus confidence band into a graphic. What is the probability of a patient in this study to survive more than 10 years?
+a) Analyse the data using **<tt>survival</tt>** R package. For this purpose, firstly create a so-called survival object using  **<tt>Surv</tt>** function.
 
-b) Analyse the effect of treatment scheme on the patient's survival by Kaplan-Meier curves. What is the median survival time in the two groups?
+<div class='fold s o'>
+```{r}
+library(survival)
 
-c) Assume that patients under treatment scheme A were on average a little bit older
-compared to patients under treatment scheme B. 
+## Store survival times and event (deaths) in a survival-object.
+SURV = Surv(times, events)
+SURV
+```
+</div>
 
-```{r ex1.2, echo=TRUE, eval=FALSE}
+The survival-object has one entry for each subject that is the survival time, followed by `+` sign if the subject was censored.
+
+
+Use **<tt>survfit</tt>** to calculate Kaplan-Meier estimates of the survival function for the whole study collective. Use **<tt>help</tt>** to understand which is the argument of the **<tt>survfit</tt>** function.
+
+<div class='fold s o'>
+```{r}
+S1 = survfit(SURV ~ 1)
+S1
+```
+</div>
+
+Plot the Kaplan-Meier-curve plus confidence band into a graphic.
+
+<div class='fold s o'>
+```{r results='hold',fig.align='center',out.width = '60%'}
+#plot(SURV, conf.int = FALSE)
+plot(S1, 
+     xlab = "Times (Months)", 
+     ylab = "Estimated Survival Probability", 
+     cex.axis=1.5, 
+     cex.lab=1.5)
+grid()
+abline(v = 120, col = "red")
+
+
+#Extra
+#raw calculation of Kaplan-Meier estimates
+test=data.frame(times=times,events=events)
+test= test[order(test$times),]
+test$n<-nrow(test):1
+test= test[test$events>=1,]
+
+#compute 1-d_i/n_i
+for(i in 1:nrow(test)){test$survival[i]=1-test$events[i]/test$n[i]
+}
+
+#calculate the estimate of the survivl function
+for(i in 1:nrow(test)){test$p[i]=prod(test$survival[1:i])}
+
+
+points(x=test$times,y=test$p)
+```
+</div>
+
+What is the probability of a patient in this study to survive more than 10 years (120 months)? (use the **<tt>summary</tt>** function )
+
+<div class='fold s o'>
+```{r}
+summary(S1, times = 120)
+```
+</div>
+
+b) Let's consider separately the  `eventsA`and  the `eventsB`.
+```{r}
+group = gl(2, N)
+```
+
+
+Analyse the effect of treatment scheme on the patient's survival by Kaplan-Meier curves. What is the median survival time in the two groups?
+
+<div class='fold s o'>
+```{r}
+S2 = survfit(SURV ~ group)
+S2
+```
+</div>
+
+Plot the Kaplan-Meier-curve of the two groups together.
+
+<div class='fold s o'>
+```{r fig.align='center',out.width = '60%'}
+plot(S2, xlab="Times (Months)", ylab="Estimated Survival Probability", 
+     cex.axis=1.5, cex.lab=1.5, col=c(1,2))
+grid()
+legend("topright", legend=c("Group A", "Group B"), col = c(1, 2),
+       lty=1, cex=0.8)
+abline(h = 0.5, col = "green")
+# median survival time
+abline(v = quantile(survfit(SURV ~ group), probs = 0.5)$quantile, lty = "dashed")
+```
+</div>
+
+c) Assume that patients who survived more than 100 months were on average younger than the others patients.
+
+
+```{r ex1.2, echo=TRUE}
 ageA = rnorm(n = N, mean = 55, sd = 2.5)
 ageB = rnorm(n = N, mean = 50, sd = 2.5)
 age = c(ageA, ageB)
 age = (age>median(age))
 ```
 
-Analyse whether age at surgery has an influence on survival using Cox regression (R function \texttt{coxph}). 
+
+Analyse the effect of `age` on the patient's survival by Kaplan-Meier curves.
+
+<div class='fold s o'>
+```{r}
+S3 = survfit(SURV ~ age)
+plot(S3, xlab="Times (Months)", ylab="Estimated Survival Probability", cex.axis=1.5, cex.lab=1.5, col=c(1,2))
+legend("topright",
+       legend=c("Age > Median age", "Age < Median age"), 
+       col = c(1, 2),
+       lty=1, cex=0.8)
+
+grid()
+```
+</div>
+
+Analyse whether age at surgery has an influence on survival using Cox regression (R function **<tt>coxph</tt>**).
+
+<!-- If someone wants to go deeper into Cox regression https://stats.stackexchange.com/questions/83892/understanding-coxph-output-in-r -->
+
+<div class='fold s o'>
+```{r}
+C = coxph(SURV ~ group+age)
+summary(C)
+```
+</div>
+
+Knowing that the R summary for the Cox model gives the hazard ratio `exp(coef)` for the second group relative to the first group, namely treatment B versus treatment A and old vs young, could you give an interpretation of the output?
+
+<details><summary>Solution</summary>
+<p> First look at Wald statistics. A negative `coef` means a reduction of the risk, this reduction is quantified by `exp(coef)`.
+</p>
+</details>
+
 

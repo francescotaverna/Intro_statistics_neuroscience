@@ -1,8 +1,8 @@
 ---
 title: "ROC curves"
 ---
-
-# Exercise 9.1
+# Exercises
+## Exercise 9.1
 The concentration of the s100b-protein was measured in $n=113$ patients. Additionally, the clinical
 outcome of patients was classified as either "Good" or "Poor" using a gold standard. Dataset is part of the **<tt>pROC</tt>** package.
 
