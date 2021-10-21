@@ -423,6 +423,13 @@ $(document).ready(function() {
 </div>
 
 
+<pre class="r"><code># student
+# op_echo=FALSE
+# op_eval=FALSE
+
+# teacher
+op_echo=TRUE
+op_eval=TRUE</code></pre>
 <div id="for-loop" class="section level1">
 <h1>For loop</h1>
 <p>A for loop is used to iterate an instruction over a vector. The syntax of a for loop in R is:</p>
@@ -433,7 +440,7 @@ instruction
 where sequence is a vector and val takes on each of its value during the loop. In each iteration the statement is evaluated. Usually the statement depends on val, e.g. <code>print(val)</code>. The Fibonacci sequence is defined as : <span class="math display">\[
 x_{0}=0 \quad x_{1}=1\\
 x_{i}=x_{i-1}+x_{i-2} \quad\forall i&gt;1
-\]</span> Using a for loop print the first 10 numbers of the Fibonacci sequence.
+\]</span> Using a for loop, print the first 10 numbers of the Fibonacci sequence.
 <div class="fold s o">
 <pre class="r"><code>fib&lt;-c(0,1)
 # in R the vectors are index starting from 1
@@ -448,7 +455,7 @@ print(fib)</code></pre>
 <h1>Exercises</h1>
 <div id="exercise-3.1" class="section level2">
 <h2>Exercise 3.1</h2>
-<p>Draw 10 random samples of size <span class="math inline">\(N = 5\)</span> from the standard normal distribution (<span class="math inline">\(\mu\)</span> = 0, <span class="math inline">\(\sigma\)</span> = 1). Calculate the mean of each sample. Calculate the mean of all 10 means.</p>
+<p>Draw 10 random samples of size <span class="math inline">\(N = 5\)</span> from the standard normal distribution (<span class="math inline">\(\mu\)</span> = 0, <span class="math inline">\(\sigma\)</span> = 1),<strong><tt>rnorm()</tt></strong>. Calculate the mean of each sample. Calculate the mean of all 10 means.</p>
 <div class="fold s o">
 <pre class="r"><code># Sample creation
 M&lt;-rnorm(n = 5, mean=0, sd=1) #variable to store the samples
@@ -476,9 +483,9 @@ for(j in 1:10){
 M_mean&lt;-mean(M_col_mean)
 M_col_mean
 M_mean</code></pre>
-<pre><code>##  [1] -0.4877094  0.2769114  0.2738868  0.1268233 -0.0114685 -0.6754962
-##  [7] -0.1563737 -0.5957303  0.0740324 -0.3803308
-## [1] -0.1555455</code></pre>
+<pre><code>##  [1] -0.01046869  0.21116324 -0.12674709 -0.03925703 -0.28477149 -1.05245309
+##  [7]  0.24850264 -0.22669560  0.40738519  0.57311427
+## [1] -0.03002277</code></pre>
 </div>
 <p>Plot the density function of the standard normal distribution. Using the function <strong><tt>points()</tt></strong> draw the sample means and the mean of means into the plot.</p>
 <div class="fold s o">
@@ -489,11 +496,30 @@ for(i in 1:10) {
   points(M_col_mean[i], y = 0, pch=4)
 }
 points(M_mean, y = 0, pch=4, col=2, lwd=3)</code></pre>
-<p><img src="Exercise03_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise03_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 Repeat the above computer experiment with <span class="math inline">\(N = 25\)</span>.
 <div class="fold s o">
-<p><img src="Exercise03_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>M&lt;-rnorm(n = 25, mean=0, sd=1) #variable to store the samples
+for(j in 1:9){
+  M&lt;-cbind(M,rnorm(n = 25, mean=0, sd=1))
+}
+
+# Calculate the mean of each sample
+M_col_mean&lt;-apply(M, 2, mean)
+
+# Calculate the mean of the means
+M_mean&lt;-mean(M_col_mean)
+
+# plot
+x.axis = seq(-3, 3, length.out=100)
+y.axis = dnorm(x.axis, mean=0, sd=1)
+plot(x.axis, y.axis, type=&quot;l&quot;)
+for(i in 1:10) {
+  points(M_col_mean[i], y = 0, pch=4)
+}
+points(M_mean, y = 0, pch=4, col=2, lwd=3)</code></pre>
+<p><img src="Exercise03_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="exercise-3.2" class="section level2">
@@ -503,7 +529,7 @@ Load the <strong><tt>study3.csv</tt></strong> data frame and plot the histogram 
 <div class="fold s o">
 <pre class="r"><code>x&lt;-read.table(&quot;./data/study3.csv&quot;,sep=&quot;;&quot;,header = TRUE)[[1]] # the values are separated by ; in the csv file
 hist(x,breaks = 7)</code></pre>
-<p><img src="Exercise03_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise03_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <p>Determine a 95%-confidence interval for the expectation from the data:</p>
 <details>
@@ -557,7 +583,7 @@ for(j in 1:100){
 
 # percentage of interval that contains the true value for the mean
 sum((M_conf[1,]&lt;=500 &amp; 500&lt;=M_conf[2,]))/100</code></pre>
-<pre><code>## [1] 0.93</code></pre>
+<pre><code>## [1] 0.88</code></pre>
 <pre class="r"><code>#EXTRA
 # usage of if else statement to give the color to the segments
 plot.new()
@@ -566,7 +592,7 @@ for(j in 1:100){
   segments(x0=j,y0=M_conf[1,j],x1=j,y1=M_conf[2,j],col=ifelse((M_conf[1,j]&lt;=500 &amp; 500&lt;=M_conf[2,j]),&#39;black&#39;,&#39;red&#39;))
 }
 abline(h=500,col=&#39;red&#39;)</code></pre>
-<p><img src="Exercise03_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise03_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>

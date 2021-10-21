@@ -423,6 +423,13 @@ $(document).ready(function() {
 </div>
 
 
+<pre class="r"><code># student
+# op_echo=FALSE
+# op_eval=FALSE
+
+# teacher
+op_echo=TRUE
+op_eval=TRUE</code></pre>
 <div id="install-an-r-package" class="section level1">
 <h1>Install an R package</h1>
 <p>R packages are a collection of R functions, complied code and sample data. We install an R package through the function <strong><tt>install.package(package_name)</tt></strong>. Let’s install the package <strong><tt>medicaldata</tt></strong>:</p>
@@ -461,7 +468,7 @@ plot(group, complete, cex=1.5, xlim=c(0.5, 2.5), axes=FALSE, ylab=&quot;gene exp
 axis(1, c(1, 2), c(&quot;patients&quot;, &quot;control&quot;))
 axis(2)
 box()</code></pre>
-<p><img src="Exercise05_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise05_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 Calculate the ranks of sample values. Like above, plot the ranks of sample values.
 <div class="fold s o">
@@ -471,7 +478,7 @@ plot(group, ranked.values, cex=1.5, xlim=c(0.5, 2.5), axes=FALSE, ylab=&quot;gen
 axis(1, c(1, 2), c(&quot;patients&quot;, &quot;control&quot;))
 axis(2)
 box()</code></pre>
-<p><img src="Exercise05_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise05_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <p>Use quantile-quantile plots to check for the assumption of normal distribution.</p>
 <div class="fold s o">
@@ -480,7 +487,7 @@ qqnorm(patients,main = &#39;patients&#39;)
 qqline(patients)
 qqnorm(controls,main=&#39;control&#39;,ylab=NA)
 qqline(controls)</code></pre>
-<p><img src="Exercise05_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise05_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <p>Perform Mann-Whitney U test (Wilcoxon Rank Sum test, R function (<strong><tt>wilcox.test</tt></strong>). Conduct a t-test. Compare results from these two tests.</p>
 <div class="fold s o">
@@ -542,7 +549,7 @@ qqnorm(dp,main=&#39;placebo&#39;)
 qqline(dp,col=&#39;red&#39;)
 qqnorm(ds,main=&#39;sulindac&#39;,ylab=NA)
 qqline(ds,col=&#39;red&#39;)</code></pre>
-<p><img src="Exercise05_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise05_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <p>Calculate the ranks of sample values. Plot the ranks of sample values.</p>
 <div class="fold s o">
@@ -557,7 +564,7 @@ plot(ranked_values,cex=1.5, xlim=c(0.5, 2.5), axes=FALSE,
 axis(1, c(1, 2), c(&quot;patients&quot;, &quot;control&quot;))
 axis(2)
 box()</code></pre>
-<p><img src="Exercise05_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise05_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <p>Perform Mann-Whitney U test, in this case you need to set <code>correct=FALSE</code>, because the continuity correction can not be applied as there are ties in our sample. Conduct a t-test. Compare results from these two tests.</p>
 <div class="fold s o">

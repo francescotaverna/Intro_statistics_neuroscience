@@ -4,6 +4,11 @@ title: "Survival analysis"
 <!-- For who wants to go deeper into the survival package
 https://www.emilyzabor.com/tutorials/survival_analysis_in_r_tutorial.html -->
 
+
+```{r, code=readLines('_setup.R')}
+```
+
+
 # Theory
 For each subject $i\in\{1,...,n\}$ let's define $T_i\geq 0$ the time of the event, $C_i \geq 0$ the censoring time. Let $T\geq0$ be a random variable, that we view as the time until the occurrence of death. 
 The probability that a subject will survive till a time $t$ is
@@ -43,7 +48,7 @@ events = c(eventsA, eventsB)
 a) Analyse the data using **<tt>survival</tt>** R package. For this purpose, firstly create a so-called survival object using  **<tt>Surv</tt>** function.
 
 <div class='fold s o'>
-```{r}
+```{r eval=op_eval,echo=op_echo}
 library(survival)
 
 ## Store survival times and event (deaths) in a survival-object.
@@ -58,7 +63,7 @@ The survival-object has one entry for each subject that is the survival time, fo
 Use **<tt>survfit</tt>** to calculate Kaplan-Meier estimates of the survival function for the whole study collective. Use **<tt>help</tt>** to understand which is the argument of the **<tt>survfit</tt>** function.
 
 <div class='fold s o'>
-```{r}
+```{r eval=op_eval,echo=op_echo}
 S1 = survfit(SURV ~ 1)
 S1
 ```
@@ -67,7 +72,7 @@ S1
 Plot the Kaplan-Meier-curve plus confidence band into a graphic.
 
 <div class='fold s o'>
-```{r results='hold',fig.align='center',out.width = '60%'}
+```{r results='hold',fig.align='center',out.width = '60%',eval=op_eval,echo=op_echo}
 #plot(SURV, conf.int = FALSE)
 plot(S1, 
      xlab = "Times (Months)", 
@@ -100,7 +105,7 @@ points(x=test$times,y=test$p)
 What is the probability of a patient in this study to survive more than 10 years (120 months)? (use the **<tt>summary</tt>** function )
 
 <div class='fold s o'>
-```{r}
+```{r eval=op_eval,echo=op_echo}
 summary(S1, times = 120)
 ```
 </div>
@@ -114,7 +119,7 @@ group = gl(2, N)
 Analyse the effect of treatment scheme on the patient's survival by Kaplan-Meier curves. What is the median survival time in the two groups?
 
 <div class='fold s o'>
-```{r}
+```{r eval=op_eval,echo=op_echo}
 S2 = survfit(SURV ~ group)
 S2
 ```
@@ -123,7 +128,7 @@ S2
 Plot the Kaplan-Meier-curve of the two groups together.
 
 <div class='fold s o'>
-```{r fig.align='center',out.width = '60%'}
+```{r fig.align='center',out.width = '60%',eval=op_eval,echo=op_echo}
 plot(S2, xlab="Times (Months)", ylab="Estimated Survival Probability", 
      cex.axis=1.5, cex.lab=1.5, col=c(1,2))
 grid()
@@ -149,7 +154,7 @@ age = (age>median(age))
 Analyse the effect of `age` on the patient's survival by Kaplan-Meier curves.
 
 <div class='fold s o'>
-```{r}
+```{r eval=op_eval,echo=op_echo}
 S3 = survfit(SURV ~ age)
 plot(S3, xlab="Times (Months)", ylab="Estimated Survival Probability", cex.axis=1.5, cex.lab=1.5, col=c(1,2))
 legend("topright",
@@ -166,7 +171,7 @@ Analyse whether age at surgery has an influence on survival using Cox regression
 <!-- If someone wants to go deeper into Cox regression https://stats.stackexchange.com/questions/83892/understanding-coxph-output-in-r -->
 
 <div class='fold s o'>
-```{r}
+```{r eval=op_eval,echo=op_echo}
 C = coxph(SURV ~ group+age)
 summary(C)
 ```

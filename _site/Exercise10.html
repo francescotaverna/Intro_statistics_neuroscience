@@ -425,6 +425,13 @@ $(document).ready(function() {
 
 <!-- For who wants to go deeper into the survival package
 https://www.emilyzabor.com/tutorials/survival_analysis_in_r_tutorial.html -->
+<pre class="r"><code># student
+# op_echo=FALSE
+# op_eval=FALSE
+
+# teacher
+op_echo=TRUE
+op_eval=TRUE</code></pre>
 <div id="theory" class="section level1">
 <h1>Theory</h1>
 <p>For each subject <span class="math inline">\(i\in\{1,...,n\}\)</span> let’s define <span class="math inline">\(T_i\geq 0\)</span> the time of the event, <span class="math inline">\(C_i \geq 0\)</span> the censoring time. Let <span class="math inline">\(T\geq0\)</span> be a random variable, that we view as the time until the occurrence of death. The probability that a subject will survive till a time <span class="math inline">\(t\)</span> is <span class="math display">\[
@@ -520,7 +527,7 @@ for(i in 1:nrow(test)){test$p[i]=prod(test$survival[1:i])}
 
 
 points(x=test$times,y=test$p)</code></pre>
-<p><img src="Exercise10_files/figure-html/unnamed-chunk-4-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise10_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /></p>
 </div>
 <p>What is the probability of a patient in this study to survive more than 10 years (120 months)? (use the <strong><tt>summary</tt></strong> function )</p>
 <div class="fold s o">
@@ -554,7 +561,7 @@ legend(&quot;topright&quot;, legend=c(&quot;Group A&quot;, &quot;Group B&quot;),
 abline(h = 0.5, col = &quot;green&quot;)
 # median survival time
 abline(v = quantile(survfit(SURV ~ group), probs = 0.5)$quantile, lty = &quot;dashed&quot;)</code></pre>
-<p><img src="Exercise10_files/figure-html/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise10_files/figure-html/unnamed-chunk-9-1.png" width="60%" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Assume that patients who survived more than 100 months were on average younger than the others patients.</li>
@@ -573,7 +580,7 @@ legend(&quot;topright&quot;,
        lty=1, cex=0.8)
 
 grid()</code></pre>
-<p><img src="Exercise10_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="Exercise10_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <p>Analyse whether age at surgery has an influence on survival using Cox regression (R function <strong><tt>coxph</tt></strong>).</p>
 <!-- If someone wants to go deeper into Cox regression https://stats.stackexchange.com/questions/83892/understanding-coxph-output-in-r -->

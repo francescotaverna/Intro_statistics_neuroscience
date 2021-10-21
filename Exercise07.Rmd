@@ -2,6 +2,9 @@
 title: "Sample size calculations"
 ---
 
+```{r, code=readLines('_setup.R')}
+```
+
 # Theory
 Let $X_{Ai}\sim N(\mu_a,\sigma)$ i.i.d. and $X_{Bi}\sim N(\mu_b,\sigma)$ i.i.d where $i=1,\dots,n$. Consider the problem of testing the null hypothesis of no treatment difference $H_0: \mu_a=\mu_b$ against the two sided alternative $\mu_a \neq\mu_b$ with Type I error probability $\alpha$ and power $1-\beta$ at $|\mu_a-\mu_b|=\delta$. The standardize statistics for this test is:
 $$
@@ -20,7 +23,7 @@ Assume you want to compare the concentration of a certain metabolite in blood sa
 
 How many samples per group are necessary to fulfill the above demand for the power of 80% (**<tt>power.t.test</tt>**)?
 <div class='fold s o'>
-```{r results='hold'}
+```{r results='hold',eval=op_eval,echo=op_echo}
 # Exactly one of the parameters n, delta, power, sd, and sig.level
 # must be passed as NULL, and that parameter is determined from the others.
 power.t.test(delta       = 3, 
@@ -39,7 +42,7 @@ power.t.test(delta       = 3,
 Assume in the above setting that a smaller difference, i.e. of $\delta = 0.1$ is considered as clinical relevant:
 
 <div class='fold s o'>
-```{r results='hold'}
+```{r results='hold',eval=op_eval,echo=op_echo}
 power.t.test(delta       = 0.1, 
              sd          = 2, 
              power       = 0.80,
@@ -62,7 +65,7 @@ In you opinion why the result of the **<tt>power.t.test</tt>** is different from
 Change the value for the desired power and discuss with your neighbor the effect on the sample size. Turn also on the value of the standard deviation from the pilot sample.
 
 <div class='fold s o'>
-```{r}
+```{r eval=op_eval,echo=op_echo}
 power.t.test(delta       = 0.01, 
              sd          = 2, 
              power       = 0.95,
@@ -75,7 +78,7 @@ Now, assume the researchers know that they can only effort to recruit $n=10$ pat
 specified $\delta$ of 1.3 and a standard deviation of 1.5.
 
 <div class='fold s o'>
-```{r}
+```{r eval=op_eval,echo=op_echo}
 power.t.test(delta= 1.3, 
              sd= 1.5, 
              n= 10,
@@ -89,7 +92,7 @@ Assume you want to compare the rate of infections between two different groups o
 Determine the power to detect a difference between the effects rates of P1 - P2 = 7% given that N=100 subjects can be recruited per group (**<tt>power.prop.test</tt>**):
 
 <div class='fold s o'>
-```{r}
+```{r eval=op_eval,echo=op_echo}
 power.prop.test(n = 100, 
                 p1 = 0.25, 
                 p2 = 0.18,
@@ -100,7 +103,7 @@ power.prop.test(n = 100,
 Assume that a power of 80% is desired for the above study. Which sample sizes per group would be necessary?
 
 <div class='fold s o'>
-```{r}
+```{r eval=op_eval,echo=op_echo}
 power.prop.test(power=0.8, 
                 p1=0.25,
                 p2=0.18,

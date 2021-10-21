@@ -2,6 +2,9 @@
 title: "Estimation and Confidence Intervals"
 ---
 
+```{r, code=readLines('_setup.R')}
+```
+
 # For loop
 A for loop is used to iterate an instruction over a vector. The syntax of a for 
 loop in R is:
@@ -17,9 +20,9 @@ $$
 x_{0}=0 \quad x_{1}=1\\
 x_{i}=x_{i-1}+x_{i-2} \quad\forall i>1
 $$
-Using a for loop print the first 10 numbers of the Fibonacci sequence.
+Using a for loop, print the first 10 numbers of the Fibonacci sequence.
 <div class='fold s o'>
-```{r}
+```{r,eval=op_eval,echo=op_echo}
 fib<-c(0,1)
 # in R the vectors are index starting from 1
 for(j in 3:10){
@@ -34,10 +37,10 @@ print(fib)
 
 ## Exercise 3.1
 
-Draw 10 random samples of size $N = 5$ from the standard normal distribution ($\mu$ = 0, $\sigma$ = 1). Calculate the mean of each sample. Calculate the mean of all 10 means.
+Draw 10 random samples of size $N = 5$ from the standard normal distribution ($\mu$ = 0, $\sigma$ = 1),**<tt>rnorm()</tt>**. Calculate the mean of each sample. Calculate the mean of all 10 means.
 
 <div class='fold s o'>
-```{r results='hold'}
+```{r results='hold',eval=op_eval,echo=op_echo}
 
 # Sample creation
 M<-rnorm(n = 5, mean=0, sd=1) #variable to store the samples
@@ -71,7 +74,7 @@ M_mean
 Plot the density function of the standard normal distribution. Using the function **<tt>points()</tt>** draw the sample means and the mean of means into the plot.
 
 <div class='fold s o'>
-```{r fig.align='center',out.width = '80%'}
+```{r fig.align='center',out.width = '80%',eval=op_eval,echo=op_echo}
 x.axis = seq(-3, 3, length.out=100)
 y.axis = dnorm(x.axis, mean=0, sd=1)
 plot(x.axis, y.axis, type="l")
@@ -83,7 +86,7 @@ points(M_mean, y = 0, pch=4, col=2, lwd=3)
 </div>
 Repeat the above computer experiment with $N = 25$. 
 <div class='fold s o'>
-```{r echo=FALSE,fig.align='center',out.width = '80%'}
+```{r echo=FALSE,fig.align='center',out.width = '80%',eval=op_eval,echo=op_echo}
 M<-rnorm(n = 25, mean=0, sd=1) #variable to store the samples
 for(j in 1:9){
   M<-cbind(M,rnorm(n = 25, mean=0, sd=1))
@@ -112,7 +115,7 @@ A producer gives the information that the content of a pharmaceutical substance 
 
 Load the **<tt>study3.csv</tt>** data frame and plot the histogram of the data, remember to select a reasonable choice of the parameter **<tt>breaks</tt>**.
 <div class='fold s o'>
-```{r fig.align='center',out.width = '80%'}
+```{r fig.align='center',out.width = '80%',eval=op_eval,echo=op_echo}
 x<-read.table("./data/study3.csv",sep=";",header = TRUE)[[1]] # the values are separated by ; in the csv file
 hist(x,breaks = 7)
 ```
@@ -130,7 +133,7 @@ where $z_{\alpha/2}$ is the $\alpha/2$ critical value of a $Z\sim N(0,1)$ distri
 <p></p>
 
 <div class='fold s o'>
-```{r}
+```{r,eval=op_eval,echo=op_echo}
 N=25
 alpha = 0.05
 MEAN = mean(x)
@@ -159,7 +162,7 @@ Draw 100 random samples of size $n = 25$ from the normal distribution ($\mu$ = 5
 for each one the  95%-confidence interval, how many of them fail to contain the true value?
 
 <div class='fold s o'>
-```{r fig.align='center',out.width = '80%'}
+```{r fig.align='center',out.width = '80%',eval=op_eval,echo=op_echo}
 # generate the data
 M<-rnorm(n = 25, mean=500, sd=10) #variable to store the samples
 for(j in 1:99){

@@ -2,6 +2,9 @@
 title: "Correlation and Regression"
 ---
 
+```{r, code=readLines('_setup.R')}
+```
+
 # Exercise
 
 ## Exercise 6.1 (Correlation)
@@ -10,7 +13,7 @@ Assume Proteins A, B and C are members of a cellular pathway that is related to 
 Read the corresponding data **<tt>study2.csv</tt>** into the R-environment.
 
 <div class='fold s o'>
-```{r}
+```{r eval=op_eval,echo=op_echo}
 X = read.table("data/study2.csv", sep=";", header=TRUE)
 str(X)
 ```
@@ -19,7 +22,7 @@ str(X)
 Make scatter plots of each pair of proteins (**<tt>plot</tt>**).
 
 <div class='fold s o'>
-```{r fig.align='center',out.width = '70%'}
+```{r fig.align='center',out.width = '70%',eval=op_eval,echo=op_echo}
 plot(X)
 ```
 </div>
@@ -27,7 +30,7 @@ plot(X)
 Determine Pearson's correlation between each pair of proteins (**<tt>cor.test</tt>**).
 
 <div class='fold s o'>
-```{r,results='hold'}
+```{r,results='hold',eval=op_eval,echo=op_echo}
 cor.test(X$Protein.A, X$Protein.B)
 cor.test(X$Protein.A, X$Protein.C)
 cor.test(X$Protein.B, X$Protein.C)
@@ -38,7 +41,7 @@ cor.test(X$Protein.B, X$Protein.C)
 
 From the correlation analysis, protein A appears to be related to protein B. From earlier research, it is known that protein B depends on protein A. Model the relation between the two proteins using a simple linear regression (**<tt>lm</tt>**).
 <div class='fold s'>
-```{r}
+```{r eval=op_eval,echo=op_echo}
 L1 = lm(X$Protein.B ~ X$Protein.A)
 ```
 </div>
@@ -46,7 +49,7 @@ L1 = lm(X$Protein.B ~ X$Protein.A)
 Evaluate the  **<tt>summary</tt>** over the linear model to check the goodness of fit. 
 
 <div class='fold o'>
-```{r}
+```{r eval=op_eval,echo=op_echo}
 summary(L1)
 ```
 </div>
@@ -71,7 +74,7 @@ The output of the **<tt>lm</tt>** is a list which contains the estimates of the 
 the regression line into the scatter plot (**<tt>abline</tt>**).
 
 <div class='fold s o'>
-```{r}
+```{r eval=op_eval,echo=op_echo}
 
 par(mfrow=c(1,1))
 plot(X$Protein.A, X$Protein.B, cex.axis=1.5, cex.lab=1.5, 

@@ -423,6 +423,13 @@ $(document).ready(function() {
 </div>
 
 
+<pre class="r"><code># student
+# op_echo=FALSE
+# op_eval=FALSE
+
+# teacher
+op_echo=TRUE
+op_eval=TRUE</code></pre>
 <div id="theory" class="section level1">
 <h1>Theory</h1>
 <p>Let’s consider the framework in which there are k levels of a factor of interest, which identify k different groups of observations.</p>
@@ -458,7 +465,7 @@ x3 = rnorm(n=n3, mean=mu3, sd=3)</code></pre>
 <div class="fold s o">
 <pre class="r"><code>boxplot(x1, x2, x3, cex.lab=1.5, cex.axis=1.5, xlab=&quot;Group&quot;, 
         ylab=&quot;Concentration (mg/ml)&quot;, names=c(1, 2, 3), lwd=2)</code></pre>
-<p><img src="Exercise08_files/figure-html/unnamed-chunk-1-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise08_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>x = c(x1, x2, x3)
 group = (c(rep(&#39;1&#39;, n1), rep(&#39;2&#39;, n2), rep(&#39;3&#39;, n3)))
 
@@ -490,7 +497,7 @@ tr3&lt;-tr1+summary.lm(aov.oneway)$coefficients[3,1]
 
 points(c(1,2,3),c(tr1,tr2,tr3),col=&#39;red&#39;,lwd=2)
 lines(c(1,2,3),c(tr1,tr2,tr3),col=&#39;red&#39;,lwd=2)</code></pre>
-<p><img src="Exercise08_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise08_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Perform subsequent pairwise group comparisons by t-tests to see which groups are different. As the chances chances of committing a type I error for a series of comparisons is greater than the error rate for any one comparison alone, use the <strong><tt>p.adjust</tt></strong> function with to <strong><tt>bonferroni</tt></strong> method to adjust the p-values.</li>
@@ -574,7 +581,7 @@ str(X)</code></pre>
 <pre class="r"><code>boxplot(X$Concentration ~ X$Time, 
         xlab=&quot;Time&quot;, 
         ylab=&quot;Concentration&quot;)</code></pre>
-<p><img src="Exercise08_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise08_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>summary(aov(X$Concentration ~ X$Time))</code></pre>
 <pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
 ## X$Time       1   4.57   4.569    3.51 0.0687 .
@@ -615,7 +622,7 @@ boxplot(X$Concentration ~ X$Time + X$Group,
 #3.1 means time 3 group 1
 
 legend(&quot;topleft&quot;, c(&quot;Group 1&quot;, &quot;Group 2&quot;), col=c(2,3), ncol=2, pch=15)</code></pre>
-<p><img src="Exercise08_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise08_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <pre><code>## &#39;data.frame&#39;:    80 obs. of  4 variables:
 ##  $ Patient      : int  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ Time         : int  1 1 1 1 1 1 1 1 1 1 ...

@@ -2,6 +2,9 @@
 title: "Hypothesis Tests: Non-normal"
 ---
 
+```{r, code=readLines('_setup.R')}
+```
+
 # Install an R package
 R packages are a collection of R functions, complied code and sample data. We install an R package through 
 the function **<tt>install.package(package_name)</tt>**. Let's install the package **<tt>medicaldata</tt>**:
@@ -44,7 +47,7 @@ controls = rexp(n = n, rate = 1/1)
 
 Plot the sample values:
 <div class='fold s o'>
-```{r fig.align='center',out.width = '70%'}
+```{r fig.align='center',out.width = '70%',eval=op_eval,echo=op_echo}
 complete = c(patients, controls)
 group = c(rep(1, n), rep(2, n))
 plot(group, complete, cex=1.5, xlim=c(0.5, 2.5), axes=FALSE, ylab="gene expression")
@@ -56,7 +59,7 @@ box()
 
 Calculate the ranks of sample values. Like above, plot the ranks of sample values.
 <div class='fold s o'>
-```{r,fig.align='center',out.width = '70%'}
+```{r,fig.align='center',out.width = '70%',eval=op_eval,echo=op_echo}
 ranked.values = rank(complete)
 group = c(rep(1, n), rep(2, n))
 plot(group, ranked.values, cex=1.5, xlim=c(0.5, 2.5), axes=FALSE, ylab="gene expression")
@@ -69,7 +72,7 @@ box()
 Use quantile-quantile plots to check for the assumption of normal distribution.
 
 <div class='fold s o'>
-```{r,fig.align='center',out.width = '70%'}
+```{r,fig.align='center',out.width = '70%',eval=op_eval,echo=op_echo}
 par(mfrow=c(1,2))
 qqnorm(patients,main = 'patients')
 qqline(patients)
@@ -81,7 +84,7 @@ qqline(controls)
 Perform Mann-Whitney U test (Wilcoxon Rank Sum test, R function (**<tt>wilcox.test</tt>**). Conduct a t-test. Compare results from these two tests.
 
 <div class='fold s o'>
-```{r, collapse=TRUE}
+```{r, collapse=TRUE,eval=op_eval,echo=op_echo}
 
 #Null hypothesis is that the distributions of x and y differ by a
 #location shift of mu
@@ -103,7 +106,7 @@ t.test(patients, controls)
 Compute the difference between **<tt>number12m</tt>** level and **<tt>baseline</tt>** level and add the data to the data frame.
 
 <div class='fold s o'>
-```{r}
+```{r,eval=op_eval,echo=op_echo}
 polyps$change12m<-polyps$number12m-polyps$baseline
 ```
 </div>
@@ -111,7 +114,7 @@ polyps$change12m<-polyps$number12m-polyps$baseline
 Check if the differences relative to the `treatment=='placebo'` are normally distributed and do the same for `treatment=='sulindac'`.
 
 <div class='fold s o'>
-```{r ,fig.align='center',out.width = '70%',collapse=TRUE}
+```{r ,fig.align='center',out.width = '70%',collapse=TRUE, eval=op_eval,echo=op_echo}
 dp<-subset(polyps,treatment=='placebo')$change12m
 ds<-subset(polyps,treatment=='sulindac')$change12m
 
@@ -131,7 +134,7 @@ qqline(ds,col='red')
 Calculate the ranks of sample values. Plot the ranks of sample values.
 
 <div class='fold s o'>
-```{r,fig.align='center',out.width = '70%'}
+```{r,fig.align='center',out.width = '70%',eval=op_eval,echo=op_echo}
 
 ranked_values<-cbind(
   c(rep(1,length(dp)),rep(2,length(ds))),
@@ -150,7 +153,7 @@ box()
 Perform Mann-Whitney U test, in this case you need to set `correct=FALSE`, because the  continuity correction can not  be applied as there are ties in our sample. Conduct a t-test. Compare results from these two tests.
 
 <div class='fold s o'>
-```{r,results='hold',warning=FALSE}
+```{r,results='hold',warning=FALSE,eval=op_eval,echo=op_echo}
 wilcox.test(ds,dp,correct=FALSE)
 t.test(ds,dp)
 ```
@@ -185,7 +188,7 @@ prop.table(X, 2)
 Perform Fisher's exact test to see whether mutation rates are significantly different between the two groups (**<tt>fisher.test</tt>**).
 
 <div class='fold s o'>
-```{r results='hold'}
+```{r results='hold',eval=op_eval,echo=op_echo}
 fisher.test(X)
 
 ## Odds ratio
@@ -201,7 +204,7 @@ OR=odds_B / odds_A
 Change samples sizes $n_1$, $n_2$ and mutations rates $p_1$, $p_2$. Discuss how results change.
 
 <div class='fold s o'>
-```{r collapse=TRUE}
+```{r collapse=TRUE,eval=op_eval,echo=op_echo}
 n1 = 50
 n2 = 100
 p1 = 0.1

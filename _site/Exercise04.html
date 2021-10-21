@@ -423,6 +423,13 @@ $(document).ready(function() {
 </div>
 
 
+<pre class="r"><code># student
+# op_echo=FALSE
+# op_eval=FALSE
+
+# teacher
+op_echo=TRUE
+op_eval=TRUE</code></pre>
 <div id="exercises" class="section level1">
 <h1>Exercises</h1>
 <div id="exercise-4.1" class="section level2">
@@ -439,16 +446,16 @@ qqnorm(low,main=&#39;low&#39;)
 qqline(low)
 qqnorm(high,main=&#39;high&#39;)
 qqline(high)</code></pre>
-<p><img src="Exercise04_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="Exercise04_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <p>Illustrate the sample values by box-plots and histograms to check whether the assumption of equal variances seems reasonable.</p>
 <div class="fold s o">
 <pre class="r"><code>boxplot(low, high, names=c(&quot;low&quot;, &quot;high&quot;),cex.lab=1.5, cex.axis=1.5,col=c(2,3))
 grid()</code></pre>
-<p><img src="Exercise04_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="Exercise04_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="r"><code>hist(low, border=2, xlim=c(0, 100), ylim=c(0, 0.5*n), density=5, col=2)
 hist(high, border=3, add=TRUE, density=2.5, col=3)</code></pre>
-<p><img src="Exercise04_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<p><img src="Exercise04_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
 </div>
 <p>Perform the t-test (<strong><tt>t.test</tt></strong>).</p>
 <div class="fold s o">
@@ -522,7 +529,7 @@ armIII&lt;-subset(dimarta_df,arm==&#39;III&#39;)$histamine_change
 boxplot(armI,armII,armIII,names=c(&#39;arm I&#39;,&#39;arm II&#39;,&#39;arm III&#39;),
         col=c(&#39;coral1&#39;,&#39;lightskyblue&#39;,&#39;mediumspringgreen&#39;))
 grid()</code></pre>
-<p><img src="Exercise04_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="Exercise04_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <p>Check whether your data is normally distributed (necessary for t-test). Draw quantile-quantile plots (QQ-plots) to check the normality-assumption,(<strong><tt>qqnorrm</tt></strong>,<strong><tt>qqline</tt></strong>).</p>
 <div class="fold s o">
@@ -533,7 +540,7 @@ qqnorm(armII,main=&#39;arm II&#39;,col=&#39;lightskyblue&#39;,ylab=NA)
 qqline(armII)
 qqnorm(armIII,main=&#39;arm III&#39;,col=&#39;mediumspringgreen&#39;,ylab=NA)
 qqline(armIII)</code></pre>
-<p><img src="Exercise04_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="Exercise04_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <p>To check this you can also use the Shapiro-Wilk’s test, where The null hypothesis is that the data are normally distributed (<strong><tt>shapiro.test</tt></strong>).</p>
 <div class="fold s o">

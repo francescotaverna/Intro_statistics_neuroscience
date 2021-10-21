@@ -1,6 +1,10 @@
 ---
 title: "Analysis of variance"
 ---
+
+```{r, code=readLines('_setup.R')}
+```
+
 # Theory 
 
 Let's consider the framework in which there are k levels of a factor of interest, which identify k different groups of observations.
@@ -46,7 +50,7 @@ x3 = rnorm(n=n3, mean=mu3, sd=3)
 a) Plot the concentration versus the group levels (**<tt>boxplot</tt>**).
 
 <div class='fold s o'>
-```{r results='hold',fig.align='center',out.width = '80%'}
+```{r results='hold',fig.align='center',out.width = '80%',eval=op_eval,echo=op_echo}
 boxplot(x1, x2, x3, cex.lab=1.5, cex.axis=1.5, xlab="Group", 
         ylab="Concentration (mg/ml)", names=c(1, 2, 3), lwd=2)
 
@@ -66,7 +70,7 @@ What dose the result suggest?
 (EXTRA) Plot the stripplot of the the data set to add the mean values of each group and to draw the segments connecting them. To do this, use the **<tt>coefficients</tt>** of the output given by the function **<tt>summary.lm</tt>** applied to the object obtained from **<tt>aov</tt>** .
 
 <div class='fold s o'>
-```{r,fig.align='center',out.width = '80%'}
+```{r,fig.align='center',out.width = '80%',eval=op_eval,echo=op_echo}
 plot(x ~ group,
      xlab="Group",
      ylab="Concentration (mg/ml)",
@@ -88,7 +92,7 @@ lines(c(1,2,3),c(tr1,tr2,tr3),col='red',lwd=2)
 c) Perform subsequent pairwise group comparisons by t-tests to see which groups are different. As the chances chances of committing a type I error for a series of comparisons is greater than the error rate for any one comparison alone, use the **<tt>p.adjust</tt>** function  with to **<tt>bonferroni</tt>** method to adjust the p-values.
 
 <div class='fold s o'>
-```{r,results='hold'}
+```{r,results='hold',eval=op_eval,echo=op_echo}
 (t1 = t.test(x1, x2))
 (t2 = t.test(x1, x3))
 (t3 = t.test(x2, x3))
@@ -102,7 +106,7 @@ p.adjust(p = c(t1$p.value, t2$p.value, t3$p.value), method = "bonferroni")
 d) Repeat the exercise with increased variances in the measurement values (e.g. sd = 5).
 
 <div class='fold s o'>
-```{r results='hold'}
+```{r results='hold',eval=op_eval,echo=op_echo}
 
 x1 = rnorm(n=n1, mean=mu1, sd=5)
 x2 = rnorm(n=n2, mean=mu2, sd=5)
@@ -129,7 +133,7 @@ str(X)
 a) Plot the concentration across different time-points. Use one-way repeated measures ANOVA to detect whether there is a time effect without the information of repeated measures.
 
 <div class='fold s o'>
-```{r,fig.align='center',out.width = '80%',results='hold'}
+```{r,fig.align='center',out.width = '80%',results='hold',eval=op_eval,echo=op_echo}
 boxplot(X$Concentration ~ X$Time, 
         xlab="Time", 
         ylab="Concentration")
@@ -141,7 +145,7 @@ summary(aov(X$Concentration ~ X$Time))
 b) Perform one-way repeated measures ANOVA with information of repeated measures. This is equal to add a random effect to the model that keeps in mind the correlation between observation from the same patient, [random effects model](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html#random-effects-models). To do this, wrap the relevant variable inside **<tt>Error()</tt>** operator and add it to the formula.
 
 <div class='fold s o'>
-```{r}
+```{r,eval=op_eval,echo=op_echo}
 summary(aov(X$Concentration ~ X$Time + Error(X$Patient)))
 ```
 </div>
@@ -149,7 +153,7 @@ c) A second group was studied in the above study. Plot the concentration versus 
 **<tt>Repeated_TwoWay.csv</tt>**.
 
 <div class='fold s o'>
-```{r results='hold',fig.align='center',out.width = '80%'}
+```{r results='hold',fig.align='center',out.width = '80%',eval=op_eval,echo=op_echo}
 X = read.csv("./data/Exercise_8_3_Repeated_TwoWay.csv", sep=";")
 str(X)
 
@@ -169,7 +173,7 @@ legend("topleft", c("Group 1", "Group 2"), col=c(2,3), ncol=2, pch=15)
 d) Conduct Anova without information of repeated measures. Also, conduct Anova with information of repeated measures.
 
 <div class='fold s o'>
-```{r results='hold'}
+```{r results='hold',eval=op_eval,echo=op_echo}
 #Without information of repeated measures; and with intreacttions
 summary(aov(X$Concentration ~ X$Time + X$Group + X$Time:X$Group))
 
