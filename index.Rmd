@@ -47,6 +47,26 @@ UMG
 :::
 ::::::
 
+<hr>
+
+The exercise sessions are held by:
+
+:::::: {.columns}
+::: {.column width="48%" data-latex="{0.24\textwidth}"}
+
+Francesco Taverna
+
+Department of Medical Statistics, UMG
+
+[francesco.taverna@med.uni-goettingen.de](mailto:francesco.taverna@med.uni-goettingen.de?subject=Introduction%20to%20Statistics%20for%20Neuroscience class)
+
+:::
+::: {.column width="24%" data-latex="{0.24\textwidth}"}
+\
+:::
+
+::::::
+
 
 ##  Useful links
 How to install R: [https://rstudio-education.github.io/hopr/starting.html](https://rstudio-education.github.io/hopr/starting.html)
@@ -56,6 +76,32 @@ The basics of R: [https://rstudio.cloud/learn/primers/1.2](https://rstudio.cloud
 Slides:
 
 Short Test:
+
+
+## Solution
+
+The solutions will be made public after each exercise session. Click the green buttons 'Show Source' and 'Show Output' to look at the lines of code and the outputs.
+
+<p align="center">
+<img width="60%"  src="./figure/show_hide_animation.gif">
+<div class="caption" align="center">Examaple of how to interact with the show-hide buttons.</div>
+</p>
+
+The following calendar will be updated as soon as the solution will be released.
+
+| Lecture|Scheduled lecture day|Solution available| Release date |
+|:---|:---|:---|:---|
+| R intro | 26 October |`r emo::ji("heavy_check_mark")`  | 21 October|
+| Exercises 1 | 27 October| `r emo::ji("x")` ||
+| Exercises 2 | 1 November| `r emo::ji("x")`  ||
+| Exercises 3 | 2 November| `r emo::ji("x")`  ||
+| Exercises 4 | 3 November| `r emo::ji("x")`  ||
+| Exercises 5 | 8 November| `r emo::ji("x")`   ||
+| Exercises 6 | 9 November| `r emo::ji("x")`  ||
+| Exercises 7 | 10 November | `r emo::ji("x")`   ||
+| Exercises 8 | 15 November | `r emo::ji("x")`  ||
+| Exercises 9 | 16 November | `r emo::ji("x")` ||
+| Exercises 10 |17 November | `r emo::ji("x")`||
 
 
 
@@ -112,6 +158,5 @@ a column separator -->
 
 The course is based on lectures notes by Prof. Dr. Klaus Jung, TiHo Hannover.
 
-The R introduction and some exercise take inspiration from the 
-lectures notes of Prof. Dr. Paolo Vidoni, Università di Udine.
+The R introduction and some exercises take inspiration from the lectures notes of Prof. Dr. Paolo Vidoni, Università di Udine.
 

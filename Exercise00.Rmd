@@ -40,7 +40,7 @@ $$\left[\frac{1}{2}\cdot\left(e^{5}-\frac{2}{3^{5}}\right)\right]-\sqrt{2\cos\le
 factorial(10)/(factorial(4)*factorial(6))*log(2)
 ```
 
-Instead of line brakers to separate different statement you can use the semicolon operator **<tt>;</tt>**.
+Instead of line breaks to separate different statements, you can use the semicolon operator `;`.
 
 <div class="fold o">
 ```{r hold=TRUE}
@@ -63,7 +63,7 @@ The logical operators are very important for data manipulation. When R evaluates
 1==2 #equal than
 1!=2 #not equal
 TRUE & FALSE # and
-TRUE & FALSE # or
+TRUE | FALSE # or
 ```
 
 Can you guess the result of the following script?
@@ -82,7 +82,7 @@ While reading an R script, you can bump into an unknown R’function, the first 
 do is to ask directly R. To do this you can use the function **<tt>help()</tt>**, remember put the name
 of the function inside the brackets. 
 
-Who knows what does the **<tt>lm()</tt>** function do?
+Who knows what the **<tt>lm()</tt>** function does?
 
 <div class='fold s'>
 ```{r,eval=FALSE}
@@ -93,19 +93,19 @@ help(lm)
 ******
 
 # Objects
-R is an object oriented language. This mean that everything in R is an object. When we  run the script we create and manipulate object. To master R, it is important to understand the basic data types and data structures and how to operate on them.
+R is an object-oriented language. This means that everything in R is an object. When we  run the script we create and manipulate objects. To master R, it is important to understand the basic data types and data structures and how to operate on them.
 
 ## Types
 
 The type of an object is  a property assigned to an object that determines how generic functions operate with it.
-The **<tt>typeof()</tt>**  function return the type of an object. R distinguishes the following main types of object:
+The **<tt>typeof()</tt>**  function returns the type of an object. R distinguishes the following main types of objects:
 
 * integer: integer numbers ;
 * real (double): real numbers;
 * character: elements made up of text-strings; for example, "Germany";
 * logical: data containing logical constants, namely, TRUE and FALSE.
 
-Try to guess which is the outcome of this sum:
+Try to guess the outcome of the following sum:
 
 <div class='fold o'>
 ```{r error=TRUE}
@@ -113,7 +113,7 @@ Try to guess which is the outcome of this sum:
 ```
 </div>
 
-## Assignements
+## Assignments
 For sure we do not want to compute an object every time we need it, especially if 
 comes from a time-consuming calculation. To store an object and to easily recall
 it, we assign it to a variable name through the assignment operator **<tt><-</tt>** or **<tt>=</tt>**.
@@ -123,9 +123,8 @@ x<-2+5
 ```
 
 On the environment tab, up-right corner of RStudio, you will find a list of the 
-object stored in the current working directory, alternatively you can use the 
-**<tt>ls()</tt>** command. To remove the object, you can use the **<tt>rm()</tt>**
-function, where in the brackets put the name of the variable.
+object stored in the current working directory, alternatively, you can use the 
+**<tt>ls()</tt>** command. To remove the object, you can use the **<tt>rm()</tt>** function (inside the brackets put the name of the variable).
 
 <div class='fold o'>
 ```{r error=TRUE, result='hide'}
@@ -134,13 +133,13 @@ rm(x)
 </div>
 
 ## Structures
-We will just introduce the need data structures for this course we will leave 
-out others structures, such as factor and functions.
+We will just introduce the needed data structures for this course we will leave 
+out other structures, such as factors and functions.
 
 ### Vectors
 Vectors are one-dimensional sequences of elements of the same type.
-To crate a vector, you need to use the **<tt>c()</tt>** function, where
-**<tt>c</tt>**stands for concatenate.
+To create a vector, you need to use the **<tt>c()</tt>** function, where
+**<tt>c</tt>** stands for concatenate.
 ```{r}
 a<-c(6,9,12,15)
 a<-c(a,c(0,3))# concatenate the vector with another vector and store it with the same name
@@ -184,8 +183,7 @@ seq(0, 15, 2)
 ```
 </div>
 
-Furthermore, you can use the colon operatoe, namely **<tt>:</tt>**, to tell R to create an integer 
-vector with a regular numbers sequence.
+Furthermore, you can use the colon operator, namely **<tt>:</tt>**, to tell R to create an integer vector with a regular numbers sequence.
 ```{r}
 pi:6;8:-8
 ```
@@ -206,7 +204,7 @@ head(x+y);head(x*y) #head function just give the first six elements
 
 
 #### Vector slicing
-Slicing a vector is done through the square bracklets **<tt>[]</tt>** operator. 
+Slicing a vector is done through the square brackets **<tt>[]</tt>** operator. 
 ```{r collapse=TRUE}
 x<-c('These','are','not','the','exercise','of','neuroscience','class')
 x[c(3,4)] #select the 3rd and the 4th element
@@ -240,13 +238,12 @@ sum(x[-length(x)]);sum(x,na.rm =TRUE )
 </div>
 
 ### Matrices
-A matrix is a collection of the same data type arranged into a two dimensional data structure, namely rows and columns.
-To create matrix, we use the **<tt>matrix()</tt>** function which takes the following arguments:
+A matrix is a collection of the same data type arranged into a two-dimensional data structure, namely rows and columns. To create a matrix, we use the **<tt>matrix()</tt>** function which takes the following arguments:
 
 * **<tt>data</tt>**: a data vector;
 * **<tt>nrow</tt>**: the desired number of columns;
 * **<tt>ncol</tt>**: the desired number of rows;
-* **<tt>byrow</tt>**: a logical statment to populate the matrix either by row or column, the default is FALSE.
+* **<tt>byrow</tt>**: a logical statement to populate the matrix either by row or column, the default is FALSE.
 
 Create a $2\times 3$ matrix of ones.
 <div class='fold s o'>
@@ -267,10 +264,7 @@ matrix(1:11,nrow=4)
 matrix(1:12,nrow=4,byrow=TRUE)
 ```
 </div>
-We cran create matrix also binding together vectors by row **<tt>rbind()</tt>** 
-using and by columns **<tt>cbind()</tt>**. The former function automatically label row
- of columns name, but you can use **<tt>rownames()</tt>** and **<tt>colnames()</tt>**
- to label rows and columns respectively.
+We can create a matrix also binding together vectors by row **<tt>rbind()</tt>** using and by columns **<tt>cbind()</tt>**. The former function automatically labels rows/columns using the names of the  vectors, but you can use **<tt>rownames()</tt>** and **<tt>colnames()</tt>** to label rows and columns respectively.
 
 ```{r}
 x<-c(1001:1010)
@@ -304,8 +298,7 @@ M[,3] #extract the 3rd column
 
 ```
 
-Write a script that extract from the matrix M all the columns that in their third
-raw contains contains a value higher than 7.
+Write a script that extracts from the matrix M all the columns containing a value higher than 7 in the third row.
 <div class='fold s o'>
 ```{r}
 M[,M[3,]>7]
@@ -324,11 +317,7 @@ outer(x,y,"+")
 </div>
 
 ### Lists
-An R list is an object, which contains elements of different types like, such
-as numbers, strings, vectors and lists. A list is created using 
-**<tt>list()</tt>** function, to access the element of the list we can use
-the squared brackets **<tt>[]</tt>** or **<tt>$key_name</tt>** if
-a key, character, is assigned to the element.
+An R list is an object, which contains elements of different types like, such as numbers, strings, vectors, and lists. A list is created using **<tt>list()</tt>** function, to access the element of the list we can use the squared brackets **<tt>[]</tt>** or **<tt>$key_name</tt>** if a key, character, is assigned to the element.
 
 ```{r collapse=TRUE}
 #create a list
@@ -342,11 +331,7 @@ x$'112'
 
 ### Data frames
 
-A dataframe is a list of named vectors (called columns) of the same length. Therefore
-each column contains elements of the same type. You can slice a dataframe in the
-same way that you can slice a matrix, furthermore you can also use the **<tt>$</tt>**, as
-done for the lists, to select columns. We use the **<tt>data.frame()</tt>**
-function to create a data frame 
+A data frame is a list of named vectors (called columns) of the same length. Therefore each column contains elements of the same type. You can slice a data frame in the same way that you can slice a matrix, furthermore, you can also use the **<tt>$</tt>**, as done for the lists, to select columns. We use the **<tt>data.frame()</tt>** function to create a data frame 
 
 ```{r collapse=TRUE}
 x<-seq(1,10)
@@ -365,10 +350,10 @@ subset(df,df$X1>5) # that is equal to df[df$X1>5,]
 
 #### Load and save data frames
 
-Creating and editing a data frames in R can be cumbersome, indeed R isn't a 
-spreadsheet. For this reason the data are created using different programming
-languages and then loaded into R. We will show how to load **<tt>.csv</tt>**, 
-file, but keep in mind that R can load a huge variety of file formats. 
+Creating and editing data frames in R can be cumbersome, indeed R isn't a 
+spreadsheet. For this reason, the data are created using different programming
+languages and then loaded into R. We will show how to load **<tt>.csv</tt>** 
+files, but keep in mind that R can load a huge variety of file formats. 
 
 We use the commands **<tt>getwd()</tt>**, **<tt>setwd()</tt>** and  **<tt>list.files()</tt>**
 to manage our working directory. R uses **<tt>/</tt>** as path separator even on
@@ -382,7 +367,8 @@ list.files("./data") # list the files in the current directory
 
 Always try to keep separate the data from the analysis, working inside the data
 directory could lead to data loss or corruption.
-Let's say we want to read the **<tt>study1.csv()</tt>** file. We  use
+
+Let's say we want to read the <a href="./data/study1.csv" download><tt>study1.csv()</tt></a> file. We  use
 the general function **<tt>read.table()</tt>**, that allows to set the
 delimiter , to include or not the headers, and more. 
 
@@ -410,7 +396,7 @@ file.remove("./data/study1_new.csv")
 ### Exercise 1
 Generate a vector of length 20 containing some numbers and sort it in descending order.
 What do the related **<tt>rank()</tt>** and **<tt>order()</tt>** functions do?
-Create a matrix (vector,vector of ranks). Use **<tt>order()</tt>** function to 
+Create a matrix (vector, vector of ranks). Use **<tt>order()</tt>** function to 
 sort the vector in ascending order.
 
 <div class='fold s o'>
@@ -442,15 +428,11 @@ x[order(x,decreasing = FALSE)]
 
 Add two columns to the **<tt>study1</tt>** data frame:
 
-1. A column with logical object, that says for every entry of the **<tt>before</tt>** column
-if is lower or not than 0.3.
+1. A column with  logical values, that says for every entry of the **<tt>before</tt>** column if is lower than 0.3.
 
-2. A column with logical object, that says for every entry of the **<tt>after</tt>** column
-if is grater or not than 0.4.
+2. A column with logical values, that says for every entry of the **<tt>after</tt>** column if is greater than 0.4.
 
-Return the rows that fulfill both the conditions of the former columns, namely rows
-with value true in both columns. How many patients belonging to group **<tt>a</tt>** 
-fulfill this condition?
+Return the rows that fulfill both the above conditions, namely rows with value true in both columns. How many patients fulfill the above conditions?
 
 <div class='fold s o'>
 ```{r}
@@ -476,9 +458,9 @@ subset(study1,study1$before_gr_0.4 & study1$after_l_0.3)
 One of the basic plotting functions is the **<tt>plot()</tt>** function. This is a generic function, namely the type of plot produced is dependent on the type or class of the first argument.
 For example:
 
-* **<tt>plot(x_vector, y_vector)</tt>** produces a scatterplot of y against x
-* **<tt>plot(x_vector)</tt>** a scatterplot of x against index of x
-* **<tt>plot(dataframe)</tt>** each variable against the others
+* **<tt>plot(x_vector, y_vector)</tt>** produces a scatter plot of y against x
+* **<tt>plot(x_vector)</tt>** a scatter plot of x against index of x
+* **<tt>plot(data frame)</tt>** each variable against the others
 
 ```{r,collapse=TRUE,fig.align='center'}
 str(study1)
@@ -526,7 +508,7 @@ legend("topleft",
 
 Use the **<tt>seq()</tt>** function to generate a vector **<tt>x</tt>** of
 length 100 of evenly spaced numbers between 0 and $2\pi$. Draw a plot of
-**<tt>x</tt>** agianst **<tt>sin(x)</tt>**. Look at the **<tt>type</tt>** 
+**<tt>x</tt>** against **<tt>sin(x)</tt>**. Look at the **<tt>type</tt>** 
 argument of function **<tt>plot()</tt>** to draw a connecting line. Use
 the **<tt>lines()</tt>** function to add the cosine to the plot.
 

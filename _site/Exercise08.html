@@ -424,12 +424,12 @@ $(document).ready(function() {
 
 
 <pre class="r"><code># student
-# op_echo=FALSE
-# op_eval=FALSE
+op_echo=FALSE
+op_eval=FALSE
 
 # teacher
-op_echo=TRUE
-op_eval=TRUE</code></pre>
+# op_echo=TRUE
+# op_eval=TRUE</code></pre>
 <div id="theory" class="section level1">
 <h1>Theory</h1>
 <p>Let’s consider the framework in which there are k levels of a factor of interest, which identify k different groups of observations.</p>
@@ -463,19 +463,7 @@ x3 = rnorm(n=n3, mean=mu3, sd=3)</code></pre>
 <li>Plot the concentration versus the group levels (<strong><tt>boxplot</tt></strong>).</li>
 </ol>
 <div class="fold s o">
-<pre class="r"><code>boxplot(x1, x2, x3, cex.lab=1.5, cex.axis=1.5, xlab=&quot;Group&quot;, 
-        ylab=&quot;Concentration (mg/ml)&quot;, names=c(1, 2, 3), lwd=2)</code></pre>
-<p><img src="Exercise08_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>x = c(x1, x2, x3)
-group = (c(rep(&#39;1&#39;, n1), rep(&#39;2&#39;, n2), rep(&#39;3&#39;, n3)))
 
-aov.oneway = aov(x ~ group)
-summary(aov.oneway)</code></pre>
-<pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)   
-## group        2  125.1   62.53   7.637 0.00177 **
-## Residuals   35  286.6    8.19                   
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Perform one-way analysis of variance (<strong><tt>aov</tt></strong>).</li>
@@ -483,86 +471,19 @@ summary(aov.oneway)</code></pre>
 <p>What dose the result suggest?</p>
 <p>(EXTRA) Plot the stripplot of the the data set to add the mean values of each group and to draw the segments connecting them. To do this, use the <strong><tt>coefficients</tt></strong> of the output given by the function <strong><tt>summary.lm</tt></strong> applied to the object obtained from <strong><tt>aov</tt></strong> .</p>
 <div class="fold s o">
-<pre class="r"><code>plot(x ~ group,
-     xlab=&quot;Group&quot;,
-     ylab=&quot;Concentration (mg/ml)&quot;,
-     pch=16)
 
-# mean of the first group
-tr1&lt;-summary.lm(aov.oneway)$coefficients[1,1] 
-# mean of the second group
-tr2&lt;-tr1+summary.lm(aov.oneway)$coefficients[2,1] 
-# mean of the second group
-tr3&lt;-tr1+summary.lm(aov.oneway)$coefficients[3,1] 
-
-points(c(1,2,3),c(tr1,tr2,tr3),col=&#39;red&#39;,lwd=2)
-lines(c(1,2,3),c(tr1,tr2,tr3),col=&#39;red&#39;,lwd=2)</code></pre>
-<p><img src="Exercise08_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Perform subsequent pairwise group comparisons by t-tests to see which groups are different. As the chances chances of committing a type I error for a series of comparisons is greater than the error rate for any one comparison alone, use the <strong><tt>p.adjust</tt></strong> function with to <strong><tt>bonferroni</tt></strong> method to adjust the p-values.</li>
 </ol>
 <div class="fold s o">
-<pre class="r"><code>(t1 = t.test(x1, x2))
-(t2 = t.test(x1, x3))
-(t3 = t.test(x2, x3))
 
-## Using bonferroni correction we can adjust the p-values 
-p.adjust(p = c(t1$p.value, t2$p.value, t3$p.value), method = &quot;bonferroni&quot;)</code></pre>
-<pre><code>## 
-##  Welch Two Sample t-test
-## 
-## data:  x1 and x2
-## t = -2.5726, df = 23.498, p-value = 0.01686
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -4.6322844 -0.5056621
-## sample estimates:
-## mean of x mean of y 
-##  1.553068  4.122041 
-## 
-## 
-##  Welch Two Sample t-test
-## 
-## data:  x1 and x3
-## t = -3.4385, df = 12.34, p-value = 0.004725
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -8.232477 -1.858024
-## sample estimates:
-## mean of x mean of y 
-##  1.553068  6.598319 
-## 
-## 
-##  Welch Two Sample t-test
-## 
-## data:  x2 and x3
-## t = -1.7777, df = 10.714, p-value = 0.1038
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -5.5521861  0.5996307
-## sample estimates:
-## mean of x mean of y 
-##  4.122041  6.598319 
-## 
-## [1] 0.05057908 0.01417393 0.31142220</code></pre>
 </div>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Repeat the exercise with increased variances in the measurement values (e.g. sd = 5).</li>
 </ol>
 <div class="fold s o">
-<pre class="r"><code>x1 = rnorm(n=n1, mean=mu1, sd=5)
-x2 = rnorm(n=n2, mean=mu2, sd=5)
-x3 = rnorm(n=n3, mean=mu3, sd=5)
 
-x = c(x1, x2, x3)
-group = (c(rep(&#39;1&#39;, n1), rep(&#39;2&#39;, n2), rep(&#39;3&#39;, n3)))
-
-aov.oneway = aov(x ~ group)
-summary(aov.oneway)</code></pre>
-<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)
-## group        2   13.0   6.482   0.313  0.734
-## Residuals   35  725.6  20.731</code></pre>
 </div>
 </div>
 <div id="exercise-8.2-repeated-measurements-analysis-of-variance" class="section level2">
@@ -578,86 +499,25 @@ str(X)</code></pre>
 <li>Plot the concentration across different time-points. Use one-way repeated measures ANOVA to detect whether there is a time effect without the information of repeated measures.</li>
 </ol>
 <div class="fold s o">
-<pre class="r"><code>boxplot(X$Concentration ~ X$Time, 
-        xlab=&quot;Time&quot;, 
-        ylab=&quot;Concentration&quot;)</code></pre>
-<p><img src="Exercise08_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>summary(aov(X$Concentration ~ X$Time))</code></pre>
-<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
-## X$Time       1   4.57   4.569    3.51 0.0687 .
-## Residuals   38  49.47   1.302                 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+
 </div>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Perform one-way repeated measures ANOVA with information of repeated measures. This is equal to add a random effect to the model that keeps in mind the correlation between observation from the same patient, <a href="https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html#random-effects-models">random effects model</a>. To do this, wrap the relevant variable inside <strong><tt>Error()</tt></strong> operator and add it to the formula.</li>
 </ol>
 <div class="fold s o">
-<pre class="r"><code>summary(aov(X$Concentration ~ X$Time + Error(X$Patient)))</code></pre>
-<pre><code>## 
-## Error: X$Patient
-##           Df Sum Sq Mean Sq F value Pr(&gt;F)
-## Residuals  1 0.5788  0.5788               
-## 
-## Error: Within
-##           Df Sum Sq Mean Sq F value Pr(&gt;F)  
-## X$Time     1   4.57   4.569   3.458 0.0709 .
-## Residuals 37  48.89   1.321                 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+
 </div>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>A second group was studied in the above study. Plot the concentration versus the group levels across different time-points. Analyse whether there is an effect by time, group or an interaction between time and group (<strong><tt>boxplot</tt></strong>). Data is given in the folder <strong><tt>Repeated_TwoWay.csv</tt></strong>.</li>
 </ol>
 <div class="fold s o">
-<pre class="r"><code>X = read.csv(&quot;./data/Exercise_8_3_Repeated_TwoWay.csv&quot;, sep=&quot;;&quot;)
-str(X)
 
-boxplot(X$Concentration ~ X$Time + X$Group, 
-        xlab=&quot;Time&quot;, 
-        ylab=&quot;Concentration&quot;, 
-        col=c(2,2,2,2,3,3,3,3)
-        )
-
-#3.1 means time 3 group 1
-
-legend(&quot;topleft&quot;, c(&quot;Group 1&quot;, &quot;Group 2&quot;), col=c(2,3), ncol=2, pch=15)</code></pre>
-<p><img src="Exercise08_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" /></p>
-<pre><code>## &#39;data.frame&#39;:    80 obs. of  4 variables:
-##  $ Patient      : int  1 2 3 4 5 6 7 8 9 10 ...
-##  $ Time         : int  1 1 1 1 1 1 1 1 1 1 ...
-##  $ Concentration: num  2.44 2.77 4.56 3.07 3.13 ...
-##  $ Group        : int  1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 </div>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Conduct Anova without information of repeated measures. Also, conduct Anova with information of repeated measures.</li>
 </ol>
 <div class="fold s o">
-<pre class="r"><code>#Without information of repeated measures; and with intreacttions
-summary(aov(X$Concentration ~ X$Time + X$Group + X$Time:X$Group))
 
-### With information of repeated measures
-summary(aov(X$Concentration ~ X$Time + X$Group + X$Time:X$Group + Error(X$Patient)))</code></pre>
-<pre><code>##                Df Sum Sq Mean Sq F value Pr(&gt;F)   
-## X$Time          1  10.60  10.595   7.771 0.0067 **
-## X$Group         1   0.83   0.834   0.612 0.4366   
-## X$Time:X$Group  1   0.05   0.054   0.039 0.8431   
-## Residuals      76 103.62   1.363                  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Error: X$Patient
-##           Df Sum Sq Mean Sq F value Pr(&gt;F)
-## Residuals  1 0.4954  0.4954               
-## 
-## Error: Within
-##                Df Sum Sq Mean Sq F value  Pr(&gt;F)   
-## X$Time          1  10.60  10.595   7.705 0.00695 **
-## X$Group         1   0.83   0.834   0.607 0.43855   
-## X$Time:X$Group  1   0.05   0.054   0.039 0.84372   
-## Residuals      75 103.13   1.375                   
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
 </div>
 </div>

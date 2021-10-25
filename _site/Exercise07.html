@@ -424,12 +424,12 @@ $(document).ready(function() {
 
 
 <pre class="r"><code># student
-# op_echo=FALSE
-# op_eval=FALSE
+op_echo=FALSE
+op_eval=FALSE
 
 # teacher
-op_echo=TRUE
-op_eval=TRUE</code></pre>
+# op_echo=TRUE
+# op_eval=TRUE</code></pre>
 <div id="theory" class="section level1">
 <h1>Theory</h1>
 <p>Let <span class="math inline">\(X_{Ai}\sim N(\mu_a,\sigma)\)</span> i.i.d. and <span class="math inline">\(X_{Bi}\sim N(\mu_b,\sigma)\)</span> i.i.d where <span class="math inline">\(i=1,\dots,n\)</span>. Consider the problem of testing the null hypothesis of no treatment difference <span class="math inline">\(H_0: \mu_a=\mu_b\)</span> against the two sided alternative <span class="math inline">\(\mu_a \neq\mu_b\)</span> with Type I error probability <span class="math inline">\(\alpha\)</span> and power <span class="math inline">\(1-\beta\)</span> at <span class="math inline">\(|\mu_a-\mu_b|=\delta\)</span>. The standardize statistics for this test is: <span class="math display">\[
@@ -446,55 +446,11 @@ n= \frac{2\sigma^2}{\delta^2}\left[\phi^{-1}(1-\alpha/2)+\phi^{-1}(1-\beta)\righ
 <p>Assume you want to compare the concentration of a certain metabolite in blood samples of patients with a certain disease with samples from healthy control people. From a pilot sample, it is known that the standard deviation in the complete sample is 2 (SD = 2). A difference of <span class="math inline">\(\delta = 3\)</span> mml/l between the group means is considered as clinical relevant. If there is truly a difference of <span class="math inline">\(\delta = 3\)</span> mml/l between the group means, it is desired to detect this differences with a probability of 80 %, i.e. you allow for a false negative probability of 100% - 80% = 20%.</p>
 How many samples per group are necessary to fulfill the above demand for the power of 80% (<strong><tt>power.t.test</tt></strong>)?
 <div class="fold s o">
-<pre class="r"><code># Exactly one of the parameters n, delta, power, sd, and sig.level
-# must be passed as NULL, and that parameter is determined from the others.
-power.t.test(delta       = 3, 
-             sd          = 2, 
-             power       = 0.80,
-             sig.level   = 0.10,
-             type        = &quot;two.sample&quot;,
-             alternative = &quot;two.sided&quot;)
 
-# From the above discussion
-
-((qnorm(1-0.05)+qnorm(1-0.2))^2)*(2*2^2)/(3^2)</code></pre>
-<pre><code>## 
-##      Two-sample t test power calculation 
-## 
-##               n = 6.298691
-##           delta = 3
-##              sd = 2
-##       sig.level = 0.1
-##           power = 0.8
-##     alternative = two.sided
-## 
-## NOTE: n is number in *each* group
-## 
-## [1] 5.495606</code></pre>
 </div>
 <p>Assume in the above setting that a smaller difference, i.e. of <span class="math inline">\(\delta = 0.1\)</span> is considered as clinical relevant:</p>
 <div class="fold s o">
-<pre class="r"><code>power.t.test(delta       = 0.1, 
-             sd          = 2, 
-             power       = 0.80,
-             sig.level   = 0.10,
-             type        = &quot;two.sample&quot;)
 
-# From the above discussion
-((qnorm(1-0.05)+qnorm(1-0.2))^2)*(2*2^2)/(0.1^2)</code></pre>
-<pre><code>## 
-##      Two-sample t test power calculation 
-## 
-##               n = 4946.722
-##           delta = 0.1
-##              sd = 2
-##       sig.level = 0.1
-##           power = 0.8
-##     alternative = two.sided
-## 
-## NOTE: n is number in *each* group
-## 
-## [1] 4946.046</code></pre>
 </div>
 <p>In you opinion why the result of the <strong><tt>power.t.test</tt></strong> is different from the straight computation in the first case and equal to in the second one?</p>
 <details>
@@ -509,40 +465,11 @@ As <strong><tt>power.t.test</tt></strong> function is built for a huge variety o
 </p>
 <p>Change the value for the desired power and discuss with your neighbor the effect on the sample size. Turn also on the value of the standard deviation from the pilot sample.</p>
 <div class="fold s o">
-<pre class="r"><code>power.t.test(delta       = 0.01, 
-             sd          = 2, 
-             power       = 0.95,
-             sig.level   = 0.10,
-             type        = &quot;two.sample&quot;)</code></pre>
-<pre><code>## 
-##      Two-sample t test power calculation 
-## 
-##               n = 865774.6
-##           delta = 0.01
-##              sd = 2
-##       sig.level = 0.1
-##           power = 0.95
-##     alternative = two.sided
-## 
-## NOTE: n is number in *each* group</code></pre>
+
 </div>
 <p>Now, assume the researchers know that they can only effort to recruit <span class="math inline">\(n=10\)</span> patients per group. The researchers want to know what power they can achieve with this constraint for a specified <span class="math inline">\(\delta\)</span> of 1.3 and a standard deviation of 1.5.</p>
 <div class="fold s o">
-<pre class="r"><code>power.t.test(delta= 1.3, 
-             sd= 1.5, 
-             n= 10,
-             type= &quot;two.sample&quot;)</code></pre>
-<pre><code>## 
-##      Two-sample t test power calculation 
-## 
-##               n = 10
-##           delta = 1.3
-##              sd = 1.5
-##       sig.level = 0.05
-##           power = 0.4500251
-##     alternative = two.sided
-## 
-## NOTE: n is number in *each* group</code></pre>
+
 </div>
 </div>
 </div>
@@ -551,39 +478,11 @@ As <strong><tt>power.t.test</tt></strong> function is built for a huge variety o
 <p>Assume you want to compare the rate of infections between two different groups of subjects. The one group (A) was strongly exposed to some risk factor, the other group (B) was only weak exposed. From a study on a similar risk factor, it is known that the infection rate for group A is P1 = 25% and P2 = 18% for group B.</p>
 <p>Determine the power to detect a difference between the effects rates of P1 - P2 = 7% given that N=100 subjects can be recruited per group (<strong><tt>power.prop.test</tt></strong>):</p>
 <div class="fold s o">
-<pre class="r"><code>power.prop.test(n = 100, 
-                p1 = 0.25, 
-                p2 = 0.18,
-                sig.level = 0.05)</code></pre>
-<pre><code>## 
-##      Two-sample comparison of proportions power calculation 
-## 
-##               n = 100
-##              p1 = 0.25
-##              p2 = 0.18
-##       sig.level = 0.05
-##           power = 0.2242613
-##     alternative = two.sided
-## 
-## NOTE: n is number in *each* group</code></pre>
+
 </div>
 <p>Assume that a power of 80% is desired for the above study. Which sample sizes per group would be necessary?</p>
 <div class="fold s o">
-<pre class="r"><code>power.prop.test(power=0.8, 
-                p1=0.25,
-                p2=0.18,
-                sig.level = 0.05)</code></pre>
-<pre><code>## 
-##      Two-sample comparison of proportions power calculation 
-## 
-##               n = 539.5113
-##              p1 = 0.25
-##              p2 = 0.18
-##       sig.level = 0.05
-##           power = 0.8
-##     alternative = two.sided
-## 
-## NOTE: n is number in *each* group</code></pre>
+
 </div>
 </div>
 

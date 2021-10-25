@@ -424,12 +424,12 @@ $(document).ready(function() {
 
 
 <pre class="r"><code># student
-# op_echo=FALSE
-# op_eval=FALSE
+op_echo=FALSE
+op_eval=FALSE
 
 # teacher
-op_echo=TRUE
-op_eval=TRUE</code></pre>
+# op_echo=TRUE
+# op_eval=TRUE</code></pre>
 <div id="exercise" class="section level1">
 <h1>Exercise</h1>
 <div id="exercise-6.1-correlation" class="section level2">
@@ -437,87 +437,26 @@ op_eval=TRUE</code></pre>
 <p>Assume Proteins A, B and C are members of a cellular pathway that is related to a certain disease. The concentration of these protein was measured in <span class="math inline">\(n=5000\)</span> patients.</p>
 <p>Read the corresponding data <strong><tt>study2.csv</tt></strong> into the R-environment.</p>
 <div class="fold s o">
-<pre class="r"><code>X = read.table(&quot;data/study2.csv&quot;, sep=&quot;;&quot;, header=TRUE)
-str(X)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    500 obs. of  3 variables:
-##  $ Protein.A: num  10.7 11.7 10.3 11.9 10 ...
-##  $ Protein.B: num  13.5 14.8 12.8 14.4 13.2 ...
-##  $ Protein.C: num  7.06 7.34 8.73 6.53 7.68 ...</code></pre>
+
 </div>
 <p>Make scatter plots of each pair of proteins (<strong><tt>plot</tt></strong>).</p>
 <div class="fold s o">
-<pre class="r"><code>plot(X)</code></pre>
-<p><img src="Exercise06_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" /></p>
+
 </div>
 <p>Determine Pearson’s correlation between each pair of proteins (<strong><tt>cor.test</tt></strong>).</p>
 <div class="fold s o">
-<pre class="r"><code>cor.test(X$Protein.A, X$Protein.B)
-cor.test(X$Protein.A, X$Protein.C)
-cor.test(X$Protein.B, X$Protein.C)</code></pre>
-<pre><code>## 
-##  Pearson&#39;s product-moment correlation
-## 
-## data:  X$Protein.A and X$Protein.B
-## t = 50.271, df = 498, p-value &lt; 2.2e-16
-## alternative hypothesis: true correlation is not equal to 0
-## 95 percent confidence interval:
-##  0.8982970 0.9273551
-## sample estimates:
-##       cor 
-## 0.9139905 
-## 
-## 
-##  Pearson&#39;s product-moment correlation
-## 
-## data:  X$Protein.A and X$Protein.C
-## t = 1.9296, df = 498, p-value = 0.05423
-## alternative hypothesis: true correlation is not equal to 0
-## 95 percent confidence interval:
-##  -0.00155775  0.17253187
-## sample estimates:
-##        cor 
-## 0.08614461 
-## 
-## 
-##  Pearson&#39;s product-moment correlation
-## 
-## data:  X$Protein.B and X$Protein.C
-## t = 0.28971, df = 498, p-value = 0.7722
-## alternative hypothesis: true correlation is not equal to 0
-## 95 percent confidence interval:
-##  -0.0747947  0.1005572
-## sample estimates:
-##        cor 
-## 0.01298103</code></pre>
+
 </div>
 </div>
 <div id="exercise-6.2-linear-regression" class="section level2">
 <h2>Exercise 6.2 (Linear Regression)</h2>
 From the correlation analysis, protein A appears to be related to protein B. From earlier research, it is known that protein B depends on protein A. Model the relation between the two proteins using a simple linear regression (<strong><tt>lm</tt></strong>).
 <div class="fold s">
-<pre class="r"><code>L1 = lm(X$Protein.B ~ X$Protein.A)</code></pre>
+
 </div>
 <p>Evaluate the <strong><tt>summary</tt></strong> over the linear model to check the goodness of fit.</p>
 <div class="fold o">
-<pre class="r"><code>summary(L1)</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = X$Protein.B ~ X$Protein.A)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.41408 -0.30749  0.00183  0.28727  1.33353 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  4.03927    0.17893   22.57   &lt;2e-16 ***
-## X$Protein.A  0.89633    0.01783   50.27   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.4258 on 498 degrees of freedom
-## Multiple R-squared:  0.8354, Adjusted R-squared:  0.835 
-## F-statistic:  2527 on 1 and 498 DF,  p-value: &lt; 2.2e-16</code></pre>
+
 </div>
 <p>Do you know the meaning behind each section of summary?</p>
 <details>
@@ -546,15 +485,7 @@ The F-Statistic checks if at least one of your coefficients is nonzero.
 </details>
 <p>The output of the <strong><tt>lm</tt></strong> is a list which contains the estimates of the linear regression model. Use the latter to draw the regression line into the scatter plot (<strong><tt>abline</tt></strong>).</p>
 <div class="fold s o">
-<pre class="r"><code>par(mfrow=c(1,1))
-plot(X$Protein.A, X$Protein.B, cex.axis=1.5, cex.lab=1.5, 
-     xlab=&quot;Concentration of Protein A&quot;,
-     ylab=&quot;Concentration of Protein B&quot;)
-grid()
-#The coefficients of the linear regression model
-#L1$coefficients
-abline(a=L1$coefficients[1], b=L1$coefficients[2], col=2, lwd=3)</code></pre>
-<p><img src="Exercise06_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+
 </div>
 </div>
 </div>

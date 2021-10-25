@@ -424,12 +424,12 @@ $(document).ready(function() {
 
 
 <pre class="r"><code># student
-# op_echo=FALSE
-# op_eval=FALSE
+op_echo=FALSE
+op_eval=FALSE
 
 # teacher
-op_echo=TRUE
-op_eval=TRUE</code></pre>
+# op_echo=TRUE
+# op_eval=TRUE</code></pre>
 <div id="functions-for-basic-satisical-models." class="section level1">
 <h1>Functions for basic satisical models.</h1>
 <p>As an example, let <span class="math inline">\(X\)</span> be a normally distributed random variable, <span class="math inline">\(X \sim N(\mu,\sigma^2)\)</span>. The following functions are included in R order to work with the normal distribution:</p>
@@ -460,9 +460,6 @@ hist(x3, breaks = 3)</code></pre>
 <p>What is a reasonable choice of the parameter <strong><tt>breaks</tt></strong>?</p>
 Obtain the following graph for the random sample <strong><tt>x3</tt></strong>.
 <div class="fold s">
-<pre class="r"><code>x3 = rnorm(n = 1000, mean = 0, sd = 1)
-hist(x3, breaks = 50,probability=TRUE,xlab =NA, main=&#39;Standard normal distribution&#39;)
-lines(sort(x3),dnorm(sort(x3)),col=&#39;red&#39;)</code></pre>
 <p><img src="Exercise02_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -471,27 +468,19 @@ lines(sort(x3),dnorm(sort(x3)),col=&#39;red&#39;)</code></pre>
 <p>Assume, the survival probability of patients after brain surgery is exponentially distributed. Assume further that the average survival time of a patient is 36 months, <span class="math inline">\(\lambda = 1/36\)</span>.</p>
 <p>Plot the density function of the exponential distribution over the interval <strong><tt>[0,200]</tt></strong>. Plot the function over a sequence obtained using the <strong><tt>seq()</tt></strong> function.</p>
 <div class="fold s o">
-<pre class="r"><code>x = seq(0, 200, length.out = 100)
-y = dexp(x, rate = 1/36)
-plot(x, y, type = &quot;l&quot;, xlab = &quot;months&quot;)</code></pre>
-<p><img src="Exercise02_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" /></p>
+
 </div>
 Plot the cumulative distribution function of the exponential distribution.
 <div class="fold s o">
-<pre class="r"><code>x = seq(0, 200, length.out = 100)
-y = pexp(x, rate = 1/36)
-plot(x, y, type = &quot;l&quot;, xlab = &quot;months&quot;)</code></pre>
-<p><img src="Exercise02_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /></p>
+
 </div>
 <p>Determine the probability of a particular patient of surviving equal or shorter than 12 month, namely <span class="math inline">\(P(X\leq 12)\)</span>.</p>
 <div class="fold s o">
-<pre class="r"><code>pexp(q=12, rate=1/36)</code></pre>
-<pre><code>## [1] 0.2834687</code></pre>
+
 </div>
 <p>What is the probability of a particular patient of surviving longer than 5 years (i.e. 60 month)?</p>
 <div class="fold s o">
-<pre class="r"><code>1 - pexp(q=60, rate=1/36) # equal to pexp(q=60, rate=1/36, lower.tail = FALSE) </code></pre>
-<pre><code>## [1] 0.1888756</code></pre>
+
 </div>
 <p>The previous questions are equivalent to calculate the red and blue area in following plot.</p>
 <p><img src="Exercise02_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" /></p>
@@ -500,25 +489,11 @@ plot(x, y, type = &quot;l&quot;, xlab = &quot;months&quot;)</code></pre>
 <h2>Exercise 2.3</h2>
 <p>Let’s assume that the outcome of a therapy can be modeled as a binomial distribution , <span class="math inline">\(B(n,p)\)</span>. If <span class="math inline">\(n=10\)</span> and <span class="math inline">\(p=0.7\)</span>, determine the probability that <span class="math inline">\(k = \{1, 4, 8\}\)</span> OR LESS patients out of <span class="math inline">\(n = 10\)</span> will have a successful therapy.</p>
 <div class="fold s o">
-<pre class="r"><code>pbinom(1, 10, prob=0.7)
-pbinom(q=4, size=10, prob=0.7)
-pbinom(q=8, size=10, prob=0.7)
-pbinom(q=c(1, 4, 8), size=10, prob=0.7)</code></pre>
-<pre><code>## [1] 0.0001436859
-## [1] 0.04734899
-## [1] 0.8506917
-## [1] 0.0001436859 0.0473489874 0.8506916541</code></pre>
+
 </div>
 <p>Determine the probability that EXACTLY <span class="math inline">\(k = \{1, 4, 8\}\)</span> patients out of <span class="math inline">\(n = 10\)</span> will have a successful therapy.</p>
 <div class="fold s o">
-<pre class="r"><code>dbinom(x=1, size=10, prob=0.7)
-dbinom(x=4, size=10, prob=0.7)
-dbinom(x=8, size=10, prob=0.7)
-dbinom(x=c(1, 4, 8), size=10, prob=0.7)</code></pre>
-<pre><code>## [1] 0.000137781
-## [1] 0.03675691
-## [1] 0.2334744
-## [1] 0.000137781 0.036756909 0.233474440</code></pre>
+
 </div>
 </div>
 </div>
