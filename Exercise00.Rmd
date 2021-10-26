@@ -168,8 +168,7 @@ Indeed.
 c(a,'b')
 ```
 </div>
-For sure manually typing all the elements of the vector **<tt>class()</tt>** isn't the
-only option we can use the function **<tt>seq()</tt>**:
+For sure manually typing all the elements of the vector isn't the only option we can use the function **<tt>seq()</tt>**:
 ```{r}
 seq(from=0,to=15,by=3) #setting the increments with the argument by
 seq(from=0,to=16, length.out=6) #setting the length of the the vector 
@@ -359,9 +358,13 @@ We use the commands **<tt>getwd()</tt>**, **<tt>setwd()</tt>** and  **<tt>list.f
 to manage our working directory. R uses **<tt>/</tt>** as path separator even on
 Windows.
 <!-- /* never a good choice to move to the data directory*/ -->
-```{r}
+
+```{r results='hide'}
 getwd() # print the name of the current working directory
 #setwd("./data") change the working directory  to the data, ./ is very useful to create relative path
+```
+
+```{r}
 list.files("./data") # list the files in the current directory
 ```
 

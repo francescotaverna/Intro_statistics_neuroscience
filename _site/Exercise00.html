@@ -553,7 +553,7 @@ Indeed.
 <pre class="r"><code>c(a,&#39;b&#39;)</code></pre>
 <pre><code>## [1] &quot;6&quot;  &quot;9&quot;  &quot;12&quot; &quot;15&quot; &quot;0&quot;  &quot;3&quot;  &quot;b&quot;</code></pre>
 </div>
-<p>For sure manually typing all the elements of the vector <strong><tt>class()</tt></strong> isn’t the only option we can use the function <strong><tt>seq()</tt></strong>:</p>
+<p>For sure manually typing all the elements of the vector isn’t the only option we can use the function <strong><tt>seq()</tt></strong>:</p>
 <pre class="r"><code>seq(from=0,to=15,by=3) #setting the increments with the argument by</code></pre>
 <pre><code>## [1]  0  3  6  9 12 15</code></pre>
 <pre class="r"><code>seq(from=0,to=16, length.out=6) #setting the length of the the vector </code></pre>
@@ -782,10 +782,9 @@ subset(df,df$X1&gt;5) # that is equal to df[df$X1&gt;5,]
 <h4>Load and save data frames</h4>
 <p>Creating and editing data frames in R can be cumbersome, indeed R isn’t a spreadsheet. For this reason, the data are created using different programming languages and then loaded into R. We will show how to load <strong><tt>.csv</tt></strong> files, but keep in mind that R can load a huge variety of file formats.</p>
 <p>We use the commands <strong><tt>getwd()</tt></strong>, <strong><tt>setwd()</tt></strong> and <strong><tt>list.files()</tt></strong> to manage our working directory. R uses <strong><tt>/</tt></strong> as path separator even on Windows. <!-- /* never a good choice to move to the data directory*/ --></p>
-<pre class="r"><code>getwd() # print the name of the current working directory</code></pre>
-<pre><code>## [1] &quot;C:/Users/frenc/Documents/GitHub/Intro_statistics_neuroscience&quot;</code></pre>
-<pre class="r"><code>#setwd(&quot;./data&quot;) change the working directory  to the data, ./ is very useful to create relative path
-list.files(&quot;./data&quot;) # list the files in the current directory</code></pre>
+<pre class="r"><code>getwd() # print the name of the current working directory
+#setwd(&quot;./data&quot;) change the working directory  to the data, ./ is very useful to create relative path</code></pre>
+<pre class="r"><code>list.files(&quot;./data&quot;) # list the files in the current directory</code></pre>
 <pre><code>## [1] &quot;dimarta_trial.csv&quot;                &quot;Exercise_10_1.csv&quot;               
 ## [3] &quot;Exercise_8_2_TwoWay.csv&quot;          &quot;Exercise_8_3_Repeated_OneWay.csv&quot;
 ## [5] &quot;Exercise_8_3_Repeated_TwoWay.csv&quot; &quot;study1.csv&quot;                      
@@ -931,14 +930,14 @@ plot(subset(study1,select=-c(group)),
      main= &#39;Study 1 results&#39;, # title of the plot
      col = factor(study1$group) # color for the points accoding to the group
      )</code></pre>
-<p><img src="Exercise00_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise00_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The <strong><tt>curve()</tt></strong> function draws the given expression over the given interval <strong><tt>[from,to]</tt></strong>.</p>
 <pre class="r"><code>curve(exp(-0.5*(x^2))/sqrt(2*pi),from=-5,to=5,
       xlab=&quot;x&quot;, #label of the x axis
       main= &quot;Standardt normal distribution&quot;,
       ylab=bquote(phi[mu==0~&#39;,&#39;~sigma^{2}==1](x)) #label of y axis
 )</code></pre>
-<p><img src="Exercise00_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise00_files/figure-html/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="exercises-1" class="section level2">
 <h2>Exercises</h2>
 <div id="exercise-1-1" class="section level3">
@@ -955,7 +954,7 @@ legend(&quot;topleft&quot;,
        legend=c(&quot;a&quot;,&quot;b&quot;),
        col=c(&#39;red&#39;,&quot;black&quot;),
        pch = 1)</code></pre>
-<p><img src="Exercise00_files/figure-html/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise00_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="exercise-2-1" class="section level3">
@@ -969,7 +968,7 @@ plot(x,sin(x),
      ) # same curve(sin(x),from=0,to=2*pi)
 lines(x,cos(x),col=&#39;red&#39;) # add the cos
 abline(0,0) # add the x axis</code></pre>
-<p><img src="Exercise00_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Exercise00_files/figure-html/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
