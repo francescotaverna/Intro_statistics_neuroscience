@@ -2,7 +2,7 @@
 title: "Hypothesis Tests: Non-normal"
 ---
 
-```{r, code=readLines('_setup.R')}
+```{r, code=readLines('_setup.R'),echo=FALSE}
 ```
 
 # Install an R package

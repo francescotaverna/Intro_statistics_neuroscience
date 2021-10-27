@@ -2,7 +2,7 @@
 title: "Sample size calculations"
 ---
 
-```{r, code=readLines('_setup.R')}
+```{r, code=readLines('_setup.R'),echo=FALSE}
 ```
 
 # Theory

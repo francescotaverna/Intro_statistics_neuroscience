@@ -2,7 +2,7 @@
 title: "Data management and descriptive methods"
 ---
 
-```{r, code=readLines('_setup.R')}
+```{r, code=readLines('_setup.R'),echo=FALSE}
 ```
 
 CASE STUDY: In a clinical trial 12 patients are randomly assigned to two different treatments. Blood measurements are taken before and after the treatment.

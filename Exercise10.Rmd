@@ -5,7 +5,7 @@ title: "Survival analysis"
 https://www.emilyzabor.com/tutorials/survival_analysis_in_r_tutorial.html -->
 
 
-```{r, code=readLines('_setup.R')}
+```{r, code=readLines('_setup.R'),echo=FALSE}
 ```
 
 

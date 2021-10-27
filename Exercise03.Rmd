@@ -2,7 +2,7 @@
 title: "Estimation and Confidence Intervals"
 ---
 
-```{r, code=readLines('_setup.R')}
+```{r, code=readLines('_setup.R'),echo=FALSE}
 ```
 
 # For loop
