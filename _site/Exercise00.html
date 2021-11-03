@@ -806,9 +806,9 @@ str(study1)
 ##  $ group  : chr  &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; ...
 ##  $ before : num  0.372 0.442 0.382 0.569 0.571 ...
 ##  $ after  : num  0.221 0.44 0.331 0.591 0.668 ...
-stud1_new&lt;-subset(study1,study1$group==&#39;a&#39;) # keep only the data from group a</code></pre>
-<p>In order to save the new data frame <strong><tt>stud1_new()</tt></strong> we use the general function <strong><tt>write.table()</tt></strong>.</p>
-<pre class="r"><code>write.table(stud1_new,file=&quot;./data/study1_new.csv&quot;,col.names=TRUE,sep=&quot;;&quot;)</code></pre>
+study1_new&lt;-subset(study1,study1$group==&#39;a&#39;) # keep only the data from group a</code></pre>
+<p>In order to save the new data frame <strong><tt>study1_new()</tt></strong> we use the general function <strong><tt>write.table()</tt></strong>.</p>
+<pre class="r"><code>write.table(study1_new,file=&quot;./data/study1_new.csv&quot;,col.names=TRUE,sep=&quot;;&quot;)</code></pre>
 </div>
 </div>
 </div>
@@ -882,8 +882,8 @@ x[order(x,decreasing = FALSE)]
 <h3>Exercise 2</h3>
 <p>Add two columns to the <strong><tt>study1</tt></strong> data frame:</p>
 <ol style="list-style-type: decimal">
-<li><p>A column with logical values, that says for every entry of the <strong><tt>before</tt></strong> column if is lower than 0.3.</p></li>
-<li><p>A column with logical values, that says for every entry of the <strong><tt>after</tt></strong> column if is greater than 0.4.</p></li>
+<li><p>A column with logical values, that says for every entry of the <strong><tt>before</tt></strong> column if it is lower than 0.3.</p></li>
+<li><p>A column with logical values, that says for every entry of the <strong><tt>after</tt></strong> column if it is greater than 0.4.</p></li>
 </ol>
 <p>Return the rows that fulfill both the above conditions, namely rows with value true in both columns. How many patients fulfill the above conditions?</p>
 <div class="fold s o">

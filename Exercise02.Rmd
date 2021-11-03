@@ -2,13 +2,15 @@
 title: "Probability Distributions"
 ---
 
-```{r, code=readLines('_setup.R'),echo=FALSE}
+```{r,echo=FALSE}
+op_eval=TRUE
+op_echo=TRUE
 ```
 
 # Functions for basic satisical models.
 
 As an example, let $X$ be a normally distributed  random variable, $X \sim N(\mu,\sigma^2)$.
-The following functions are included in R order to work with the normal distribution:
+The following functions are included in order to work with the normal distribution:
 
 * **<tt>dnorm(x,mean=$\mu$,sd=$\sigma$)</tt>**, which returns the value of the probability density function in  **<tt>x</tt>** for the normal distribution;
 * **<tt>pnorm(q,mean=$\mu$,sd=$\sigma$,lower.tail=TRUE)</tt>**, which returns $P(X\leq q)$ when lower.tail is set to TRUE, otherwise $P(X\geq q)$;
@@ -86,7 +88,8 @@ What is the probability of a particular patient of surviving longer than 5 years
 
 The previous questions are equivalent to calculate the red and blue area in following plot.
 
-```{r echo=FALSE,fig.align='center',out.width = '80%'}
+<div class='fold s'>
+```{r echo=TRUE,fig.align='center',out.width = '80%'}
 curve(dexp(x,rate=1/36),from=0,to=200,xlab="months",ylab='Density')
 cord.x<-c(60,seq(60,200,0.1),200)
 cord.y<-c(0,dexp(seq(60,200,0.1),rate=1/36),0)
@@ -96,7 +99,7 @@ cord.x<-c(0,seq(0,12,0.1),12)
 cord.y<-c(0,dexp(seq(0,12,0.1),rate=1/36),0)
 polygon(cord.x,cord.y,col='coral1')
 ```
-
+</div>
 
 
 

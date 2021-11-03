@@ -2,7 +2,9 @@
 title: "Data management and descriptive methods"
 ---
 
-```{r, code=readLines('_setup.R'),echo=FALSE}
+```{r,echo=FALSE}
+op_eval=TRUE
+op_echo=TRUE
 ```
 
 CASE STUDY: In a clinical trial 12 patients are randomly assigned to two different treatments. Blood measurements are taken before and after the treatment.

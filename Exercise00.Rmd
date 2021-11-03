@@ -379,14 +379,14 @@ delimiter , to include or not the headers, and more.
 study1<-read.table("./data/study1.csv",sep=";",header = TRUE) # the values are separated by ; in the csv file
 head(study1)
 str(study1)
-stud1_new<-subset(study1,study1$group=='a') # keep only the data from group a
+study1_new<-subset(study1,study1$group=='a') # keep only the data from group a
 ```
 
-In order to save the new data frame **<tt>stud1_new()</tt>** we use the 
+In order to save the new data frame **<tt>study1_new()</tt>** we use the 
 general function **<tt>write.table()</tt>**.
 
 ```{r}
-write.table(stud1_new,file="./data/study1_new.csv",col.names=TRUE,sep=";")
+write.table(study1_new,file="./data/study1_new.csv",col.names=TRUE,sep=";")
 ```
 
 ```{r echo=FALSE,results='hide'}
@@ -431,9 +431,9 @@ x[order(x,decreasing = FALSE)]
 
 Add two columns to the **<tt>study1</tt>** data frame:
 
-1. A column with  logical values, that says for every entry of the **<tt>before</tt>** column if is lower than 0.3.
+1. A column with  logical values, that says for every entry of the **<tt>before</tt>** column if it is lower than 0.3.
 
-2. A column with logical values, that says for every entry of the **<tt>after</tt>** column if is greater than 0.4.
+2. A column with logical values, that says for every entry of the **<tt>after</tt>** column if it  is greater than 0.4.
 
 Return the rows that fulfill both the above conditions, namely rows with value true in both columns. How many patients fulfill the above conditions?
 
