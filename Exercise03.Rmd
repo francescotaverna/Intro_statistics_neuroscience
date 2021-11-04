@@ -2,7 +2,10 @@
 title: "Estimation and Confidence Intervals"
 ---
 
-```{r, code=readLines('_setup.R'),echo=FALSE}
+
+```{r,echo=FALSE}
+op_eval=TRUE
+op_echo=TRUE
 ```
 
 # For loop
@@ -113,7 +116,7 @@ points(M_mean, y = 0, pch=4, col=2, lwd=3)
 ## Exercise 3.2
 A producer gives the information that the content of a pharmaceutical substance in the tablets of some preparation A is normally distributed with an expectation of 500 mg and with a variance  of 10mg. To check this claim, the contents of 25 randomly chosen tablets are determined.
 
-Load the **<tt>study3.csv</tt>** data frame and plot the histogram of the data, remember to select a reasonable choice of the parameter **<tt>breaks</tt>**.
+Load the <a href="./data/study3.csv" download><tt>study3.csv()</tt></a> data frame and plot the histogram of the data, remember to select a reasonable choice of the parameter **<tt>breaks</tt>**.
 <div class='fold s o'>
 ```{r fig.align='center',out.width = '80%',eval=op_eval,echo=op_echo}
 x<-read.table("./data/study3.csv",sep=";",header = TRUE)[[1]] # the values are separated by ; in the csv file

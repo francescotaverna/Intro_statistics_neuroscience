@@ -435,7 +435,13 @@ x_{0}=0 \quad x_{1}=1\\
 x_{i}=x_{i-1}+x_{i-2} \quad\forall i&gt;1
 \]</span> Using a for loop, print the first 10 numbers of the Fibonacci sequence.
 <div class="fold s o">
-
+<pre class="r"><code>fib&lt;-c(0,1)
+# in R the vectors are index starting from 1
+for(j in 3:10){
+  fib[j]&lt;-fib[j-1]+fib[j-2]
+}
+print(fib)</code></pre>
+<pre><code>##  [1]  0  1  1  2  3  5  8 13 21 34</code></pre>
 </div>
 </div>
 <div id="exercises" class="section level1">
@@ -444,23 +450,79 @@ x_{i}=x_{i-1}+x_{i-2} \quad\forall i&gt;1
 <h2>Exercise 3.1</h2>
 <p>Draw 10 random samples of size <span class="math inline">\(N = 5\)</span> from the standard normal distribution (<span class="math inline">\(\mu\)</span> = 0, <span class="math inline">\(\sigma\)</span> = 1),<strong><tt>rnorm()</tt></strong>. Calculate the mean of each sample. Calculate the mean of all 10 means.</p>
 <div class="fold s o">
+<pre class="r"><code># Sample creation
+M&lt;-rnorm(n = 5, mean=0, sd=1) #variable to store the samples
+for(j in 1:9){
+  M&lt;-cbind(M,rnorm(n = 5, mean=0, sd=1))
+}
+# Otherwise you can create an empty matrix 5x10 
+# and then use a for loop to fill  it
+# M&lt;-matrix(NA, ncol = 10, nrow = 5)
+# for(j in 1:10){
+#   M[,j]&lt;-rnorm(n = 5, mean=0, sd=1)
+# }
 
+# Calculate the mean of each sample
+
+M_col_mean&lt;-c()
+for(j in 1:10){
+  M_col_mean[j]&lt;-mean(M[,j])
+}
+# Otherwise using the apply function
+# we apply the function mean over each column of the matrix M
+#M_col_mean&lt;-apply(M, 2, mean)
+
+# Calculate the mean of the means
+M_mean&lt;-mean(M_col_mean)
+M_col_mean
+M_mean</code></pre>
+<pre><code>##  [1]  0.112764523  0.346966996 -0.119982428  0.076924150  0.922383612
+##  [6]  0.256484236 -0.372220641 -0.131462225 -0.008372184 -0.148695923
+## [1] 0.09347901</code></pre>
 </div>
 <p>Plot the density function of the standard normal distribution. Using the function <strong><tt>points()</tt></strong> draw the sample means and the mean of means into the plot.</p>
 <div class="fold s o">
-
+<pre class="r"><code>x.axis = seq(-3, 3, length.out=100)
+y.axis = dnorm(x.axis, mean=0, sd=1)
+plot(x.axis, y.axis, type=&quot;l&quot;)
+for(i in 1:10) {
+  points(M_col_mean[i], y = 0, pch=4)
+}
+points(M_mean, y = 0, pch=4, col=2, lwd=3)</code></pre>
+<p><img src="Exercise03_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 Repeat the above computer experiment with <span class="math inline">\(N = 25\)</span>.
 <div class="fold s o">
+<pre class="r"><code>M&lt;-rnorm(n = 25, mean=0, sd=1) #variable to store the samples
+for(j in 1:9){
+  M&lt;-cbind(M,rnorm(n = 25, mean=0, sd=1))
+}
 
+# Calculate the mean of each sample
+M_col_mean&lt;-apply(M, 2, mean)
+
+# Calculate the mean of the means
+M_mean&lt;-mean(M_col_mean)
+
+# plot
+x.axis = seq(-3, 3, length.out=100)
+y.axis = dnorm(x.axis, mean=0, sd=1)
+plot(x.axis, y.axis, type=&quot;l&quot;)
+for(i in 1:10) {
+  points(M_col_mean[i], y = 0, pch=4)
+}
+points(M_mean, y = 0, pch=4, col=2, lwd=3)</code></pre>
+<p><img src="Exercise03_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="exercise-3.2" class="section level2">
 <h2>Exercise 3.2</h2>
 <p>A producer gives the information that the content of a pharmaceutical substance in the tablets of some preparation A is normally distributed with an expectation of 500 mg and with a variance of 10mg. To check this claim, the contents of 25 randomly chosen tablets are determined.</p>
-Load the <strong><tt>study3.csv</tt></strong> data frame and plot the histogram of the data, remember to select a reasonable choice of the parameter <strong><tt>breaks</tt></strong>.
+Load the <a href="./data/study3.csv" download><tt>study3.csv()</tt></a> data frame and plot the histogram of the data, remember to select a reasonable choice of the parameter <strong><tt>breaks</tt></strong>.
 <div class="fold s o">
-
+<pre class="r"><code>x&lt;-read.table(&quot;./data/study3.csv&quot;,sep=&quot;;&quot;,header = TRUE)[[1]] # the values are separated by ; in the csv file
+hist(x,breaks = 7)</code></pre>
+<p><img src="Exercise03_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <p>Determine a 95%-confidence interval for the expectation from the data:</p>
 <details>
@@ -474,7 +536,16 @@ Consider an i.i.d. sample of length <span class="math inline">\(n\)</span> from 
 <p>
 </p>
 <div class="fold s o">
-
+<pre class="r"><code>N=25
+alpha = 0.05
+MEAN = mean(x)
+s = sd(x)
+SEM = s / sqrt(N) # standard error of the mean
+Z = qnorm(1 - alpha / 2, 0, 1)# calculate the critical values
+lower_bound&lt;-MEAN - Z * SEM # Lower Bound
+upper_bound&lt;-MEAN + Z * SEM # Upper Bound
+print(paste0(&#39;the confidence interval is [&#39;,round(lower_bound,2),&#39;,&#39;,round(upper_bound,2),&#39;]&#39;))</code></pre>
+<pre><code>## [1] &quot;the confidence interval is [501.74,510.97]&quot;</code></pre>
 </div>
 <p>Plot the confidence interval against the histogram.</p>
 <p>Given the confidence intervals, could you trust the producer? Change</p>
@@ -487,7 +558,34 @@ Consider an i.i.d. sample of length <span class="math inline">\(n\)</span> from 
 <p>Discuss changes and results.</p>
 <p>Draw 100 random samples of size <span class="math inline">\(n = 25\)</span> from the normal distribution (<span class="math inline">\(\mu\)</span> = 500 mg, <span class="math inline">\(\sigma\)</span> = 10 mg). Calculate for each one the 95%-confidence interval, how many of them fail to contain the true value?</p>
 <div class="fold s o">
+<pre class="r"><code># generate the data
+M&lt;-rnorm(n = 25, mean=500, sd=10) #variable to store the samples
+for(j in 1:99){
+  M&lt;-cbind(M,rnorm(n = 25, mean=500, sd=10))
+}
 
+M_conf&lt;-matrix(nrow=2,ncol=100)
+
+for(j in 1:100){
+  MEAN&lt;-mean(M[,j])
+  SEM&lt;-sd(M[,j])/sqrt(25)
+  z&lt;-qnorm(1 - 0.05 / 2, 0, 1)
+  M_conf[1,j]&lt;-MEAN - Z * SEM # Lower Bound
+  M_conf[2,j]&lt;-MEAN + Z * SEM # Upper Bound
+}
+
+# percentage of interval that contains the true value for the mean
+sum((M_conf[1,]&lt;=500 &amp; 500&lt;=M_conf[2,]))/100</code></pre>
+<pre><code>## [1] 0.94</code></pre>
+<pre class="r"><code>#EXTRA
+# usage of if else statement to give the color to the segments
+plot.new()
+plot(1, type = &quot;n&quot;, xlab = &quot;&quot;, ylab = &quot;&quot;,xlim = c(0, 100), ylim = c(min(M_conf[1,j])-10, max(M_conf[2,j])+10))
+for(j in 1:100){
+  segments(x0=j,y0=M_conf[1,j],x1=j,y1=M_conf[2,j],col=ifelse((M_conf[1,j]&lt;=500 &amp; 500&lt;=M_conf[2,j]),&#39;black&#39;,&#39;red&#39;))
+}
+abline(h=500,col=&#39;red&#39;)</code></pre>
+<p><img src="Exercise03_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
