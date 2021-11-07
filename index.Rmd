@@ -92,9 +92,9 @@ The following calendar will be updated as soon as the solution will be released.
 | Lecture|Scheduled lecture day|Solution available| Release date |
 |:---|:---|:---|:---|
 | R intro | 26 October |`r emo::ji("heavy_check_mark")`  | 21 October|
-| Exercises 1 | 27 October| `r emo::ji("x")` ||
-| Exercises 2 | 1 November| `r emo::ji("x")`  ||
-| Exercises 3 | 2 November| `r emo::ji("x")`  ||
+| Exercises 1 | 27 October| `r emo::ji("heavy_check_mark")` | 1 November|
+| Exercises 2 | 1 November| `r emo::ji("heavy_check_mark")` | 2 November|
+| Exercises 3 | 2 November| `r emo::ji("heavy_check_mark")` | 4 November|
 | Exercises 4 | 3 November| `r emo::ji("x")`  ||
 | Exercises 5 | 8 November| `r emo::ji("x")`   ||
 | Exercises 6 | 9 November| `r emo::ji("x")`  ||
