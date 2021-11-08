@@ -2,7 +2,9 @@
 title: "Hypothesis Tests"
 ---
 
-```{r, code=readLines('_setup.R'),echo=FALSE}
+```{r,echo=FALSE}
+op_eval=TRUE
+op_echo=TRUE
 ```
 
 # Exercises
@@ -75,7 +77,8 @@ t.test(low, high, var.equal = TRUE)
 
 
 ## Exercise 4.3
-Load the data frame in the **<tt>dimarta_trial.csv</tt>** file.
+Load the data frame in the <a href="./data/dimarta_trial.csv" download><tt>dimarta_trial.csv</tt></a> file.
+
 ```{r}
 dimarta_df<-read.csv('./data/dimarta_trial.csv',sep=',')
 str(dimarta_df)

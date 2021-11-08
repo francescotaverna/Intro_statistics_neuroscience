@@ -434,15 +434,45 @@ low = rnorm(n = n, mean = 50, sd = 10)
 high = rnorm(n = n, mean = 60, sd = 10)</code></pre>
 <p>In a real-world experiment you would first check whether your data is normally distributed (necessary for t-test). Draw quantile-quantile plots (QQ-plots) to check the normality-assumption (<strong><tt>qqnorrm</tt></strong>,<strong><tt>qqline</tt></strong>).</p>
 <div class="fold s o">
-
+<pre class="r"><code>par(mfrow=c(1,2))
+qqnorm(low,main=&#39;low&#39;)
+qqline(low)
+qqnorm(high,main=&#39;high&#39;)
+qqline(high)</code></pre>
+<p><img src="Exercise04_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <p>Illustrate the sample values by box-plots and histograms to check whether the assumption of equal variances seems reasonable.</p>
 <div class="fold s o">
-
+<pre class="r"><code>boxplot(low, high, names=c(&quot;low&quot;, &quot;high&quot;),cex.lab=1.5, cex.axis=1.5,col=c(2,3))
+grid()</code></pre>
+<p><img src="Exercise04_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>hist(low, border=2, xlim=c(0, 100), ylim=c(0, 0.5*n), density=5, col=2)
+hist(high, border=3, add=TRUE, density=2.5, col=3)</code></pre>
+<p><img src="Exercise04_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
 </div>
 <p>Perform the t-test (<strong><tt>t.test</tt></strong>).</p>
 <div class="fold s o">
-
+<pre class="r"><code>a = t.test(low, high)
+a = t.test(low, high, var.equal = TRUE)
+#a = t.test(low, high, paired = FALSE,
+#                      alternative = &quot;two-sided&quot;,
+#                      conf.level = 0.95)
+a</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  low and high
+## t = -7.8758, df = 198, p-value = 2.19e-13
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -13.014823  -7.802415
+## sample estimates:
+## mean of x mean of y 
+##  49.68831  60.09693</code></pre>
+<pre class="r"><code># mean difference
+a$estimate[1] - a$estimate[2]</code></pre>
+<pre><code>## mean of x 
+## -10.40862</code></pre>
 </div>
 <p>Interpret the results.</p>
 </div>
@@ -450,12 +480,27 @@ high = rnorm(n = n, mean = 60, sd = 10)</code></pre>
 <h2>Exercise 4.2</h2>
 <p>Repeat the above computer simulation with sample sizes <span class="math inline">\(n=5\)</span> per group. Analyze whether the test results lead to a false positive or false negative decision.</p>
 <div class="fold s o">
-
+<pre class="r"><code>set.seed(1)
+n = 5 ### Sample Size
+low = rnorm(n=n, mean=50, sd=10)
+high = rnorm(n=n, mean=60, sd=10)
+t.test(low, high, var.equal = TRUE)</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  low and high
+## t = -1.921, df = 8, p-value = 0.09098
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -22.133561   2.016246
+## sample estimates:
+## mean of x mean of y 
+##  51.29270  61.35136</code></pre>
 </div>
 </div>
 <div id="exercise-4.3" class="section level2">
 <h2>Exercise 4.3</h2>
-<p>Load the data frame in the <strong><tt>dimarta_trial.csv</tt></strong> file.</p>
+<p>Load the data frame in the <a href="./data/dimarta_trial.csv" download><tt>dimarta_trial.csv</tt></a> file.</p>
 <pre class="r"><code>dimarta_df&lt;-read.csv(&#39;./data/dimarta_trial.csv&#39;,sep=&#39;,&#39;)
 str(dimarta_df)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    296 obs. of  6 variables:
@@ -467,23 +512,101 @@ str(dimarta_df)</code></pre>
 ##  $ qol_end        : int  3 4 2 3 7 2 6 2 3 1 ...</code></pre>
 <p>Compute the difference between <strong><tt>histamine_end</tt></strong> level and <strong><tt>histamine_start</tt></strong> level and add the data to the data frame.</p>
 <div class="fold s">
-
+<pre class="r"><code>dimarta_df$histamine_change&lt;-with(dimarta_df,histamine_end - histamine_start)</code></pre>
 </div>
 <p>Use boxplots to check whether the assumption of equal variances of histamine changes between arms seems reasonable .</p>
 <div class="fold s o">
-
+<pre class="r"><code>armI&lt;-subset(dimarta_df,arm==&#39;I&#39;)$histamine_change
+armII&lt;-subset(dimarta_df,arm==&#39;II&#39;)$histamine_change
+armIII&lt;-subset(dimarta_df,arm==&#39;III&#39;)$histamine_change
+boxplot(armI,armII,armIII,names=c(&#39;arm I&#39;,&#39;arm II&#39;,&#39;arm III&#39;),
+        col=c(&#39;coral1&#39;,&#39;lightskyblue&#39;,&#39;mediumspringgreen&#39;))
+grid()</code></pre>
+<p><img src="Exercise04_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <p>Check whether your data is normally distributed (necessary for t-test). Draw quantile-quantile plots (QQ-plots) to check the normality-assumption,(<strong><tt>qqnorrm</tt></strong>,<strong><tt>qqline</tt></strong>).</p>
 <div class="fold s o">
-
+<pre class="r"><code>par(mfrow=c(1,3))
+qqnorm(armI,main=&#39;arm I&#39;,col=&#39;coral1&#39;)
+qqline(armI)
+qqnorm(armII,main=&#39;arm II&#39;,col=&#39;lightskyblue&#39;,ylab=NA)
+qqline(armII)
+qqnorm(armIII,main=&#39;arm III&#39;,col=&#39;mediumspringgreen&#39;,ylab=NA)
+qqline(armIII)</code></pre>
+<p><img src="Exercise04_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <p>To check this you can also use the Shapiro-Wilk’s test, where The null hypothesis is that the data are normally distributed (<strong><tt>shapiro.test</tt></strong>).</p>
 <div class="fold s o">
-
+<pre class="r"><code>shapiro.test(armI)
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  armI
+## W = 0.99133, p-value = 0.7977
+shapiro.test(armII)
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  armII
+## W = 0.98671, p-value = 0.4717
+shapiro.test(armIII)
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  armIII
+## W = 0.98543, p-value = 0.4073</code></pre>
 </div>
 <p>Let treatment arm I be the control arm and II and III two new types of drugs. Check if the population means of arm I and II are equal, then do the same for arm I and III (<strong><tt>t.test</tt></strong>).</p>
 <div class="fold s o">
-
+<pre class="r"><code>#when the variance are not equal we the Welch t-test
+t.test(armI,armII)
+## 
+##  Welch Two Sample t-test
+## 
+## data:  armI and armII
+## t = 3.6231, df = 185.99, p-value = 0.0003755
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  1.158997 3.930029
+## sample estimates:
+## mean of x mean of y 
+## 2.7351579 0.1906452
+t.test(armI,armII,var.equal = TRUE)
+## 
+##  Two Sample t-test
+## 
+## data:  armI and armII
+## t = 3.6225, df = 186, p-value = 0.0003762
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  1.158791 3.930235
+## sample estimates:
+## mean of x mean of y 
+## 2.7351579 0.1906452
+t.test(armI,armIII)
+## 
+##  Welch Two Sample t-test
+## 
+## data:  armI and armIII
+## t = 0.55219, df = 181.12, p-value = 0.5815
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.056181  1.877047
+## sample estimates:
+## mean of x mean of y 
+##  2.735158  2.324725
+t.test(armI,armIII,var.equal = TRUE)
+## 
+##  Two Sample t-test
+## 
+## data:  armI and armIII
+## t = 0.55318, df = 184, p-value = 0.5808
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.053399  1.874264
+## sample estimates:
+## mean of x mean of y 
+##  2.735158  2.324725</code></pre>
 </div>
 <p>Interpret the results of the test.</p>
 </div>
