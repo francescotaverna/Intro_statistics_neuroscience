@@ -95,7 +95,7 @@ The following calendar will be updated as soon as the solution will be released.
 | Exercises 1 | 27 October| `r emo::ji("heavy_check_mark")` | 1 November|
 | Exercises 2 | 1 November| `r emo::ji("heavy_check_mark")` | 2 November|
 | Exercises 3 | 2 November| `r emo::ji("heavy_check_mark")` | 4 November|
-| Exercises 4 | 3 November| `r emo::ji("x")`  ||
+| Exercises 4 | 3 November| `r emo::ji("heavy_check_mark")` | 9 November|
 | Exercises 5 | 8 November| `r emo::ji("x")`   ||
 | Exercises 6 | 9 November| `r emo::ji("x")`  ||
 | Exercises 7 | 10 November | `r emo::ji("x")`   ||
