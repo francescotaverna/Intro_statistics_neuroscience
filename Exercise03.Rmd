@@ -50,7 +50,7 @@ M<-c()
 # The sequence of this for cycle will be 1,2,3, the indexes of the r vector
 for(i in 1:3){
   # At each step we bind a column to M and store the resulting object in M
-  M<-cbind(M,rexp(n=100, rate = r[i]))
+  M<-cbind(M,rexp(n=200, rate = r[i]))
   # To understand the process we print the first three rows of M at each step
   print(head(M,n=3))
 }

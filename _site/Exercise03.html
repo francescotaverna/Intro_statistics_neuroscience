@@ -457,22 +457,22 @@ M&lt;-c()
 # The sequence of this for cycle will be 1,2,3, the indexes of the r vector
 for(i in 1:3){
   # At each step we bind a column to M and store the resulting object in M
-  M&lt;-cbind(M,rexp(n=100, rate = r[i]))
+  M&lt;-cbind(M,rexp(n=200, rate = r[i]))
   # To understand the process we print the first three rows of M at each step
   print(head(M,n=3))
 }</code></pre>
-<pre><code>##           [,1]
-## [1,] 43.767234
-## [2,]  2.147137
-## [3,]  8.291597
-##           [,1]     [,2]
-## [1,] 43.767234 7.970347
-## [2,]  2.147137 4.180766
-## [3,]  8.291597 3.869878
-##           [,1]     [,2]     [,3]
-## [1,] 43.767234 7.970347 14.01081
-## [2,]  2.147137 4.180766 82.19909
-## [3,]  8.291597 3.869878 26.38574</code></pre>
+<pre><code>##          [,1]
+## [1,] 12.59982
+## [2,] 51.20265
+## [3,] 17.10618
+##          [,1]      [,2]
+## [1,] 12.59982 53.630283
+## [2,] 51.20265  6.122894
+## [3,] 17.10618 30.747865
+##          [,1]      [,2]       [,3]
+## [1,] 12.59982 53.630283  0.8006837
+## [2,] 51.20265  6.122894  7.3564647
+## [3,] 17.10618 30.747865 58.9143080</code></pre>
 </div>
 <p>For each column, we want to calculate the mean.</p>
 <div class="fold s o">
@@ -535,9 +535,9 @@ for(j in 1:10){
 M_mean&lt;-mean(M_col_mean)
 M_col_mean
 M_mean</code></pre>
-<pre><code>##  [1]  0.18432377  0.38492922 -0.26686445 -0.17202693  0.48437414  0.03589472
-##  [7]  0.55124086 -0.23937164  0.49740562  0.22257164
-## [1] 0.1682477</code></pre>
+<pre><code>##  [1] -0.33369463  0.13897811 -0.38655924 -0.30211224 -0.16280320 -0.68119910
+##  [7] -0.35355259 -0.77751239 -0.09197601 -0.47064080
+## [1] -0.3421072</code></pre>
 </div>
 <p>Plot the density function of the standard normal distribution. Using the function <strong><tt>points()</tt></strong> draw the sample means and the mean of means into the plot.</p>
 <div class="fold s o">
@@ -640,7 +640,7 @@ for(j in 1:100){
 
 # percentage of interval that contains the true value for the mean
 sum((M_conf[1,]&lt;=500 &amp; 500&lt;=M_conf[2,]))/100</code></pre>
-<pre><code>## [1] 0.96</code></pre>
+<pre><code>## [1] 0.9</code></pre>
 <pre class="r"><code>#EXTRA
 # usage of if else statement to give the color to the segments
 plot.new()

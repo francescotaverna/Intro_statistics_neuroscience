@@ -14,7 +14,7 @@ The following functions are included in order to work with the normal distributi
 
 * **<tt>dnorm(x,mean=$\mu$,sd=$\sigma$)</tt>**, which returns the value of the probability density function in  **<tt>x</tt>** for the normal distribution;
 * **<tt>pnorm(q,mean=$\mu$,sd=$\sigma$,lower.tail=TRUE)</tt>**, which returns $P(X\leq q)$ when lower.tail is set to TRUE, otherwise $P(X\geq q)$;
-* **<tt>qnorm(p,mean=$\mu$,sd=$\sigma$)</tt>**, which calculates the theatrical quantile for a given probability level  **<tt>p</tt>**;
+* **<tt>qnorm(p,mean=$\mu$,sd=$\sigma$)</tt>**, which calculates the quantile of the normal distribution for a given probability level  **<tt>p</tt>**;
 * **<tt>rnorm(n,mean=$\mu$,sd=$\sigma$)</tt>**, which generates n observation from a normal distribution.  
 
 These concepts generally hold true for all the distribution functions built into R. Indeed, we will use **<tt>rbinom()</tt>** to generate observation from a binomial distribution. Use `help(distributions)` to discover all the other functions the others distributions.
