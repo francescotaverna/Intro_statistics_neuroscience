@@ -133,7 +133,7 @@ Let treatment arm I be the control arm and II and III two new types of drugs. Ch
 
 <div class='fold s o'>
 ```{r,collapse=TRUE,eval=op_eval,echo=op_echo}
-#when the variance are not equal we the Welch t-test
+# When the variance are not equal we use the Welch t-test
 t.test(armI,armII)
 t.test(armI,armII,var.equal = TRUE)
 t.test(armI,armIII)

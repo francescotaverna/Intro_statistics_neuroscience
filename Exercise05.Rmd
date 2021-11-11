@@ -2,7 +2,9 @@
 title: "Hypothesis Tests: Non-normal"
 ---
 
-```{r, code=readLines('_setup.R'),echo=FALSE}
+```{r,echo=FALSE}
+op_eval=TRUE
+op_echo=TRUE
 ```
 
 # Install an R package
@@ -16,7 +18,7 @@ install.packages("medicaldata")
 
 To use this package in our session we need to load it. To accomplish this, we use the **<tt>library()</tt>** function:
 
-```{r}
+```{r warning=FALSE}
 library(medicaldata)
 ```
 
@@ -88,7 +90,7 @@ Perform Mann-Whitney U test (Wilcoxon Rank Sum test, R function (**<tt>wilcox.te
 
 #Null hypothesis is that the distributions of x and y differ by a
 #location shift of mu
-wilcox.test(patients,controls)
+wilcox.test(patients,controls,mu=0)
 
 #Comparison with t-test result, null hypothesis  equal means
 t.test(patients, controls)

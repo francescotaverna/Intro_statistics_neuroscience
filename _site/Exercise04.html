@@ -558,7 +558,7 @@ shapiro.test(armIII)
 </div>
 <p>Let treatment arm I be the control arm and II and III two new types of drugs. Check if the population means of arm I and II are equal, then do the same for arm I and III (<strong><tt>t.test</tt></strong>).</p>
 <div class="fold s o">
-<pre class="r"><code>#when the variance are not equal we the Welch t-test
+<pre class="r"><code># When the variance are not equal we use the Welch t-test
 t.test(armI,armII)
 ## 
 ##  Welch Two Sample t-test
