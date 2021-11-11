@@ -22,14 +22,15 @@ To use this package in our session we need to load it. To accomplish this, we us
 library(medicaldata)
 ```
 
-from this package we want to retrieve the **<tt>polyps</tt>** data frame, which contains the systolic blood pressure, the weight and the smoking status for a sample of 500 adults. We use the **<tt>library()</tt>** to add this data frame to variable in our current environment:
+
+The database **<tt>polyps</tt>** contains the results of the randomized controlled trial of sulindac vs. placebo in the prevention of colonic polyps in FAP (Familial Adenomatous Polyposis). You can find more information here [polyps](https://htmlpreview.github.io/?https://github.com/higgi13425/medicaldata/blob/master/man/description_docs/polyps_desc.html). We use the **<tt>data()</tt>** to add this data frame to variable in our current environment:
 
 ```{r, collapse=TRUE}
 data(polyps)
 str(polyps)
 ```
 
-The database **<tt>polyps</tt>** contains the results of the randomized controlled trial of sulindac vs. placebo in the prevention of colonic polyps in FAP (Familial Adenomatous Polyposis). You can find more information here [polyps](https://htmlpreview.github.io/?https://github.com/higgi13425/medicaldata/blob/master/man/description_docs/polyps_desc.html).
+
 
 
 
@@ -83,7 +84,7 @@ qqline(controls)
 ```
 </div>
 
-Perform Mann-Whitney U test (Wilcoxon Rank Sum test, R function (**<tt>wilcox.test</tt>**). Conduct a t-test. Compare results from these two tests.
+Perform Mann-Whitney U test (Wilcoxon Rank Sum test, R function **<tt>wilcox.test</tt>**). Conduct a t-test. Compare results from these two tests.
 
 <div class='fold s o'>
 ```{r, collapse=TRUE,eval=op_eval,echo=op_echo}

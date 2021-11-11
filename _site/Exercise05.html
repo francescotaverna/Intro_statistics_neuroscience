@@ -429,7 +429,7 @@ $(document).ready(function() {
 <pre class="r"><code>install.packages(&quot;medicaldata&quot;)</code></pre>
 <p>To use this package in our session we need to load it. To accomplish this, we use the <strong><tt>library()</tt></strong> function:</p>
 <pre class="r"><code>library(medicaldata)</code></pre>
-<p>from this package we want to retrieve the <strong><tt>polyps</tt></strong> data frame, which contains the systolic blood pressure, the weight and the smoking status for a sample of 500 adults. We use the <strong><tt>library()</tt></strong> to add this data frame to variable in our current environment:</p>
+<p>The database <strong><tt>polyps</tt></strong> contains the results of the randomized controlled trial of sulindac vs. placebo in the prevention of colonic polyps in FAP (Familial Adenomatous Polyposis). You can find more information here <a href="https://htmlpreview.github.io/?https://github.com/higgi13425/medicaldata/blob/master/man/description_docs/polyps_desc.html">polyps</a>. We use the <strong><tt>data()</tt></strong> to add this data frame to variable in our current environment:</p>
 <pre class="r"><code>data(polyps)
 str(polyps)
 ## &#39;data.frame&#39;:    22 obs. of  7 variables:
@@ -440,7 +440,6 @@ str(polyps)
 ##  $ treatment     : Factor w/ 2 levels &quot;placebo&quot;,&quot;sulindac&quot;: 2 1 2 1 2 1 2 1 1 1 ...
 ##  $ number3m      : int  6 67 4 5 16 31 6 20 7 347 ...
 ##  $ number12m     : num  NA 63 2 28 17 61 1 7 15 44 ...</code></pre>
-<p>The database <strong><tt>polyps</tt></strong> contains the results of the randomized controlled trial of sulindac vs. placebo in the prevention of colonic polyps in FAP (Familial Adenomatous Polyposis). You can find more information here <a href="https://htmlpreview.github.io/?https://github.com/higgi13425/medicaldata/blob/master/man/description_docs/polyps_desc.html">polyps</a>.</p>
 </div>
 <div id="exercises" class="section level1">
 <h1>Exercises</h1>
@@ -481,7 +480,7 @@ qqnorm(controls,main=&#39;control&#39;,ylab=NA)
 qqline(controls)</code></pre>
 <p><img src="Exercise05_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<p>Perform Mann-Whitney U test (Wilcoxon Rank Sum test, R function (<strong><tt>wilcox.test</tt></strong>). Conduct a t-test. Compare results from these two tests.</p>
+<p>Perform Mann-Whitney U test (Wilcoxon Rank Sum test, R function <strong><tt>wilcox.test</tt></strong>). Conduct a t-test. Compare results from these two tests.</p>
 <div class="fold s o">
 <pre class="r"><code>
 #Null hypothesis is that the distributions of x and y differ by a
