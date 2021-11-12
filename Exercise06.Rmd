@@ -12,7 +12,7 @@ op_echo=TRUE
 ## Exercise 6.1 (Correlation)
 Assume Proteins A, B and C are members of a cellular pathway that is related to a certain disease. The concentration of these protein was measured in $n=5000$ patients.
 
-Read the corresponding data **<tt>study2.csv</tt>** into the R-environment.
+Read the corresponding data <a href="./data/study2.csv" download><tt>study2.csv</tt></a> into the R-environment.
 
 <div class='fold s o'>
 ```{r eval=op_eval,echo=op_echo}
