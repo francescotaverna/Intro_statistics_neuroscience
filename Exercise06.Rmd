@@ -2,7 +2,9 @@
 title: "Correlation and Regression"
 ---
 
-```{r, code=readLines('_setup.R'),echo=FALSE}
+```{r,echo=FALSE}
+op_eval=TRUE
+op_echo=TRUE
 ```
 
 # Exercise
