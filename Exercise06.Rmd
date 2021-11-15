@@ -67,7 +67,7 @@ Do you know the meaning behind each section of summary?
 </details>
 
 <details><summary>F-statistic</summary>
-<p>The F-Statistic  checks if at least one of your coefficients is nonzero.
+<p>The F-Statistic  checks if at least one of the coefficients is nonzero, namely the null hypothesis is that all of the regression coefficients are equal to zero.
 </p>
 </details>
 
