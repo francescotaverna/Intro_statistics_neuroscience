@@ -2,7 +2,9 @@
 title: "Analysis of variance"
 ---
 
-```{r, code=readLines('_setup.R'),echo=FALSE}
+```{r,echo=FALSE}
+op_eval=TRUE
+op_echo=TRUE
 ```
 
 # Theory 
@@ -19,7 +21,7 @@ where $\mu$ is the general mean, $\tau_{i}$ is the treatment effect for group $i
 
 The the formulas in R are used to specify the symbolic model as well as generating the intended design matrix. The formula are characterized by the $\sim$ as you can see in this example `y~x`.
 
-Let y and x1 be two variables, with `y~x1`we mean that y, the dependent variable, depends on x1, the independent variable. When the dependence relation is quadraticwe will write `y~I(x1^2)`, indeed you nedd to use **<tt>I()</tt>**, as-is operator, to apply a function to a variable. Now let x2 be another variable, with`y~x1+x2`we mean that y depends on x1 and x2 but there is no dependence between x1 and x2. We will use the $-$ sign to ignore an object in the analysis `y~x1+x2`.If we want to express the dependence of y on x1, x2 and their interaction we will write `y~x1+x2+x1:x2`, the former is equal to`y~x1*x2`.
+Let y and x1 be two variables, with `y~x1`we mean that y, the dependent variable, depends on x1, the independent variable. When the dependence relation is quadratic will write `y~I(x1^2)`, indeed you nedd to use **<tt>I()</tt>**, as-is operator, to apply a function to a variable. Now let x2 be another variable, with`y~x1+x2`we mean that y depends on x1 and x2 but there is no dependence between x1 and x2. We will use the $-$ sign to ignore an object in the analysis, e.g. `y~x1-1` delete the intercept (regress through the origin). If we want to express the dependence of y on x1, x2 and their interaction we will write `y~x1+x2+x1:x2`, the former is equal to`y~x1*x2`.
 
 # Exercises
 

@@ -444,52 +444,52 @@ How many samples per group are necessary to fulfill the above demand for the pow
 power.t.test(delta       = 3, 
              sd          = 2, 
              power       = 0.80,
-             sig.level   = 0.10,
+             sig.level   = 0.05,
              type        = &quot;two.sample&quot;,
              alternative = &quot;two.sided&quot;)
 
 # From the above discussion
 
-((qnorm(1-0.05)+qnorm(1-0.2))^2)*(2*2^2)/(3^2)</code></pre>
+((qnorm(1-0.025)+qnorm(1-0.2))^2)*(2*2^2)/(3^2)</code></pre>
 <pre><code>## 
 ##      Two-sample t test power calculation 
 ## 
-##               n = 6.298691
+##               n = 8.06031
 ##           delta = 3
 ##              sd = 2
-##       sig.level = 0.1
+##       sig.level = 0.05
 ##           power = 0.8
 ##     alternative = two.sided
 ## 
 ## NOTE: n is number in *each* group
 ## 
-## [1] 5.495606</code></pre>
+## [1] 6.976782</code></pre>
 </div>
 <p>Assume in the above setting that a smaller difference, i.e. of <span class="math inline">\(\delta = 0.1\)</span> is considered clinically relevant:</p>
 <div class="fold s o">
-<pre class="r"><code>power.t.test(delta       = 0.1, 
+<pre class="r"><code>power.t.test(delta       = 0.5, 
              sd          = 2, 
              power       = 0.80,
-             sig.level   = 0.10,
+             sig.level   = 0.05,
              type        = &quot;two.sample&quot;)
 
 # From the above discussion
-((qnorm(1-0.05)+qnorm(1-0.2))^2)*(2*2^2)/(0.1^2)</code></pre>
+((qnorm(1-0.025)+qnorm(1-0.2))^2)*(2*2^2)/(0.5^2)</code></pre>
 <pre><code>## 
 ##      Two-sample t test power calculation 
 ## 
-##               n = 4946.722
-##           delta = 0.1
+##               n = 252.1281
+##           delta = 0.5
 ##              sd = 2
-##       sig.level = 0.1
+##       sig.level = 0.05
 ##           power = 0.8
 ##     alternative = two.sided
 ## 
 ## NOTE: n is number in *each* group
 ## 
-## [1] 4946.046</code></pre>
+## [1] 251.1642</code></pre>
 </div>
-<p>In you opinion why the result of the <strong><tt>power.t.test</tt></strong> is different from the straight computation in the first case and equal to in the second one?</p>
+<p>In you opinion why the result of the <strong><tt>power.t.test</tt></strong> is different from the straight computation one?</p>
 <details>
 <summary>
 Answer
@@ -541,7 +541,7 @@ As <strong><tt>power.t.test</tt></strong> function is built for a huge variety o
 </div>
 <div id="exercise-7.2" class="section level1">
 <h1>Exercise 7.2</h1>
-<p>Assume you want to compare the rate of infections between two different groups of subjects. The one group (A) was strongly exposed to some risk factor, the other group (B) was only weak exposed. From a study on a similar risk factor, it is known that the infection rate for group A is P1 = 25% and P2 = 18% for group B.</p>
+<p>Assume you want to compare the rate of infections between two different groups of subjects. The one group (A) was strongly exposed to some risk factor, the other group (B) was only weakly exposed. From a study on a similar risk factor, it is known that the infection rate for group A is P1 = 25% and P2 = 18% for group B.</p>
 <p>Determine the power to detect a difference between the effects rates of P1 - P2 = 7% given that N=100 subjects can be recruited per group (<strong><tt>power.prop.test</tt></strong>):</p>
 <div class="fold s o">
 <pre class="r"><code>power.prop.test(n = 100, 

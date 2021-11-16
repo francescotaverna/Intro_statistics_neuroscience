@@ -31,13 +31,13 @@ How many samples per group are necessary to fulfill the above demand for the pow
 power.t.test(delta       = 3, 
              sd          = 2, 
              power       = 0.80,
-             sig.level   = 0.10,
+             sig.level   = 0.05,
              type        = "two.sample",
              alternative = "two.sided")
 
 # From the above discussion
 
-((qnorm(1-0.05)+qnorm(1-0.2))^2)*(2*2^2)/(3^2)
+((qnorm(1-0.025)+qnorm(1-0.2))^2)*(2*2^2)/(3^2)
 
 ```
 </div>
@@ -45,18 +45,18 @@ Assume in the above setting that a smaller difference, i.e. of $\delta = 0.1$ is
 
 <div class='fold s o'>
 ```{r results='hold',eval=op_eval,echo=op_echo}
-power.t.test(delta       = 0.1, 
+power.t.test(delta       = 0.5, 
              sd          = 2, 
              power       = 0.80,
-             sig.level   = 0.10,
+             sig.level   = 0.05,
              type        = "two.sample")
 
 # From the above discussion
-((qnorm(1-0.05)+qnorm(1-0.2))^2)*(2*2^2)/(0.1^2)
+((qnorm(1-0.025)+qnorm(1-0.2))^2)*(2*2^2)/(0.5^2)
 ```
 </div>
 
-In you opinion why the result of the **<tt>power.t.test</tt>** is different from the straight computation in the first case  and equal to in the second one?
+In you opinion why the result of the **<tt>power.t.test</tt>** is different from the straight computation one?
 
 <details><summary>Answer</summary>
 <p>As **<tt>power.t.test</tt>** function is built for a huge variety of cases, e.g. different sd in $X_{Ai}$ and $X_{Bi}$, the result in some cases do not match the straight computation but is a good approximation of it.
@@ -88,7 +88,7 @@ power.t.test(delta= 1.3,
 </div>
 
 # Exercise 7.2
-Assume you want to compare the rate of infections between two different groups of subjects. The one group (A) was strongly exposed to some risk factor, the other group (B) was only weak exposed. From a study on a similar risk factor, it is known that the infection rate for group A is P1 = 25% and P2 = 18% for group B.
+Assume you want to compare the rate of infections between two different groups of subjects. The one group (A) was strongly exposed to some risk factor, the other group (B) was only weakly exposed. From a study on a similar risk factor, it is known that the infection rate for group A is P1 = 25% and P2 = 18% for group B.
 
 Determine the power to detect a difference between the effects rates of P1 - P2 = 7% given that N=100 subjects can be recruited per group (**<tt>power.prop.test</tt>**):
 
