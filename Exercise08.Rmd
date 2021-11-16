@@ -55,17 +55,19 @@ a) Plot the concentration versus the group levels (**<tt>boxplot</tt>**).
 ```{r results='hold',fig.align='center',out.width = '80%',eval=op_eval,echo=op_echo}
 boxplot(x1, x2, x3, cex.lab=1.5, cex.axis=1.5, xlab="Group", 
         ylab="Concentration (mg/ml)", names=c(1, 2, 3), lwd=2)
+```
+</div>
 
+b) Perform one-way analysis of variance (**<tt>aov</tt>**).
+
+```{r}
 x = c(x1, x2, x3)
 group = (c(rep('1', n1), rep('2', n2), rep('3', n3)))
 
 aov.oneway = aov(x ~ group)
 summary(aov.oneway)
-
 ```
-</div>
 
-b) Perform one-way analysis of variance (**<tt>aov</tt>**).
 
 What dose the result suggest?
 
