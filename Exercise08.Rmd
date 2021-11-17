@@ -128,10 +128,7 @@ summary(aov.oneway)
 
 
 ## Exercise 8.2 (Repeated measurements analysis of variance)
-Some concentration was measured in $n = 10$ patients repeatedly at $T = 4$ time points. Load the dataset <a href="./data/Exercise_8_3_Repeated_OneWay.csv" download><tt>Repeated_OneWay.csv</tt></a>
-
-
-**<tt>Repeated_OneWay.csv</tt>**.
+Some concentration was measured in $n = 10$ patients repeatedly at $T = 4$ time points. Load the dataset <a href="./data/Exercise_8_3_Repeated_OneWay.csv" download><tt>Repeated_OneWay.csv</tt></a>.
 
 ```{r}
 X <- read.csv("./data/Exercise_8_3_Repeated_OneWay.csv", sep=";")
