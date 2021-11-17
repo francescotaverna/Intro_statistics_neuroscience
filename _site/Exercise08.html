@@ -502,8 +502,8 @@ lines(c(1,2,3),c(tr1,tr2,tr3),col=&#39;red&#39;,lwd=2)</code></pre>
 t2 = t.test(x1, x3,conf.level = 1-0.05/3)
 t3 = t.test(x2, x3,conf.level = 1-0.05/3)
 
-c(t1$p.value, t2$p.value, t3$p.value)&lt;=1-0.05/3</code></pre>
-<pre><code>## [1] TRUE TRUE TRUE</code></pre>
+c(t1$p.value, t2$p.value, t3$p.value)&lt;=0.05/3</code></pre>
+<pre><code>## [1] FALSE  TRUE FALSE</code></pre>
 </div>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Repeat the exercise with increased variances in the measurement values (e.g. sd = 5).</li>
