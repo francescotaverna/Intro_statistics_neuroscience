@@ -128,7 +128,10 @@ summary(aov.oneway)
 
 
 ## Exercise 8.2 (Repeated measurements analysis of variance)
-Some concentration was measured in $n = 10$ patients repeatedly at $T = 4$ time points. Load the dataset **<tt>Repeated_OneWay.csv</tt>**.
+Some concentration was measured in $n = 10$ patients repeatedly at $T = 4$ time points. Load the dataset <a href="./data/Exercise_8_3_Repeated_OneWay.csv" download><tt>Repeated_OneWay.csv</tt></a>
+
+
+**<tt>Repeated_OneWay.csv</tt>**.
 
 ```{r}
 X <- read.csv("./data/Exercise_8_3_Repeated_OneWay.csv", sep=";")
@@ -155,7 +158,7 @@ summary(aov(X$Concentration ~ X$Time + Error(X$Patient)))
 ```
 </div>
 c) A second group was studied in the above study. Plot the concentration versus the group levels across different time-points. Analyse whether there is an effect by time, group or an interaction between time and group (**<tt>boxplot</tt>**). Data is given in the folder
-**<tt>Repeated_TwoWay.csv</tt>**.
+<a href="./data/Exercise_8_3_Repeated_TwoWay.csv" download><tt>Repeated_TwoWay.csv</tt></a>.
 
 <div class='fold s o'>
 ```{r results='hold',fig.align='center',out.width = '80%',eval=op_eval,echo=op_echo}
