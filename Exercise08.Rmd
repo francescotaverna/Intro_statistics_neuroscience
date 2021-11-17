@@ -72,7 +72,7 @@ summary(aov.oneway)
 
 What dose the result suggest?
 
-(EXTRA) Plot the stripplot of the the data set to add the mean values of each group and to draw the segments connecting them. To do this, use the **<tt>coefficients</tt>** of the output given by the function **<tt>summary.lm</tt>** applied to the object obtained from **<tt>aov</tt>** .
+(EXTRA) Plot the stripplot of the the data set to add the mean values of each group and to draw the segments connecting them. To do this, use the **<tt>coefficients</tt>** of the output given by the function **<tt>summary</tt>** applied to the object obtained from **<tt>aov</tt>** .
 
 <div class='fold s o'>
 ```{r,fig.align='center',out.width = '80%',eval=op_eval,echo=op_echo}
@@ -94,7 +94,7 @@ lines(c(1,2,3),c(tr1,tr2,tr3),col='red',lwd=2)
 ```
 </div>
 
-c) Perform subsequent pairwise group comparisons by t-tests to see which groups are different. As the chances chances of committing a type I error for a series of comparisons is greater than the error rate for any one comparison alone, use the Bonferroni correction to lower down the family-wise error rate.
+c) Perform subsequent pairwise group comparisons by t-tests to see which groups are different. As the chances of committing a type I error for a series of comparisons is greater than the error rate for any one comparison alone, use the Bonferroni correction to lower down the family-wise error rate.
 
 <div class='fold s o'>
 ```{r,results='hold',eval=op_eval,echo=op_echo}

@@ -476,7 +476,7 @@ summary(aov.oneway)</code></pre>
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
 <p>What dose the result suggest?</p>
-<p>(EXTRA) Plot the stripplot of the the data set to add the mean values of each group and to draw the segments connecting them. To do this, use the <strong><tt>coefficients</tt></strong> of the output given by the function <strong><tt>summary.lm</tt></strong> applied to the object obtained from <strong><tt>aov</tt></strong> .</p>
+<p>(EXTRA) Plot the stripplot of the the data set to add the mean values of each group and to draw the segments connecting them. To do this, use the <strong><tt>coefficients</tt></strong> of the output given by the function <strong><tt>summary</tt></strong> applied to the object obtained from <strong><tt>aov</tt></strong> .</p>
 <div class="fold s o">
 <pre class="r"><code>plot(x ~ group,
      xlab=&quot;Group&quot;,
@@ -495,7 +495,7 @@ lines(c(1,2,3),c(tr1,tr2,tr3),col=&#39;red&#39;,lwd=2)</code></pre>
 <p><img src="Exercise08_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="3" style="list-style-type: lower-alpha">
-<li>Perform subsequent pairwise group comparisons by t-tests to see which groups are different. As the chances chances of committing a type I error for a series of comparisons is greater than the error rate for any one comparison alone, use the Bonferroni correction to lower down the family-wise error rate.</li>
+<li>Perform subsequent pairwise group comparisons by t-tests to see which groups are different. As the chances of committing a type I error for a series of comparisons is greater than the error rate for any one comparison alone, use the Bonferroni correction to lower down the family-wise error rate.</li>
 </ol>
 <div class="fold s o">
 <pre class="r"><code>t1 = t.test(x1, x2,conf.level = 1-0.05/3)
