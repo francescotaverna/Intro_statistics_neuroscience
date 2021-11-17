@@ -60,6 +60,7 @@ boxplot(x1, x2, x3, cex.lab=1.5, cex.axis=1.5, xlab="Group",
 
 b) Perform one-way analysis of variance (**<tt>aov</tt>**).
 
+<div class='fold s o'>
 ```{r}
 x = c(x1, x2, x3)
 group = (c(rep('1', n1), rep('2', n2), rep('3', n3)))
@@ -67,7 +68,7 @@ group = (c(rep('1', n1), rep('2', n2), rep('3', n3)))
 aov.oneway = aov(x ~ group)
 summary(aov.oneway)
 ```
-
+</div>
 
 What dose the result suggest?
 
@@ -93,18 +94,18 @@ lines(c(1,2,3),c(tr1,tr2,tr3),col='red',lwd=2)
 ```
 </div>
 
-c) Perform subsequent pairwise group comparisons by t-tests to see which groups are different. As the chances chances of committing a type I error for a series of comparisons is greater than the error rate for any one comparison alone, use the **<tt>p.adjust</tt>** function  with to **<tt>bonferroni</tt>** method to adjust the p-values.
+c) Perform subsequent pairwise group comparisons by t-tests to see which groups are different. As the chances chances of committing a type I error for a series of comparisons is greater than the error rate for any one comparison alone, use the Bonferroni correction to lower down the family-wise error rate.
 
 <div class='fold s o'>
 ```{r,results='hold',eval=op_eval,echo=op_echo}
-(t1 = t.test(x1, x2))
-(t2 = t.test(x1, x3))
-(t3 = t.test(x2, x3))
+t1 = t.test(x1, x2,conf.level = 1-0.05/3)
+t2 = t.test(x1, x3,conf.level = 1-0.05/3)
+t3 = t.test(x2, x3,conf.level = 1-0.05/3)
 
-## Using bonferroni correction we can adjust the p-values 
-p.adjust(p = c(t1$p.value, t2$p.value, t3$p.value), method = "bonferroni")
+c(t1$p.value, t2$p.value, t3$p.value)<=1-0.05/3
 ```
 </div>
+
 
 
 d) Repeat the exercise with increased variances in the measurement values (e.g. sd = 5).

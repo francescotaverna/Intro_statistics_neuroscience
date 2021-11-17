@@ -8,7 +8,7 @@ title: "ROC curves"
 # Exercises
 ## Exercise 9.1
 The concentration of the s100b-protein was measured in $n=113$ patients. Additionally, the clinical
-outcome of patients was classified as either "Good" or "Poor" using a gold standard. Dataset is part of the **<tt>pROC</tt>** package.
+outcome of patients was classified as either "Good" or "Poor" using a gold standard. Data set is part of the **<tt>pROC</tt>** package.
 
 a) Install and load the **<tt>pROC</tt>** package. Then load the data set **<tt>aSAH</tt>** from **<tt>pROC</tt>**. This dataset summarizes clinical and laboratory variables of 113 patients with an aneurysmal subarachnoid hemorrhage.
 
