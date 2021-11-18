@@ -98,9 +98,9 @@ c) Perform subsequent pairwise group comparisons by t-tests to see which groups 
 
 <div class='fold s o'>
 ```{r,results='hold',eval=op_eval,echo=op_echo}
-t1 = t.test(x1, x2,conf.level = 1-0.05/3)
-t2 = t.test(x1, x3,conf.level = 1-0.05/3)
-t3 = t.test(x2, x3,conf.level = 1-0.05/3)
+t1 = t.test(x1, x2,conf.level = 1-0.05)
+t2 = t.test(x1, x3,conf.level = 1-0.05)
+t3 = t.test(x2, x3,conf.level = 1-0.05)
 
 c(t1$p.value, t2$p.value, t3$p.value)<=0.05/3
 ```

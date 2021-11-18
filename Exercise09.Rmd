@@ -2,13 +2,14 @@
 title: "ROC curves"
 ---
 
-```{r, code=readLines('_setup.R'),echo=FALSE}
+```{r,echo=FALSE}
+op_eval=TRUE
+op_echo=TRUE
 ```
 
 # Exercises
 ## Exercise 9.1
-The concentration of the s100b-protein was measured in $n=113$ patients. Additionally, the clinical
-outcome of patients was classified as either "Good" or "Poor" using a gold standard. Data set is part of the **<tt>pROC</tt>** package.
+The concentration of the s100b-protein was measured in $n=113$ patients. Additionally, the clinical outcome of patients was classified as either "Good" or "Poor" using a gold standard. Data set is part of the **<tt>pROC</tt>** package.
 
 a) Install and load the **<tt>pROC</tt>** package. Then load the data set **<tt>aSAH</tt>** from **<tt>pROC</tt>**. This dataset summarizes clinical and laboratory variables of 113 patients with an aneurysmal subarachnoid hemorrhage.
 
@@ -60,37 +61,52 @@ Knowing that Specificity=P(Test negative result|Patient healthy),  Sensitivity=P
 </details>
 <br>
 
-c) Knowing that the ROC curve is 1-Specificity vs Sensitivity, plot the ROC curve, and interpret the results. Use the **<tt>text</tt>** function to add the AUC value to the plot. Furthermore using the **<tt>points</tt>** function mark up with red color the point corresponding to the maximum Youden index value.
+c) Use the **<tt>plot.roc</tt>** function to draw the Roc curve, look carefully at the  `print.auc` to add the AUC value.  Furthermore using the **<tt>points</tt>** function mark up with red color the point corresponding to the maximum Youden index value.
 
 <div class='fold s o'>
 ```{r results='hold',fig.align='center',out.width = '80%', eval=op_eval,echo=op_echo}
 par(mfrow=c(1,2))
 stripchart(s100b~outcome,data=aSAH,col='black',vertical=TRUE,pch=19)
-plot(x = 1 - roc_s100b$specificities,
-     y = roc_s100b$sensitivities, 
-     type = "l",
-     xlab = "1 - Specificity",
-     ylab = "Sensitivity",
-     ylim = c(0, 1), 
-     xlim = c(0, 1))
-lines(x = 0:1, y = 0:1, lty = "dashed")
-
-temp<-length(roc_s100b$specificities)
-points(x = 1 - roc_s100b$specificities[seq(2,temp,5)],
-       y = roc_s100b$sensitivities[seq(2,temp,5)]) 
-text(0.6,0.1,paste('AUC:',round(roc_s100b$auc,2)))
 
 #same result with plot.roc
-# plot.roc(roc_s100b)
+plot.roc(roc_s100b,print.auc = TRUE)
 
 # Youden index
 max_youden<-result[which.max(result$Youden),]
-points(x=1-max_youden$Specificity,y=max_youden$Sensitivity,col='red',pch=19)
-
-text(x=1-max_youden$Specificity,y=max_youden$Sensitivity, label=max_youden$Threshold, cex=0.9, font=2,pos=3)
+points(x=max_youden$Specificity,y=max_youden$Sensitivity,col='red',pch=19)
+# Add the threshold of the max youden index
+text(x=max_youden$Specificity,y=max_youden$Sensitivity, label=max_youden$Threshold, cex=0.9, font=2,pos=3)
 ```
 </div>
 
+(EXTRA) Knowing that the ROC curve is 1-Specificity vs Sensitivity, you can obtain the same plot just using the **<tt>plot</tt>** function with `lty = "dashed"` to draw the curve, and the **<tt>text</tt>** function to add the AUC value.
+
+<div class='fold s o'>
+```{r results='hold',fig.align='center',out.width = '80%', eval=op_eval,echo=op_echo}
+par(mfrow=c(1,2))
+stripchart(s100b~outcome,data=aSAH,col='black',vertical=TRUE,pch=19)
+
+plot(x = 1 - roc_s100b$specificities,
+     y = roc_s100b$sensitivities,
+     type = "l",
+      xlab = "1 - Specificity",
+      ylab = "Sensitivity",
+      ylim = c(0, 1),
+      xlim = c(0, 1))
+ lines(x = 0:1, y = 0:1, lty = "dashed")
+ 
+temp<-length(roc_s100b$specificities)
+points(x = 1 - roc_s100b$specificities[seq(2,temp,5)],
+       y = roc_s100b$sensitivities[seq(2,temp,5)]
+       )
+text(0.6,0.1,paste('AUC:',round(roc_s100b$auc,2)))
+# Youden index
+max_youden<-result[which.max(result$Youden),]
+points(x=1-max_youden$Specificity,y=max_youden$Sensitivity,col='red',pch=19)
+# Add the threshold of the max youden index
+text(x=1-max_youden$Specificity,y=max_youden$Sensitivity, label=max_youden$Threshold, cex=0.9, font=2,pos=3)
+```
+</div>
 
 d) Besides s100b, the enzyme NDKA was measured. Make again a ROC analysis and draw the ROC curve on top of the existing plot. You can use **<tt>plot</tt>** and **<tt>lines</tt>** or **<tt>plot.roc</tt>** and **<tt>lines.roc</tt>** functions.
 
@@ -103,7 +119,7 @@ lines.roc(outcome ~ s100b,data=aSAH, col="blue")
 </div>
 
 
-c) Perform a statistical test to see whether s100b or NDKA is a better predictor for the clinical outcome (**<tt>roc</tt>**).
+(EXTRA) Perform a statistical test to see whether s100b or NDKA is a better predictor for the clinical outcome (**<tt>roc.test</tt>**).
 
 [//]: # (https://statisticaloddsandends.wordpress.com/2020/06/07/what-is-the-delong-test-for-comparing-aucs/)
 

@@ -456,20 +456,79 @@ events = c(eventsA, eventsB)
 <li>Analyse the data using <strong><tt>survival</tt></strong> R package. For this purpose, firstly create a so-called survival object using <strong><tt>Surv</tt></strong> function.</li>
 </ol>
 <div class="fold s o">
+<pre class="r"><code>library(survival)
 
+## Store survival times and event (deaths) in a survival-object.
+SURV = Surv(times, events)
+SURV</code></pre>
+<pre><code>##   [1]  21.9298888   14.9918670   34.5554266+   0.8210113+   1.4614854+
+##   [6]   8.2290316+   8.1699096    3.7769369+  70.8821481    0.7579896+
+##  [11]  26.1255815   12.4855829+   7.3063543+   9.8050636+   4.8953851+
+##  [16]  22.0944394+  40.6432920   12.4477708   15.3643057+ 105.0663045+
+##  [21]  21.9218930   25.1126515+  38.6171706   35.0491566+  30.3817536+
+##  [26]  41.7521609+  38.9153146+  40.8369662+   0.8259613+  15.5440920 
+##  [31]  56.3638334+  13.1720089+   6.7485033+  67.5191950   31.9546690+
+##  [36]  20.5577257+  16.3612820+  32.6206661+  15.3058007+  29.3615409+
+##  [41]  10.9294849+ 187.4861970+  21.9887711+   5.8640922   28.6088093+
+##  [46]  58.4559480+  35.4570918   14.9861834   70.8571721+  34.1162391 
+##  [51]   5.4354810+  18.3722310+  64.0327842+  18.8109754+  58.4784090+
+##  [56] 113.2693989+  33.8753162+ 154.6176797   62.8617449+  61.4664805+
+##  [61]  61.6721769+  17.0801076+  93.7831133+   2.5252976+   5.9178534+
+##  [66]   5.9141587   16.8231097+  17.7472175   58.3457789+  55.4416334+
+##  [71]  98.5442716+  97.1947661+ 152.1687324+  91.2929774+  22.8008522+
+##  [76]  14.3107780   27.9892454    2.5362871+  19.1806140+  38.6166552+
+##  [81]  34.3537862+  12.9633302+ 269.9204039+ 111.4254332+  41.1275183+
+##  [86]  86.3671576+ 103.8692390+  74.6869980   87.7980336   92.2436387 
+##  [91]   0.2759476+  66.5259281   17.9982191+  71.5201804+  66.8957222+
+##  [96]   4.0425535+  28.8401232+  94.2272603+  15.5967664  111.4153372+</code></pre>
 </div>
 <p>The survival-object has one entry for each subject that is the survival time, followed by <code>+</code> sign if the subject was censored.</p>
 <p>Use <strong><tt>survfit</tt></strong> to calculate Kaplan-Meier estimates of the survival function for the whole study collective. Use <strong><tt>help</tt></strong> to understand which is the argument of the <strong><tt>survfit</tt></strong> function.</p>
 <div class="fold s o">
-
+<pre class="r"><code>S1 = survfit(SURV ~ 1)
+S1</code></pre>
+<pre><code>## Call: survfit(formula = SURV ~ 1)
+## 
+##       n  events  median 0.95LCL 0.95UCL 
+##   100.0    25.0   154.6    74.7      NA</code></pre>
 </div>
 <p>Plot the Kaplan-Meier-curve plus confidence band into a graphic.</p>
 <div class="fold s o">
+<pre class="r"><code>#plot(SURV, conf.int = FALSE)
+plot(S1, 
+     xlab = &quot;Times (Months)&quot;, 
+     ylab = &quot;Estimated Survival Probability&quot;, 
+     cex.axis=1.5, 
+     cex.lab=1.5)
+grid()
+abline(v = 120, col = &quot;red&quot;)
 
+
+#Extra
+#raw calculation of Kaplan-Meier estimates
+test=data.frame(times=times,events=events)
+test= test[order(test$times),]
+test$n&lt;-nrow(test):1
+test= test[test$events&gt;=1,]
+
+#compute 1-d_i/n_i
+for(i in 1:nrow(test)){test$survival[i]=1-test$events[i]/test$n[i]
+}
+
+#calculate the estimate of the survivl function
+for(i in 1:nrow(test)){test$p[i]=prod(test$survival[1:i])}
+
+
+points(x=test$times,y=test$p)</code></pre>
+<p><img src="Exercise10_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /></p>
 </div>
 <p>What is the probability of a patient in this study to survive more than 10 years (120 months)? (use the <strong><tt>summary</tt></strong> function )</p>
 <div class="fold s o">
-
+<pre class="r"><code>summary(S1, times = 120)</code></pre>
+<pre><code>## Call: survfit(formula = SURV ~ 1)
+## 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##   120      4      24    0.527  0.0836        0.387        0.719</code></pre>
 </div>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Let’s consider separately the <code>eventsA</code>and the <code>eventsB</code>.</li>
@@ -477,11 +536,25 @@ events = c(eventsA, eventsB)
 <pre class="r"><code>group = gl(2, N)</code></pre>
 <p>Analyse the effect of treatment scheme on the patient’s survival by Kaplan-Meier curves. What is the median survival time in the two groups?</p>
 <div class="fold s o">
-
+<pre class="r"><code>S2 = survfit(SURV ~ group)
+S2</code></pre>
+<pre><code>## Call: survfit(formula = SURV ~ group)
+## 
+##          n events median 0.95LCL 0.95UCL
+## group=1 50     15   67.5    35.5      NA
+## group=2 50     10  154.6    92.2      NA</code></pre>
 </div>
 <p>Plot the Kaplan-Meier-curve of the two groups together.</p>
 <div class="fold s o">
-
+<pre class="r"><code>plot(S2, xlab=&quot;Times (Months)&quot;, ylab=&quot;Estimated Survival Probability&quot;, 
+     cex.axis=1.5, cex.lab=1.5, col=c(1,2))
+grid()
+legend(&quot;topright&quot;, legend=c(&quot;Group A&quot;, &quot;Group B&quot;), col = c(1, 2),
+       lty=1, cex=0.8)
+abline(h = 0.5, col = &quot;green&quot;)
+# median survival time
+abline(v = quantile(survfit(SURV ~ group), probs = 0.5)$quantile, lty = &quot;dashed&quot;)</code></pre>
+<p><img src="Exercise10_files/figure-html/unnamed-chunk-9-1.png" width="60%" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Assume that patients who survived more than 100 months were on average younger than the others patients.</li>
@@ -492,12 +565,40 @@ age = c(ageA, ageB)
 age = (age&gt;median(age))</code></pre>
 <p>Analyse the effect of <code>age</code> on the patient’s survival by Kaplan-Meier curves.</p>
 <div class="fold s o">
+<pre class="r"><code>S3 = survfit(SURV ~ age)
+plot(S3, xlab=&quot;Times (Months)&quot;, ylab=&quot;Estimated Survival Probability&quot;, cex.axis=1.5, cex.lab=1.5, col=c(1,2))
+legend(&quot;topright&quot;,
+       legend=c(&quot;Age &gt; Median age&quot;, &quot;Age &lt; Median age&quot;), 
+       col = c(1, 2),
+       lty=1, cex=0.8)
 
+grid()</code></pre>
+<p><img src="Exercise10_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <p>Analyse whether age at surgery has an influence on survival using Cox regression (R function <strong><tt>coxph</tt></strong>).</p>
 <!-- If someone wants to go deeper into Cox regression https://stats.stackexchange.com/questions/83892/understanding-coxph-output-in-r -->
 <div class="fold s o">
-
+<pre class="r"><code>C = coxph(SURV ~ group+age)
+summary(C)</code></pre>
+<pre><code>## Call:
+## coxph(formula = SURV ~ group + age)
+## 
+##   n= 100, number of events= 25 
+## 
+##            coef exp(coef) se(coef)      z Pr(&gt;|z|)  
+## group2  -1.3757    0.2527   0.5753 -2.391   0.0168 *
+## ageTRUE -0.3791    0.6845   0.5477 -0.692   0.4889  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##         exp(coef) exp(-coef) lower .95 upper .95
+## group2     0.2527      3.958   0.08181    0.7803
+## ageTRUE    0.6845      1.461   0.23397    2.0026
+## 
+## Concordance= 0.631  (se = 0.065 )
+## Likelihood ratio test= 7.38  on 2 df,   p=0.02
+## Wald test            = 7.17  on 2 df,   p=0.03
+## Score (logrank) test = 7.71  on 2 df,   p=0.02</code></pre>
 </div>
 <p>Knowing that the R summary for the Cox model gives the hazard ratio <code>exp(coef)</code> for the second group relative to the first group, namely treatment B versus treatment A and old vs young, could you give an interpretation of the output?</p>
 <details>
