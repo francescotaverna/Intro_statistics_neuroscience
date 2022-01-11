@@ -1,4 +1,5 @@
 name: "R-for-the-neuroscience-class"
+output_dir: "docs"
 
 navbar:
     
@@ -50,4 +51,5 @@ output:
     #   after_body: footer.html
     
   # pdf_document:
-  #   toc: true
+  #   toc: 
+  
