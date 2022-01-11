@@ -73,10 +73,6 @@ How to install R: [https://rstudio-education.github.io/hopr/starting.html](https
 
 The basics of R: [https://rstudio.cloud/learn/primers/1.2](https://rstudio.cloud/learn/primers/1.2)
 
-Slides:
-
-Short Test:
-
 
 ## Solution
 
@@ -101,7 +97,7 @@ The following calendar will be updated as soon as the solution will be released.
 | Exercises 7 | 10 November | `r emo::ji("heavy_check_mark")` |15 November|
 | Exercises 8 | 15 November |`r emo::ji("heavy_check_mark")`  | 17 November|
 | Exercises 9 | 16 November | `r emo::ji("heavy_check_mark")` | 18 November|
-| Exercises 10 |17 November | `r emo::ji("x")`||
+| Exercises 10 |17 November | `r emo::ji("heavy_check_mark")`|19 November|
 
 
 
